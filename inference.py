@@ -13,7 +13,8 @@ class LLMEngine:
             from vllm import LLM, SamplingParams
             print(f"Loading {model_path} with vLLM...")
             # For AWQ or standard models, vllm generally handles it natively
-            self.model = LLM(model=model_path, trust_remote_code=True, tensor_parallel_size=1)
+            # We set gpu_memory_utilization=0.8 to avoid startup crashes if the GPU isn't 100% free
+            self.model = LLM(model=model_path, trust_remote_code=True, tensor_parallel_size=1, gpu_memory_utilization=0.8)
             self.sampling_params = SamplingParams(temperature=0.1, max_tokens=512, stop=["<|im_end|>"])
         else:
             print(f"Loading {model_path} with Transformers...")
