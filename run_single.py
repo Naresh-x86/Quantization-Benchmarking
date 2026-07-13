@@ -1,4 +1,8 @@
 import os
+# Disable flashinfer because its JIT compiler fails on RTX 5090 (compute_120a) with older nvcc
+os.environ["VLLM_ATTENTION_BACKEND"] = "FLASH_ATTN"
+os.environ["VLLM_USE_MODELSCOPE"] = "False"
+import sys
 import json
 import argparse
 from inference import LLMEngine
