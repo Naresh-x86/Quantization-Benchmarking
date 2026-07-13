@@ -1,0 +1,7 @@
+[
+  {
+    "task_id": "ticket_001",
+    "description": "User ID 1045 is complaining that their recent order (ORD-992) for a 'ZenBook Pro' arrived with a shattered screen. They are highly distressed. They want a replacement, but ONLY if it can arrive within 3 days. Otherwise, they want a full refund immediately. Please resolve this ticket appropriately.",
+    "expected_actions": ["check_order", "check_inventory", "issue_replacement", "issue_refund"]
+  }
+]
