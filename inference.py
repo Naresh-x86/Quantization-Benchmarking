@@ -29,7 +29,10 @@ class LLMEngine:
             # We assume config.json has the correct quantization_config.
             if "FP16" in quant_type:
                 kwargs["torch_dtype"] = torch.float16
-            
+            elif "FP8" in quant_type:
+                # Attempt to keep in FP8 or fallback to bfloat16
+                kwargs["torch_dtype"] = "auto"
+                
             self.model = AutoModelForCausalLM.from_pretrained(model_path, **kwargs)
             self.model.eval()
 
@@ -45,13 +48,18 @@ class LLMEngine:
             inputs = self.tokenizer(prompt, return_tensors="pt").to(self.model.device)
             input_length = inputs.input_ids.shape[1]
             
+            terminators = [
+                self.tokenizer.eos_token_id,
+                self.tokenizer.convert_tokens_to_ids("<|im_end|>")
+            ]
+            
             with torch.no_grad():
                 outputs = self.model.generate(
                     **inputs,
                     max_new_tokens=512,
                     temperature=0.1,
                     do_sample=True,
-                    eos_token_id=self.tokenizer.eos_token_id,
+                    eos_token_id=terminators,
                     pad_token_id=self.tokenizer.pad_token_id
                 )
                 
