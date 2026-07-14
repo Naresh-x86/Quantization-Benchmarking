@@ -7,6 +7,7 @@ import pandas as pd
 
 def parse_config(config_file="config.ini"):
     config = configparser.ConfigParser()
+    config.optionxform = str  # Preserve case sensitivity for model names
     config.read(config_file)
     return config
 

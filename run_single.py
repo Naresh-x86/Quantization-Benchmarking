@@ -102,10 +102,12 @@ def main():
             all_trials_results.append(result_row)
             
     except Exception as e:
+        print(f"Error during execution: {e}")
         # If initialization or something else fatally fails
         all_trials_results.append({
             "Model": model_name,
             "Quantization": quant_type,
+            "Params (B)": params_billion,
             "Success": False,
             "Error": str(e)
         })
