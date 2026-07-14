@@ -6,3 +6,8 @@ test_models/
 models/
 venv/
 log.txt
+
+# Allow results directory and its CSV/JSON files to be tracked
+!results/
+!results/**/*.csv
+!results/**/*.json

@@ -86,16 +86,21 @@ def main():
     use_vllm = config["BENCHMARK"].getboolean("use_vllm", fallback=True)
     repeated_trials = config["BENCHMARK"].getboolean("repeated_trials", fallback=True)
     num_trials = config["BENCHMARK"].getint("number_of_trials", fallback=10) if repeated_trials else 1
-    output_dir = config["BENCHMARK"].get("output_dir", fallback="./results")
+    output_dir_base = config["BENCHMARK"].get("output_dir", fallback="./results")
     output_prefix = config["BENCHMARK"].get("output_prefix", fallback="benchmark")
     dataset_path = "dataset.json"
     
-    os.makedirs(output_dir, exist_ok=True)
+    import datetime
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    run_output_dir = os.path.join(output_dir_base, f"{output_prefix}_{timestamp}")
+    
+    os.makedirs(run_output_dir, exist_ok=True)
     
     print(f"Starting Benchmark Suite V2")
     print(f"Agents: {agents_enabled}")
     print(f"Models: {models_enabled}")
-    print(f"Trials per model: {num_trials}\n")
+    print(f"Trials per model: {num_trials}")
+    print(f"Output Directory: {run_output_dir}\n")
     
     for agent_id in agents_enabled:
         print(f"\n=======================================================")
@@ -103,12 +108,11 @@ def main():
         print(f"=======================================================\n")
         
         agent_results = []
+        agent_output_dir = os.path.join(run_output_dir, agent_id)
+        os.makedirs(agent_output_dir, exist_ok=True)
         
         for model_name in models_enabled:
             model_path = os.path.join(models_dir, model_name)
-            
-            # Note: The model_path might be relative to config.ini's models_dir, we don't strictly check exist here
-            # as it will be checked by the subprocess, but good to warn.
             
             print(f"--- Benchmarking Model: {model_name} on {agent_id} ---")
             output_json = f"temp_result_{model_name}_{agent_id}.json"
@@ -121,7 +125,7 @@ def main():
                 "--agent_id", agent_id,
                 "--num_trials", str(num_trials),
                 "--output_json", output_json,
-                "--output_dir", output_dir
+                "--output_dir", agent_output_dir
             ]
             
             if use_vllm:
@@ -145,8 +149,8 @@ def main():
         # Aggregate and save agent results
         if agent_results:
             df = pd.DataFrame(agent_results)
-            aggregate_results(df, agent_id, output_dir, output_prefix)
-            print(f"\n--- {agent_id} Benchmark Complete! Results saved to {output_dir} ---")
+            aggregate_results(df, agent_id, agent_output_dir, output_prefix)
+            print(f"\n--- {agent_id} Benchmark Complete! Results saved to {agent_output_dir} ---")
 
 if __name__ == "__main__":
     main()
