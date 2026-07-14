@@ -4,3 +4,5 @@ __pycache__/
 .env
 test_models/
 models/
+venv/
+log.txt
