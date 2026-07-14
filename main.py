@@ -26,7 +26,7 @@ def aggregate_results(df, agent_id, output_dir, prefix):
     
     # Only average these if they exist (numeric columns)
     numeric_cols = ["Steps", "Total Tokens", "Inference Time (s)", "Tokens / Sec", 
-                    "Achieved TFLOPS", "Avg Power (W)", "Peak Power (W)", 
+                    "Achieved TFLOPS", "Weights Size (GB)", "Avg Power (W)", "Peak Power (W)", 
                     "Total Energy (J)", "Avg VRAM (GB)", "Peak VRAM (GB)", "Avg GPU Util (%)"]
                     
     for col in numeric_cols:
@@ -120,7 +120,8 @@ def main():
                 "--dataset", dataset_path,
                 "--agent_id", agent_id,
                 "--num_trials", str(num_trials),
-                "--output_json", output_json
+                "--output_json", output_json,
+                "--output_dir", output_dir
             ]
             
             if use_vllm:

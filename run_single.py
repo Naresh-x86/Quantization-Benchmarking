@@ -18,6 +18,7 @@ def parse_args():
     parser.add_argument("--num_trials", type=int, default=1)
     parser.add_argument("--use_vllm", action="store_true")
     parser.add_argument("--output_json", type=str, required=True)
+    parser.add_argument("--output_dir", type=str, required=True)
     return parser.parse_args()
 
 def get_params_billion_from_name(model_name: str) -> float:
@@ -26,6 +27,16 @@ def get_params_billion_from_name(model_name: str) -> float:
     if match:
         return float(match.group(1))
     return 7.0
+
+def get_weights_size_gb(model_path: str) -> float:
+    """Calculate the true VRAM footprint of the model weights by summing .safetensors and .bin sizes."""
+    total_bytes = 0
+    if os.path.exists(model_path):
+        for root, _, files in os.walk(model_path):
+            for file in files:
+                if file.endswith((".safetensors", ".bin")):
+                    total_bytes += os.path.getsize(os.path.join(root, file))
+    return total_bytes / (1024**3)
 
 def main():
     args = parse_args()
@@ -42,6 +53,7 @@ def main():
     model_name = args.model_name
     model_path = args.model_path
     params_billion = get_params_billion_from_name(model_name)
+    weights_size_gb = get_weights_size_gb(model_path)
     
     quant_type = "baseline"
     if "INT8" in model_name: quant_type = "INT8"
@@ -50,6 +62,10 @@ def main():
     elif "FP16" in model_name: quant_type = "FP16"
     
     all_trials_results = []
+    
+    # Ensure traces directory exists
+    traces_dir = os.path.join(args.output_dir, "traces")
+    os.makedirs(traces_dir, exist_ok=True)
     
     try:
         # Initialize engine once per model
@@ -79,6 +95,7 @@ def main():
                 "Model": model_name,
                 "Quantization": quant_type,
                 "Params (B)": params_billion,
+                "Weights Size (GB)": weights_size_gb,
                 "Trial": trial + 1,
                 "Success": agent_result["success"],
                 "Steps": agent_result["steps"],
@@ -101,6 +118,12 @@ def main():
             
             all_trials_results.append(result_row)
             
+            # Save trace
+            trace_filename = f"{args.agent_id}_{model_name}_Trial_{trial+1}.json"
+            trace_path = os.path.join(traces_dir, trace_filename)
+            with open(trace_path, "w") as tf:
+                json.dump(agent_result["final_history"], tf, indent=2)
+            
     except Exception as e:
         print(f"Error during execution: {e}")
         # If initialization or something else fatally fails
@@ -108,6 +131,7 @@ def main():
             "Model": model_name,
             "Quantization": quant_type,
             "Params (B)": params_billion,
+            "Weights Size (GB)": weights_size_gb,
             "Success": False,
             "Error": str(e)
         })
