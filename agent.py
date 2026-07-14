@@ -1,10 +1,18 @@
 import re
 from inference import LLMEngine
-from tools import AVAILABLE_TOOLS, get_tools_description
+from tools import get_tools_dict, get_tools_description
 
-SYSTEM_PROMPT = """You are a helpful customer support agent. You must resolve the user's issue by thinking step-by-step and calling the available tools.
+def get_system_prompt(agent_id: str) -> str:
+    agent_roles = {
+        "AGENT_1_SUPPORT": "You are a helpful customer support agent.",
+        "AGENT_2_IT_HELPDESK": "You are a highly skilled IT Helpdesk engineer.",
+        "AGENT_3_FINANCE": "You are a quantitative financial analyst."
+    }
+    role = agent_roles.get(agent_id, "You are a helpful AI assistant.")
+    
+    return f"""{role} You must resolve the user's issue by thinking step-by-step and calling the available tools.
 
-{tool_desc}
+{get_tools_description(agent_id)}
 
 To use a tool, you MUST format your response exactly like this:
 Thought: I need to do [action] because [reason].
@@ -17,13 +25,14 @@ Final Answer: [Your final message to the user]
 """
 
 class ReActAgent:
-    def __init__(self, llm_engine: LLMEngine, max_steps: int = 10):
+    def __init__(self, llm_engine: LLMEngine, agent_id: str, max_steps: int = 10):
         self.llm = llm_engine
+        self.agent_id = agent_id
         self.max_steps = max_steps
-        self.system_prompt = SYSTEM_PROMPT.format(tool_desc=get_tools_description())
+        self.system_prompt = get_system_prompt(agent_id)
+        self.tools_dict = get_tools_dict(agent_id)
         
     def _format_prompt(self, history: list) -> str:
-        # Simple ChatML format for Qwen
         prompt = f"<|im_start|>system\n{self.system_prompt}<|im_end|>\n"
         for turn in history:
             role = turn['role']
@@ -32,18 +41,18 @@ class ReActAgent:
         prompt += "<|im_start|>assistant\n"
         return prompt
 
-    def run(self, task_description: str):
+    def run(self, task_description: str, strict_success_criteria: dict = None):
         history = [{"role": "user", "content": task_description}]
         
         total_tokens = 0
         total_time = 0.0
         steps = 0
         success = False
+        tools_called = set()
         
         while steps < self.max_steps:
             prompt = self._format_prompt(history)
             
-            # Generate LLM response
             output = self.llm.generate(prompt)
             total_tokens += output["generated_tokens"]
             total_time += output["duration"]
@@ -51,9 +60,18 @@ class ReActAgent:
             
             history.append({"role": "assistant", "content": response_text})
             
-            # Parse ReAct format
             if "Final Answer:" in response_text:
-                success = True
+                if strict_success_criteria:
+                    must_call = set(strict_success_criteria.get("must_call", []))
+                    must_not_call = set(strict_success_criteria.get("must_not_call", []))
+                    
+                    # Evaluate strict criteria
+                    if must_call.issubset(tools_called) and not must_not_call.intersection(tools_called):
+                        success = True
+                    else:
+                        success = False
+                else:
+                    success = True # Fallback if no strict criteria provided
                 break
                 
             action_match = re.search(r"Action:\s*(.+)", response_text)
@@ -63,12 +81,14 @@ class ReActAgent:
                 action = action_match.group(1).strip()
                 action_input_str = input_match.group(1).strip()
                 
+                tools_called.add(action)
+                
                 try:
                     import json
                     action_input = json.loads(action_input_str)
                     
-                    if action in AVAILABLE_TOOLS:
-                        tool_func = AVAILABLE_TOOLS[action]
+                    if action in self.tools_dict:
+                        tool_func = self.tools_dict[action]
                         tool_result = str(tool_func(**action_input))
                     else:
                         tool_result = f"Error: Tool '{action}' not found."
@@ -77,7 +97,6 @@ class ReActAgent:
                     
                 history.append({"role": "user", "content": f"Tool Result: {tool_result}"})
             else:
-                # If the model didn't follow the format properly, gently correct it
                 history.append({"role": "user", "content": "Error: Could not parse Action and Action Input. Please use the exact format requested."})
                 
             steps += 1
@@ -87,5 +106,6 @@ class ReActAgent:
             "steps": steps,
             "total_generated_tokens": total_tokens,
             "total_inference_time_sec": total_time,
-            "final_history": history
+            "final_history": history,
+            "tools_called": list(tools_called)
         }

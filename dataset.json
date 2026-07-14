@@ -1,7 +1,29 @@
 [
   {
-    "task_id": "ticket_001",
+    "agent_id": "AGENT_1_SUPPORT",
+    "task_id": "support_ticket_001",
     "description": "User ID 1045 is complaining that their recent order (ORD-992) for a 'ZenBook Pro' arrived with a shattered screen. They are highly distressed. They want a replacement, but ONLY if it can arrive within 3 days. Otherwise, they want a full refund immediately. Please resolve this ticket appropriately.",
-    "expected_actions": ["check_order", "check_inventory", "issue_replacement", "issue_refund"]
+    "strict_success_criteria": {
+      "must_call": ["check_order", "check_inventory", "issue_refund"],
+      "must_not_call": ["issue_replacement"]
+    }
+  },
+  {
+    "agent_id": "AGENT_2_IT_HELPDESK",
+    "task_id": "it_ticket_001",
+    "description": "Our main API gateway is returning 502 Bad Gateway errors. Please check the server status to identify which service is down. Then, retrieve the logs for the down service to confirm the issue. Finally, restart the correct service.",
+    "strict_success_criteria": {
+      "must_call": ["check_server_status", "read_service_logs", "restart_service"],
+      "must_not_call": []
+    }
+  },
+  {
+    "agent_id": "AGENT_3_FINANCE",
+    "task_id": "finance_ticket_001",
+    "description": "I need to know if I should buy shares of 'TECH_CORP'. Please query its current stock price and its 5-day average. If the 5-day average is strictly below $150.00, please execute a trade to buy 10 shares of TECH_CORP. Otherwise, do not buy.",
+    "strict_success_criteria": {
+      "must_call": ["get_current_price", "get_5_day_average", "execute_trade"],
+      "must_not_call": []
+    }
   }
 ]

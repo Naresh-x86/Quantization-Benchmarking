@@ -1,6 +1,6 @@
 import json
 
-# Mock Database
+# --- AGENT 1: CUSTOMER SUPPORT TOOLS ---
 ORDERS = {
     "ORD-992": {
         "user_id": 1045,
@@ -10,90 +10,118 @@ ORDERS = {
         "price": 1499.99
     }
 }
-
 INVENTORY = {
     "ITEM-ZB-PRO": {
-        "stock": 5,
-        "estimated_shipping_days": 5
+        "in_stock": True,
+        "shipping_days": 5
     }
 }
 
-POLICIES = {
-    "damaged_item": "If an item arrives damaged, the customer is entitled to a full refund or a free replacement. Replacements are subject to inventory shipping times. If the customer requires the item sooner than the replacement shipping time, process a refund.",
-    "refunds": "Refunds are processed immediately and take 3-5 business days to reflect on the customer's account."
-}
-
-
-def search_policies(query: str) -> str:
-    """
-    Search the company policies for a given query (e.g., 'damaged item', 'refunds').
-    """
-    query = query.lower()
-    for key, policy in POLICIES.items():
-        if key in query or query in key:
-            return f"Policy on {key}: {policy}"
-    return "No matching policy found."
-
-
 def check_order(order_id: str) -> str:
-    """
-    Check the details of an order using the order ID.
-    """
     if order_id in ORDERS:
         return json.dumps(ORDERS[order_id])
-    return f"Order {order_id} not found."
-
+    return "Order not found."
 
 def check_inventory(item_id: str) -> str:
-    """
-    Check inventory and shipping estimates for an item ID.
-    """
     if item_id in INVENTORY:
         return json.dumps(INVENTORY[item_id])
-    return f"Item {item_id} not found in inventory."
+    return "Item not found in inventory."
 
-
-def issue_refund(order_id: str, reason: str) -> str:
-    """
-    Issue a full refund for a given order ID.
-    """
+def issue_replacement(order_id: str) -> str:
     if order_id in ORDERS:
-        return f"SUCCESS: Refund of ${ORDERS[order_id]['price']} issued for {order_id}. Reason: {reason}"
-    return f"FAILED: Order {order_id} not found."
+        return f"Replacement issued for order {order_id}."
+    return "Order not found."
 
+def issue_refund(order_id: str) -> str:
+    if order_id in ORDERS:
+        return f"Refund of ${ORDERS[order_id]['price']} issued for order {order_id}."
+    return "Order not found."
 
-def issue_replacement(order_id: str, item_id: str) -> str:
-    """
-    Issue a replacement for a given order ID and item ID.
-    """
-    if order_id in ORDERS and item_id in INVENTORY:
-        if INVENTORY[item_id]['stock'] > 0:
-            INVENTORY[item_id]['stock'] -= 1
-            return f"SUCCESS: Replacement ordered for {order_id}. Estimated arrival in {INVENTORY[item_id]['estimated_shipping_days']} days."
-        else:
-            return "FAILED: Item out of stock."
-    return "FAILED: Invalid order or item ID."
-
-
-AVAILABLE_TOOLS = {
-    "search_policies": search_policies,
-    "check_order": check_order,
-    "check_inventory": check_inventory,
-    "issue_refund": issue_refund,
-    "issue_replacement": issue_replacement
+# --- AGENT 2: IT HELPDESK TOOLS ---
+SERVICES = {
+    "api_gateway": "online",
+    "auth_service": "online",
+    "payment_backend": "down",
+    "database": "online"
 }
 
-def get_tools_description() -> str:
-    return """
-Available Tools:
-1. search_policies(query: str) -> str
-   - Description: Search the company policies for a given query (e.g., 'damaged item').
-2. check_order(order_id: str) -> str
-   - Description: Check the details of an order using the order ID. Returns JSON.
-3. check_inventory(item_id: str) -> str
-   - Description: Check inventory and shipping estimates for an item ID. Returns JSON.
-4. issue_refund(order_id: str, reason: str) -> str
-   - Description: Issue a full refund for a given order ID.
-5. issue_replacement(order_id: str, item_id: str) -> str
-   - Description: Issue a replacement for a given order ID and item ID.
-"""
+LOGS = {
+    "payment_backend": "ERROR: Connection refused to database port 5432. Process crashed."
+}
+
+def check_server_status() -> str:
+    return json.dumps(SERVICES)
+
+def read_service_logs(service_name: str) -> str:
+    if service_name in LOGS:
+        return LOGS[service_name]
+    return f"No logs found for {service_name}."
+
+def restart_service(service_name: str) -> str:
+    if service_name in SERVICES:
+        SERVICES[service_name] = "online"
+        return f"Service {service_name} has been successfully restarted."
+    return "Service not found."
+
+# --- AGENT 3: FINANCIAL ANALYST TOOLS ---
+STOCK_DATA = {
+    "TECH_CORP": {
+        "current_price": 145.50,
+        "5_day_history": [152.0, 150.5, 149.0, 147.5, 145.5]
+    }
+}
+
+def get_current_price(ticker: str) -> str:
+    if ticker in STOCK_DATA:
+        return f"Current price of {ticker} is ${STOCK_DATA[ticker]['current_price']}"
+    return "Ticker not found."
+
+def get_5_day_average(ticker: str) -> str:
+    if ticker in STOCK_DATA:
+        history = STOCK_DATA[ticker]["5_day_history"]
+        avg = sum(history) / len(history)
+        return f"5-day average for {ticker} is ${avg:.2f}"
+    return "Ticker not found."
+
+def execute_trade(action: str, ticker: str, shares: int) -> str:
+    if action not in ["buy", "sell"]:
+        return "Invalid action. Must be 'buy' or 'sell'."
+    if ticker in STOCK_DATA:
+        return f"Successfully executed {action} of {shares} shares for {ticker}."
+    return "Ticker not found."
+
+# --- TOOL REGISTRIES ---
+SUPPORT_TOOLS = {
+    "check_order": check_order,
+    "check_inventory": check_inventory,
+    "issue_replacement": issue_replacement,
+    "issue_refund": issue_refund
+}
+
+IT_TOOLS = {
+    "check_server_status": check_server_status,
+    "read_service_logs": read_service_logs,
+    "restart_service": restart_service
+}
+
+FINANCE_TOOLS = {
+    "get_current_price": get_current_price,
+    "get_5_day_average": get_5_day_average,
+    "execute_trade": execute_trade
+}
+
+def get_tools_description(agent_id: str) -> str:
+    tools_dict = get_tools_dict(agent_id)
+    desc = ""
+    for name in tools_dict:
+        desc += f"- {name}\n"
+    return desc
+
+def get_tools_dict(agent_id: str) -> dict:
+    if agent_id == "AGENT_1_SUPPORT":
+        return SUPPORT_TOOLS
+    elif agent_id == "AGENT_2_IT_HELPDESK":
+        return IT_TOOLS
+    elif agent_id == "AGENT_3_FINANCE":
+        return FINANCE_TOOLS
+    return {}
