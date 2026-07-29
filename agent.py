@@ -11,23 +11,25 @@ def get_system_prompt(agent_id: str) -> str:
     }
     role = agent_roles.get(agent_id, "You are a helpful AI assistant.")
     
-    return f"""{role} You must resolve the user's issue by thinking step-by-step and calling the available tools.
-
+    return f"""{role}
+You have access to the following tools:
 {get_tools_description(agent_id)}
 
-IMPORTANT RULES:
-1. You must call exactly ONE tool per response. Do NOT call multiple tools in the same response.
-2. After calling a tool, STOP and wait for the Tool Result before proceeding.
-3. Do NOT include "Final Answer:" in the same response as an "Action:". Always wait for the tool result first.
+You must solve the user's problem by calling the appropriate tools one by one. Do not guess information.
 
-To use a tool, format your response EXACTLY like this (one tool call only):
-Thought: I need to do [action] because [reason].
-Action: [tool_name]
-Action Input: [arguments in JSON format, e.g., {{"order_id": "ORD-123"}}]
+Use this exact format to call a tool:
+Thought: I should call the tool ...
+Action: tool_name
+Action Input: {{"param_name": "value"}}
 
-When you have resolved the issue and all necessary actions are complete, format your final response like this (with NO Action/Action Input):
-Thought: I have finished the task.
-Final Answer: [Your final message to the user]
+Rules:
+- Call only one tool at a time.
+- Action Input MUST be valid JSON format.
+- Stop and wait for the Tool Result.
+
+When the task is complete, use this format:
+Thought: I have completed the task.
+Final Answer: task is complete
 """
 
 class ReActAgent:
@@ -38,14 +40,10 @@ class ReActAgent:
         self.system_prompt = get_system_prompt(agent_id)
         self.tools_dict = get_tools_dict(agent_id)
         
-    def _format_prompt(self, history: list) -> str:
-        prompt = f"<|im_start|>system\n{self.system_prompt}<|im_end|>\n"
-        for turn in history:
-            role = turn['role']
-            content = turn['content']
-            prompt += f"<|im_start|>{role}\n{content}<|im_end|>\n"
-        prompt += "<|im_start|>assistant\n"
-        return prompt
+    def _get_messages(self, history: list) -> list:
+        messages = [{"role": "system", "content": self.system_prompt}]
+        messages.extend(history)
+        return messages
 
     def run(self, task_description: str, strict_success_criteria: dict = None):
         # Reset mutable tool state before each trial to prevent cross-trial contamination
@@ -57,28 +55,47 @@ class ReActAgent:
         total_time = 0.0
         steps = 0
         success = False
-        tools_called_successfully = set()
-        tools_attempted = set()
+        tools_called_successfully = set()   # unique names (kept for backward compat)
+        tools_attempted = set()             # unique names (kept for backward compat)
+        tool_call_sequence = []             # ordered list with repeats
+        tool_attempt_sequence = []          # ordered list with repeats
+        parse_error_count = 0               # format / parse failures
         
         while steps < self.max_steps:
-            prompt = self._format_prompt(history)
+            messages = self._get_messages(history)
             
-            output = self.llm.generate(prompt)
+            output = self.llm.generate(messages)
             total_tokens += output["generated_tokens"]
             total_time += output["duration"]
             response_text = output["text"]
             
-            history.append({"role": "assistant", "content": response_text})
+            # Truncate hallucinated results from smaller models
+            for stop_word in ["\nResult:", "\nResponse:", "\nTool Result:", "\nObservation:", "\nExpected next call:"]:
+                idx = response_text.find(stop_word)
+                if idx != -1:
+                    response_text = response_text[:idx]
+            
+            history.append({"role": "assistant", "content": response_text.strip()})
             
             # Parse Action FIRST (even if Final Answer is also present)
-            action_match = re.search(r"Action:\s*(.+)", response_text)
-            input_match = re.search(r"Action Input:\s*(.+)", response_text)
+            # Enforce that action is just the function name (no brackets/params attached)
+            action_match = re.search(r"Action:\s*([a-zA-Z0-9_]+)", response_text)
+            input_match_start = response_text.find("Action Input:")
             
-            if action_match and input_match:
+            if action_match and input_match_start != -1:
                 action = action_match.group(1).strip()
-                action_input_str = input_match.group(1).strip()
+                
+                # Robust JSON extraction
+                json_start = response_text.find("{", input_match_start)
+                json_end = response_text.rfind("}")
+                if json_start != -1 and json_end != -1 and json_end >= json_start:
+                    action_input_str = response_text[json_start:json_end+1]
+                else:
+                    # fallback if no braces
+                    action_input_str = response_text[input_match_start+13:].strip().split('\n')[0]
                 
                 tools_attempted.add(action)
+                tool_attempt_sequence.append(action)
                 
                 try:
                     action_input = json.loads(action_input_str)
@@ -88,20 +105,27 @@ class ReActAgent:
                         tool_result = str(tool_func(**action_input))
                         # Only count as successfully called if no exception was raised
                         tools_called_successfully.add(action)
+                        tool_call_sequence.append(action)
                     else:
                         tool_result = f"Error: Tool '{action}' not found. Available tools are: {', '.join(self.tools_dict.keys())}"
                 except Exception as e:
                     tool_result = f"Error executing tool: {e}. Ensure Action Input is valid JSON with the correct parameter names."
                     
-                history.append({"role": "user", "content": f"Tool Result: {tool_result}"})
+                # We want to record this execution for the human-readable trace.
+                # history will store an extended object temporarily, or we just append string format.
+                # To keep agent.py logic the same, we'll append the user tool result, 
+                # but also add a secret field for run_single.py to format later.
+                history.append({"role": "user", "content": f"Tool Result: {tool_result}", "action": action, "action_input": action_input_str})
                 
                 # If Final Answer was ALSO in this response, we still executed the tool above.
                 # Now check if we should terminate.
                 if "Final Answer:" in response_text:
                     if strict_success_criteria:
-                        must_call = set(strict_success_criteria.get("must_call", []))
+                        must_call_dicts = strict_success_criteria.get("must_call", [])
+                        must_call_names = [mc["tool"] if isinstance(mc, dict) else mc for mc in must_call_dicts]
+                        must_call_set = set(must_call_names)
                         must_not_call = set(strict_success_criteria.get("must_not_call", []))
-                        if must_call.issubset(tools_called_successfully) and not must_not_call.intersection(tools_called_successfully):
+                        if must_call_set.issubset(tools_called_successfully) and not must_not_call.intersection(tools_called_successfully):
                             success = True
                         else:
                             success = False
@@ -112,9 +136,11 @@ class ReActAgent:
             elif "Final Answer:" in response_text:
                 # Pure Final Answer with no Action in this response
                 if strict_success_criteria:
-                    must_call = set(strict_success_criteria.get("must_call", []))
+                    must_call_dicts = strict_success_criteria.get("must_call", [])
+                    must_call_names = [mc["tool"] if isinstance(mc, dict) else mc for mc in must_call_dicts]
+                    must_call_set = set(must_call_names)
                     must_not_call = set(strict_success_criteria.get("must_not_call", []))
-                    if must_call.issubset(tools_called_successfully) and not must_not_call.intersection(tools_called_successfully):
+                    if must_call_set.issubset(tools_called_successfully) and not must_not_call.intersection(tools_called_successfully):
                         success = True
                     else:
                         success = False
@@ -123,6 +149,7 @@ class ReActAgent:
                 break
             else:
                 # Model didn't follow format at all
+                parse_error_count += 1
                 history.append({"role": "user", "content": "Error: Could not parse Action and Action Input. Please use the exact format requested. Call exactly ONE tool per response."})
                 
             steps += 1
@@ -134,5 +161,8 @@ class ReActAgent:
             "total_inference_time_sec": total_time,
             "final_history": history,
             "tools_called": list(tools_called_successfully),
-            "tools_attempted": list(tools_attempted)
+            "tools_attempted": list(tools_attempted),
+            "tool_call_sequence": tool_call_sequence,
+            "tool_attempt_sequence": tool_attempt_sequence,
+            "parse_error_count": parse_error_count
         }

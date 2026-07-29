@@ -75,6 +75,14 @@ def issue_refund(order_id: str) -> str:
         return f"Refund of ${ORDERS[order_id]['price']} issued for order {order_id}."
     return "Order not found."
 
+def send_email_to_customer(order_id: str, message: str) -> str:
+    """Send an email update to the customer regarding their order. Returns success message."""
+    return f"Email sent to customer for order {order_id}."
+
+def check_promotions(item_id: str) -> str:
+    """Check if there are any active promotions for an item."""
+    return "No active promotions."
+
 # --- AGENT 2: IT HELPDESK TOOLS ---
 def check_server_status() -> str:
     """Check the status of all services. Returns a JSON object mapping service names to their status (online/down)."""
@@ -92,6 +100,14 @@ def restart_service(service_name: str) -> str:
         SERVICES[service_name] = "online"
         return f"Service {service_name} has been successfully restarted."
     return "Service not found."
+
+def ping_server(ip_address: str) -> str:
+    """Ping a specific server IP address to check network latency."""
+    return f"Ping to {ip_address} successful. Latency: 12ms"
+
+def clear_browser_cache() -> str:
+    """Clear the local browser cache."""
+    return "Browser cache cleared successfully."
 
 # --- AGENT 3: FINANCIAL ANALYST TOOLS ---
 def get_current_price(ticker: str) -> str:
@@ -116,24 +132,38 @@ def execute_trade(action: str, ticker: str, shares: int) -> str:
         return f"Successfully executed {action} of {shares} shares for {ticker}."
     return "Ticker not found."
 
+def get_company_news(ticker: str) -> str:
+    """Get the latest news headlines for a company ticker."""
+    return f"No recent news for {ticker}."
+
+def calculate_tax(amount: float) -> str:
+    """Calculate the standard tax for a given amount."""
+    return f"Calculated tax: ${amount * 0.15:.2f}"
+
 # --- TOOL REGISTRIES ---
 SUPPORT_TOOLS = {
     "check_order": check_order,
     "check_inventory": check_inventory,
     "issue_replacement": issue_replacement,
-    "issue_refund": issue_refund
+    "issue_refund": issue_refund,
+    "send_email_to_customer": send_email_to_customer,
+    "check_promotions": check_promotions
 }
 
 IT_TOOLS = {
     "check_server_status": check_server_status,
     "read_service_logs": read_service_logs,
-    "restart_service": restart_service
+    "restart_service": restart_service,
+    "ping_server": ping_server,
+    "clear_browser_cache": clear_browser_cache
 }
 
 FINANCE_TOOLS = {
     "get_current_price": get_current_price,
     "get_5_day_average": get_5_day_average,
-    "execute_trade": execute_trade
+    "execute_trade": execute_trade,
+    "get_company_news": get_company_news,
+    "calculate_tax": calculate_tax
 }
 
 def get_tools_description(agent_id: str) -> str:

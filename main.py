@@ -21,29 +21,49 @@ def aggregate_results(df, agent_id, output_dir, prefix):
     
     agg_funcs = {
         "Trial": "count",  # Number of trials
-        "Success": ["sum", "mean"],  # sum = success_times, mean = success_rate
+        "Success": [("sum", "sum"), ("mean", "mean")],  # sum = success_times, mean = success_rate
     }
     
     # Only average these if they exist (numeric columns)
     numeric_cols = ["Steps", "Total Tokens", "Inference Time (s)", "Tokens / Sec", 
                     "Achieved TFLOPS", "Weights Size (GB)", "Avg Power (W)", "Peak Power (W)", 
-                    "Total Energy (J)", "Avg VRAM (GB)", "Peak VRAM (GB)", "Avg GPU Util (%)"]
+                    "Total Energy (J)", "Avg VRAM (GB)", "Peak VRAM (GB)", "Avg GPU Util (%)",
+                    # Tool-call quality metrics
+                    "Expected_Steps", "Actual_Tool_Calls", "Redundant_Tool_Calls",
+                    "Parse_Errors", "Tool_Call_Efficiency", "Tokens_per_Useful_Step",
+                    "Tool_Repeat_Count", "Unique_Tools_Called"]
                     
     for col in numeric_cols:
+        if col in df.columns:
+            agg_funcs[col] = "mean"
+
+    # Boolean columns to average (gives a rate)
+    bool_cols = ["Correct_Order", "Final_Tool_Without_Prior"]
+    for col in bool_cols:
         if col in df.columns:
             agg_funcs[col] = "mean"
             
     summary_df = grouped.agg(agg_funcs).reset_index()
     
     # Flatten multi-level columns
-    summary_df.columns = [' '.join(col).strip() for col in summary_df.columns.values]
+    summary_df.columns = [' '.join(col).strip() if isinstance(col, tuple) else col
+                          for col in summary_df.columns.values]
     
     # Rename columns for clarity
     summary_df = summary_df.rename(columns={
         "Trial count": "Number of Trials",
         "Success sum": "Success Times",
-        "Success mean": "Success Rate"
+        "Success mean": "Success Rate",
+        "Correct_Order mean": "Correct_Order_Rate",
+        "Final_Tool_Without_Prior mean": "Shortcut_Rate"
     })
+    
+    # Add Exec_Path distribution counts per model/quant group
+    if "Exec_Path" in df.columns:
+        path_counts = df.groupby(["Model", "Quantization", "Params (B)"])["Exec_Path"].value_counts().unstack(fill_value=0)
+        path_counts.columns = [f"Path_{col}_Count" for col in path_counts.columns]
+        path_counts = path_counts.reset_index()
+        summary_df = summary_df.merge(path_counts, on=["Model", "Quantization", "Params (B)"], how="left")
     
     os.makedirs(output_dir, exist_ok=True)
     
@@ -67,6 +87,32 @@ def aggregate_results(df, agent_id, output_dir, prefix):
             os.path.join(output_dir, f"{prefix}_{agent_id}_failures_only.csv"), index=False
         )
 
+def _load_models_from_section(config, section_name: str, dir_key: str) -> list:
+    """Read a model section and return a list of (model_name, model_path) tuples
+    for every entry whose value is 'true' (case-insensitive).
+
+    Args:
+        config:       ConfigParser instance
+        section_name: e.g. 'QWEN_MODELS' or 'LLAMA_MODELS'
+        dir_key:      the key inside the section that holds the base directory,
+                      e.g. 'qwen_models_dir' or 'llama_models_dir'
+    """
+    if section_name not in config:
+        return []
+
+    section = config[section_name]
+    base_dir = section.get(dir_key, "").strip()
+
+    models = []
+    for key, val in section.items():
+        if key == dir_key:
+            continue                          # skip the directory key itself
+        if val.strip().lower() == "true":
+            full_path = os.path.join(base_dir, key) if base_dir else key
+            models.append((key, full_path))
+
+    return models
+
 def main():
     if not os.path.exists("config.ini"):
         print("Error: config.ini not found.")
@@ -76,12 +122,11 @@ def main():
     
     # Extract config
     agents_enabled = [key.upper() for key, val in config["AGENTS"].items() if val.lower() == "true"]
-    models_dir = config["MODELS"].get("models_dir", "./models")
-    
-    models_enabled = [
-        key for key, val in config["MODELS"].items() 
-        if key != "models_dir" and val.lower() == "true"
-    ]
+
+    # Build unified model list from both sections, preserving Qwen-then-Llama order
+    qwen_models  = _load_models_from_section(config, "QWEN_MODELS",  "qwen_models_dir")
+    llama_models = _load_models_from_section(config, "LLAMA_MODELS", "llama_models_dir")
+    all_models   = qwen_models + llama_models
     
     use_vllm = config["BENCHMARK"].getboolean("use_vllm", fallback=True)
     repeated_trials = config["BENCHMARK"].getboolean("repeated_trials", fallback=True)
@@ -98,7 +143,9 @@ def main():
     
     print(f"Starting Benchmark Suite V2")
     print(f"Agents: {agents_enabled}")
-    print(f"Models: {models_enabled}")
+    print(f"Qwen models enabled:  {len(qwen_models)}")
+    print(f"Llama models enabled: {len(llama_models)}")
+    print(f"Total models: {len(all_models)}")
     print(f"Trials per model: {num_trials}")
     print(f"Output Directory: {run_output_dir}\n")
     
@@ -111,11 +158,11 @@ def main():
         agent_output_dir = os.path.join(run_output_dir, agent_id)
         os.makedirs(agent_output_dir, exist_ok=True)
         
-        for model_name in models_enabled:
-            model_path = os.path.join(models_dir, model_name)
+        for model_name, model_path in all_models:
             
             print(f"--- Benchmarking Model: {model_name} on {agent_id} ---")
-            output_json = f"temp_result_{model_name}_{agent_id}.json"
+            safe_model_name = model_name.replace("/", "__")
+            output_json = f"temp_result_{safe_model_name}_{agent_id}.json"
             
             cmd = [
                 sys.executable, "run_single.py",
