@@ -76,11 +76,11 @@ def issue_refund(order_id: str) -> str:
     return "Order not found."
 
 def send_email_to_customer(order_id: str, message: str) -> str:
-    """Send an email update to the customer regarding their order. Returns success message."""
+    """Send an email update to the customer regarding their order. Only call this tool if the task explicitly instructs you to notify the customer. Do NOT call this as a courtesy or follow-up."""
     return f"Email sent to customer for order {order_id}."
 
 def check_promotions(item_id: str) -> str:
-    """Check if there are any active promotions for an item."""
+    """Check if there are any active promotions for an item. Only call this tool if the task explicitly asks about promotions or discounts."""
     return "No active promotions."
 
 # --- AGENT 2: IT HELPDESK TOOLS ---

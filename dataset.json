@@ -2,7 +2,7 @@
   {
     "agent_id": "AGENT_1_SUPPORT",
     "task_id": "support_ticket_001",
-    "description": "User ID 1045 is complaining that their recent order (ORD-992) for a 'ZenBook Pro' arrived with a shattered screen. They are highly distressed. They want a replacement, but ONLY if it can arrive within 3 days. Otherwise, they want a full refund immediately. Please resolve this ticket appropriately.",
+    "description": "User ID 1045 has reported that their order (ORD-992) for a 'ZenBook Pro' arrived with a shattered screen. Resolution policy: issue a replacement ONLY if it can ship within 3 days, otherwise issue a full refund. Do NOT send any emails or check promotions. Resolve the ticket using only the tools required to look up the order, check shipping, and apply the correct resolution.",
     "strict_success_criteria": {
       "must_call": [
         {"tool": "check_order", "params": {"order_id": "ORD-992"}},

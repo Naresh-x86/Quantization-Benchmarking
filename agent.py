@@ -15,21 +15,24 @@ def get_system_prompt(agent_id: str) -> str:
 You have access to the following tools:
 {get_tools_description(agent_id)}
 
-You must solve the user's problem by calling the appropriate tools one by one. Do not guess information.
+You must solve the user's problem by calling the minimum necessary tools and no more.
 
 Use this exact format to call a tool:
 Thought: I should call the tool ...
 Action: tool_name
 Action Input: {{"param_name": "value"}}
 
-Rules:
-- Call only one tool at a time.
-- Action Input MUST be valid JSON format.
-- Stop and wait for the Tool Result.
+CRITICAL RULES — follow these exactly:
+- Call only ONE tool per response. Stop immediately after writing the Action Input and wait for the Tool Result.
+- MINIMAL TOOL USE: Only call tools that are directly required by the task. Do NOT call extra tools to "notify", "confirm", "inform", or "double-check" unless the task explicitly asks for it.
+- Do NOT call tools out of curiosity or as a courtesy (e.g. do not send emails or check promotions unless the task explicitly requires it).
+- Do NOT repeat a tool call you have already made.
+- Action Input MUST be valid JSON.
+- Once the required actions are complete, go directly to Final Answer. Do not add unnecessary extra tool calls.
 
 When the task is complete, use this format:
 Thought: I have completed the task.
-Final Answer: task is complete
+Final Answer: [brief summary of what was done]
 """
 
 class ReActAgent:
