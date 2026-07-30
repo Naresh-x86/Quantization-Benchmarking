@@ -119,6 +119,7 @@ class LLMEngine:
                 input_ids=input_ids,
                 attention_mask=attention_mask,
                 max_new_tokens=self.max_new_tokens,
+                max_length=None,
                 temperature=self.temperature,
                 do_sample=self.do_sample,
                 pad_token_id=self.tokenizer.eos_token_id,
@@ -129,7 +130,7 @@ class LLMEngine:
 
         new_ids          = output_ids[0][prompt_tokens:]
         generated_tokens = int(new_ids.shape[0])
-        text             = self.tokenizer.decode(new_ids, skip_special_tokens=True)
+        text             = self.tokenizer.decode(new_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False)
         tokens_per_sec   = generated_tokens / duration if duration > 0 else 0.0
 
         return {
