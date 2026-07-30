@@ -87,9 +87,21 @@ class ReActAgent:
                 
                 # Robust JSON extraction
                 json_start = response_text.find("{", input_match_start)
-                json_end = response_text.rfind("}")
-                if json_start != -1 and json_end != -1 and json_end >= json_start:
-                    action_input_str = response_text[json_start:json_end+1]
+                if json_start != -1:
+                    brace_count = 0
+                    json_end = -1
+                    for i, char in enumerate(response_text[json_start:]):
+                        if char == '{':
+                            brace_count += 1
+                        elif char == '}':
+                            brace_count -= 1
+                            if brace_count == 0:
+                                json_end = json_start + i
+                                break
+                    if json_end != -1:
+                        action_input_str = response_text[json_start:json_end+1]
+                    else:
+                        action_input_str = response_text[input_match_start+13:].strip().split('\n')[0]
                 else:
                     # fallback if no braces
                     action_input_str = response_text[input_match_start+13:].strip().split('\n')[0]

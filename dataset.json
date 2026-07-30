@@ -33,6 +33,7 @@
       "must_call": [
         {"tool": "get_current_price", "params": {"ticker": "TECH_CORP"}},
         {"tool": "get_5_day_average", "params": {"ticker": "TECH_CORP"}},
+        {"tool": "calculate_math", "params": {"expression": "<any valid math expression>"}},
         {"tool": "execute_trade", "params": {"action": "buy", "ticker": "TECH_CORP", "shares": 10}}
       ],
       "must_not_call": []

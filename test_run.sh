@@ -1,4 +1,5 @@
 #!/bin/bash
+export HF_HOME=/home/ror-technologies/.cache/huggingface
 
 echo "Creating dummy models directory for testing..."
 mkdir -p ./test_models/Qwen2.5-0.5B-Instruct_FP16_Baseline

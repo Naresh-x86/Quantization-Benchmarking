@@ -140,6 +140,17 @@ def calculate_tax(amount: float) -> str:
     """Calculate the standard tax for a given amount."""
     return f"Calculated tax: ${amount * 0.15:.2f}"
 
+def calculate_math(expression: str) -> str:
+    """Evaluate a mathematical expression. Supports basic arithmetic (+, -, *, /) and comparison (<, >, <=, >=, ==). Use this tool to compare stock prices or calculate differences."""
+    try:
+        allowed_chars = set("0123456789+-*/.<>= ")
+        if not all(c in allowed_chars for c in expression):
+            return "Error: Invalid characters in expression. Only basic math and comparisons allowed."
+        result = eval(expression, {"__builtins__": None}, {})
+        return str(result)
+    except Exception as e:
+        return f"Error: {e}"
+
 # --- TOOL REGISTRIES ---
 SUPPORT_TOOLS = {
     "check_order": check_order,
@@ -163,7 +174,8 @@ FINANCE_TOOLS = {
     "get_5_day_average": get_5_day_average,
     "execute_trade": execute_trade,
     "get_company_news": get_company_news,
-    "calculate_tax": calculate_tax
+    "calculate_tax": calculate_tax,
+    "calculate_math": calculate_math
 }
 
 def get_tools_description(agent_id: str) -> str:
