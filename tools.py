@@ -98,6 +98,8 @@ def restart_service(service_name: str) -> str:
     """Restart a specific service by its service_name."""
     if service_name in SERVICES:
         SERVICES[service_name] = "online"
+        if service_name in LOGS:
+            LOGS[service_name] = "Service restarted successfully. No errors."
         return f"Service {service_name} has been successfully restarted."
     return "Service not found."
 
@@ -147,6 +149,8 @@ def calculate_math(expression: str) -> str:
         if not all(c in allowed_chars for c in expression):
             return "Error: Invalid characters in expression. Only basic math and comparisons allowed."
         result = eval(expression, {"__builtins__": None}, {})
+        if isinstance(result, bool):
+            return f"True (The condition '{expression}' is met)" if result else f"False (The condition '{expression}' is not met)"
         return str(result)
     except Exception as e:
         return f"Error: {e}"
@@ -200,3 +204,12 @@ def get_tools_dict(agent_id: str) -> dict:
     elif agent_id == "AGENT_3_FINANCE":
         return FINANCE_TOOLS
     return {}
+
+def get_tool_signature(func) -> str:
+    """Return a human-readable signature string like: tool_name(param1: str, param2: int)"""
+    sig = inspect.signature(func)
+    params = ", ".join(
+        f"{p.name}: {p.annotation.__name__}" if p.annotation != inspect.Parameter.empty else p.name
+        for p in sig.parameters.values()
+    )
+    return f"{func.__name__}({params})"

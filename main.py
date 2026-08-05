@@ -20,9 +20,11 @@ def aggregate_results(df, agent_id, output_dir, prefix):
     grouped = df.groupby(["Model", "Quantization", "Params (B)"])
     
     agg_funcs = {
-        "Trial": "count",  # Number of trials
         "Success": [("sum", "sum"), ("mean", "mean")],  # sum = success_times, mean = success_rate
     }
+    if "Trial" in df.columns:
+        agg_funcs["Trial"] = "count"
+
     
     # Only average these if they exist (numeric columns)
     numeric_cols = ["Steps", "Total Tokens", "Inference Time (s)", "Tokens / Sec", 
@@ -62,6 +64,12 @@ def aggregate_results(df, agent_id, output_dir, prefix):
     if "Exec_Path" in df.columns:
         path_counts = df.groupby(["Model", "Quantization", "Params (B)"])["Exec_Path"].value_counts().unstack(fill_value=0)
         path_counts.columns = [f"Path_{col}_Count" for col in path_counts.columns]
+        
+        # Ensure standard path columns always exist
+        for expected in ["Path_FAILED_Count", "Path_PERFECT_Count", "Path_WANDERING_Count", "Path_SHORTCUT_Count"]:
+            if expected not in path_counts.columns:
+                path_counts[expected] = 0
+                
         path_counts = path_counts.reset_index()
         summary_df = summary_df.merge(path_counts, on=["Model", "Quantization", "Params (B)"], how="left")
     
