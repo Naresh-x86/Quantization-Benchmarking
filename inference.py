@@ -57,7 +57,7 @@ class LLMEngine:
             self.tokenizer.pad_token = self.tokenizer.eos_token
 
         load_kwargs: dict = {
-            "device_map":       "auto",
+            "device_map":       "cuda",
             "trust_remote_code": True,
         }
 
@@ -75,7 +75,7 @@ class LLMEngine:
             # BNB checkpoints saved by quantize_bnb.py also embed quantization_config
             # in config.json, so from_pretrained re-applies the same quantization.
             # No extra BitsAndBytesConfig needed — it's already in the saved config.
-            pass  # device_map="auto" is sufficient
+            load_kwargs["torch_dtype"] = torch.float16
 
         else:
             # Unknown type — attempt plain float16 load and warn.

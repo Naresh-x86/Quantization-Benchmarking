@@ -1,0 +1,1823 @@
+Starting Benchmark Suite V2
+Agents: ['AGENT_1_SUPPORT', 'AGENT_2_IT_HELPDESK', 'AGENT_3_FINANCE']
+Qwen models enabled:  8
+Llama models enabled: 17
+Total models: 25
+Trials per model: 10
+Output Directory: ./results/benchmark_20260805_163009
+
+
+=======================================================
+=== TESTING AGENT: AGENT_1_SUPPORT ===
+=======================================================
+
+--- Benchmarking Model: Qwen2.5-3B-Instruct_FP16_Baseline on AGENT_1_SUPPORT ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [FP16]  /home/ror-technologies/Quantization/models/Qwen2.5-3B-Instruct_FP16_Baseline …
+Loading weights:   0%|          | 0/434 [00:00<?, ?it/s]Loading weights:   0%|          | 1/434 [00:00<00:57,  7.55it/s]Loading weights:  15%|█▍        | 63/434 [00:00<00:01, 312.97it/s]Loading weights:  26%|██▌       | 112/434 [00:00<00:00, 379.22it/s]Loading weights:  37%|███▋      | 160/434 [00:00<00:00, 390.45it/s]Loading weights:  48%|████▊     | 208/434 [00:00<00:00, 409.80it/s]Loading weights:  59%|█████▉    | 255/434 [00:00<00:00, 415.65it/s]Loading weights:  70%|██████▉   | 303/434 [00:00<00:00, 417.15it/s]Loading weights:  81%|████████  | 351/434 [00:00<00:00, 432.75it/s]Loading weights:  92%|█████████▏| 399/434 [00:01<00:00, 442.64it/s]Loading weights: 100%|██████████| 434/434 [00:01<00:00, 409.87it/s]
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: Qwen2.5-3B-Instruct_FP8_Static_per_tensor on AGENT_1_SUPPORT ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [FP16]  /home/ror-technologies/Quantization/models/Qwen2.5-3B-Instruct_FP8_Static_per_tensor …
+Compressing model:   0%|          | 0/475 [00:00<?, ?it/s]Compressing model:  82%|████████▏ | 389/475 [00:00<00:00, 3886.41it/s]Compressing model: 100%|██████████| 475/475 [00:00<00:00, 3909.29it/s]
+Loading weights:   0%|          | 0/938 [00:00<?, ?it/s]Loading weights:  39%|███▉      | 369/938 [00:00<00:00, 3646.33it/s]Loading weights:  80%|███████▉  | 749/938 [00:00<00:00, 3735.41it/s]Loading weights: 100%|██████████| 938/938 [00:00<00:00, 3730.38it/s]
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+Decompressing model:   0%|          | 0/475 [00:00<?, ?it/s]Decompressing model: 100%|██████████| 475/475 [00:00<00:00, 10902.40it/s]
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: Qwen2.5-3B-Instruct_INT4_AWQ on AGENT_1_SUPPORT ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [AWQ]  /home/ror-technologies/Quantization/models/Qwen2.5-3B-Instruct_INT4_AWQ …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `AwqMarlinLinear`               
+INFO  Kernel: selected -> `AwqMarlinLinear`.                                   
+Loading weights:   0%|          | 0/938 [00:00<?, ?it/s]Loading weights:  64%|██████▍   | 603/938 [00:00<00:00, 5974.71it/s]Loading weights: 100%|██████████| 938/938 [00:00<00:00, 6052.85it/s]
+INFO  gc.collect() reclaimed 354 objects in 0.166s                             
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: Qwen2.5-7B-Instruct_FP16_Baseline on AGENT_1_SUPPORT ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [FP16]  /home/ror-technologies/Quantization/models/Qwen2.5-7B-Instruct_FP16_Baseline …
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   0%|          | 1/339 [00:00<05:22,  1.05it/s]Loading weights:  12%|█▏        | 40/339 [00:01<00:06, 46.50it/s]Loading weights:  16%|█▌        | 53/339 [00:01<00:05, 54.89it/s]Loading weights:  19%|█▉        | 66/339 [00:01<00:04, 61.58it/s]Loading weights:  26%|██▌       | 88/339 [00:01<00:03, 76.03it/s]Loading weights:  30%|██▉       | 101/339 [00:01<00:03, 75.12it/s]Loading weights:  34%|███▎      | 114/339 [00:01<00:02, 79.73it/s]Loading weights:  40%|████      | 136/339 [00:02<00:02, 93.08it/s]Loading weights:  44%|████▍     | 149/339 [00:02<00:02, 92.52it/s]Loading weights:  53%|█████▎    | 180/339 [00:02<00:01, 132.19it/s]Loading weights:  58%|█████▊    | 196/339 [00:02<00:01, 128.65it/s]Loading weights:  62%|██████▏   | 211/339 [00:02<00:00, 128.65it/s]Loading weights:  66%|██████▋   | 225/339 [00:02<00:00, 131.13it/s]Loading weights:  76%|███████▌  | 256/339 [00:02<00:00, 153.77it/s]Loading weights:  83%|████████▎ | 280/339 [00:03<00:00, 146.14it/s]Loading weights:  90%|████████▉ | 305/339 [00:03<00:00, 164.36it/s]Loading weights:  97%|█████████▋| 328/339 [00:03<00:00, 159.67it/s]Loading weights: 100%|██████████| 339/339 [00:03<00:00, 100.69it/s]
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: Qwen2.5-7B-Instruct_FP8_Static_per_tensor on AGENT_1_SUPPORT ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [FP16]  /home/ror-technologies/Quantization/models/Qwen2.5-7B-Instruct_FP8_Static_per_tensor …
+Compressing model:   0%|          | 0/371 [00:00<?, ?it/s]Compressing model: 100%|██████████| 371/371 [00:00<00:00, 3999.52it/s]
+Loading weights:   0%|          | 0/731 [00:00<?, ?it/s]Loading weights:   0%|          | 1/731 [00:00<04:42,  2.58it/s]Loading weights:  33%|███▎      | 242/731 [00:00<00:00, 643.44it/s]Loading weights:  54%|█████▍    | 395/731 [00:00<00:00, 881.91it/s]Loading weights:  74%|███████▎  | 538/731 [00:00<00:00, 1030.04it/s]Loading weights:  94%|█████████▎| 684/731 [00:00<00:00, 1145.14it/s]Loading weights: 100%|██████████| 731/731 [00:00<00:00, 885.83it/s] 
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+Decompressing model:   0%|          | 0/371 [00:00<?, ?it/s]Decompressing model: 100%|██████████| 371/371 [00:00<00:00, 6638.77it/s]
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: Qwen2.5-7B-Instruct_INT4_AWQ on AGENT_1_SUPPORT ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [AWQ]  /home/ror-technologies/Quantization/models/Qwen2.5-7B-Instruct_INT4_AWQ …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `AwqMarlinLinear`               
+INFO  Kernel: selected -> `AwqMarlinLinear`.                                   
+Loading weights:   0%|          | 0/731 [00:00<?, ?it/s]Loading weights:  37%|███▋      | 269/731 [00:00<00:00, 2689.61it/s]Loading weights:  74%|███████▎  | 538/731 [00:00<00:00, 2608.82it/s]Loading weights: 100%|██████████| 731/731 [00:00<00:00, 2641.09it/s]
+INFO  gc.collect() reclaimed 354 objects in 0.166s                             
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: Qwen2.5-14B-Instruct_FP8_Static_per_tensor on AGENT_1_SUPPORT ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [FP16]  /home/ror-technologies/Quantization/models/Qwen2.5-14B-Instruct_FP8_Static_per_tensor …
+Compressing model:   0%|          | 0/631 [00:00<?, ?it/s]Compressing model:  62%|██████▏   | 390/631 [00:00<00:00, 3892.74it/s]Compressing model: 100%|██████████| 631/631 [00:00<00:00, 3918.67it/s]
+Loading weights:   0%|          | 0/1251 [00:00<?, ?it/s]Loading weights:   0%|          | 1/1251 [00:00<10:42,  1.94it/s]Loading weights:  30%|██▉       | 372/1251 [00:00<00:01, 805.33it/s]Loading weights:  47%|████▋     | 588/1251 [00:00<00:00, 951.84it/s]Loading weights:  61%|██████    | 761/1251 [00:00<00:00, 1040.86it/s]Loading weights:  73%|███████▎  | 916/1251 [00:01<00:00, 1089.96it/s]Loading weights:  85%|████████▍ | 1059/1251 [00:01<00:00, 1113.53it/s]Loading weights:  95%|█████████▌| 1194/1251 [00:01<00:00, 1149.90it/s]Loading weights: 100%|██████████| 1251/1251 [00:01<00:00, 941.96it/s] 
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+Decompressing model:   0%|          | 0/631 [00:00<?, ?it/s]Decompressing model: 100%|██████████| 631/631 [00:00<00:00, 6826.50it/s]
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: Qwen2.5-14B-Instruct_INT4_AWQ on AGENT_1_SUPPORT ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [AWQ]  /home/ror-technologies/Quantization/models/Qwen2.5-14B-Instruct_INT4_AWQ …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `AwqMarlinLinear`               
+INFO  Kernel: selected -> `AwqMarlinLinear`.                                   
+Loading weights:   0%|          | 0/1251 [00:00<?, ?it/s]Loading weights:  18%|█▊        | 226/1251 [00:00<00:00, 2218.27it/s]Loading weights:  36%|███▌      | 452/1251 [00:00<00:00, 2235.90it/s]Loading weights:  54%|█████▍    | 679/1251 [00:00<00:00, 2241.23it/s]Loading weights:  73%|███████▎  | 917/1251 [00:00<00:00, 2275.62it/s]Loading weights:  92%|█████████▏| 1150/1251 [00:00<00:00, 2294.35it/s]Loading weights: 100%|██████████| 1251/1251 [00:00<00:00, 2277.27it/s]
+INFO  gc.collect() reclaimed 354 objects in 0.161s                             
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama/Llama-3.2-1B-Instruct on AGENT_1_SUPPORT ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [FP16]  meta-llama/Llama-3.2-1B-Instruct …
+Loading weights:   0%|          | 0/146 [00:00<?, ?it/s]Loading weights:   1%|          | 1/146 [00:00<00:19,  7.49it/s]Loading weights:  40%|███▉      | 58/146 [00:00<00:00, 278.83it/s]Loading weights:  71%|███████   | 104/146 [00:00<00:00, 348.80it/s]Loading weights: 100%|██████████| 146/146 [00:00<00:00, 339.67it/s]
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Llama-3.2-1B-Instruct-AWQ on AGENT_1_SUPPORT ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [AWQ]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Llama-3.2-1B-Instruct-AWQ …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `AwqMarlinLinear`               
+INFO  Kernel: selected -> `AwqMarlinLinear`.                                   
+Loading weights:   0%|          | 0/370 [00:00<?, ?it/s]Loading weights:   0%|          | 1/370 [00:00<00:50,  7.27it/s]Loading weights: 100%|██████████| 370/370 [00:00<00:00, 2304.59it/s]
+INFO  gc.collect() reclaimed 374 objects in 0.153s                             
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Llama-3.2-1B-Instruct-BNB-4bit on AGENT_1_SUPPORT ---
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [BNB-4BIT]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Llama-3.2-1B-Instruct-BNB-4bit …
+Loading weights:   0%|          | 0/146 [00:00<?, ?it/s]Loading weights:   1%|          | 1/146 [00:00<00:26,  5.52it/s]Loading weights:  36%|███▋      | 53/146 [00:00<00:00, 231.33it/s]Loading weights:  68%|██████▊   | 100/146 [00:00<00:00, 322.52it/s]Loading weights: 100%|██████████| 146/146 [00:00<00:00, 316.27it/s]
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Llama-3.2-1B-Instruct-BNB-8bit on AGENT_1_SUPPORT ---
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [BNB-8BIT]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Llama-3.2-1B-Instruct-BNB-8bit …
+Loading weights:   0%|          | 0/146 [00:00<?, ?it/s]Loading weights:   1%|          | 1/146 [00:00<00:28,  5.09it/s]Loading weights:  22%|██▏       | 32/146 [00:00<00:00, 130.49it/s]Loading weights:  47%|████▋     | 68/146 [00:00<00:00, 211.19it/s]Loading weights:  71%|███████   | 104/146 [00:00<00:00, 260.37it/s]Loading weights:  95%|█████████▍| 138/146 [00:00<00:00, 284.11it/s]Loading weights: 100%|██████████| 146/146 [00:00<00:00, 234.21it/s]
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Llama-3.2-1B-Instruct-GPTQ-4bit on AGENT_1_SUPPORT ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [GPTQ]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Llama-3.2-1B-Instruct-GPTQ-4bit …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `MarlinLinear`                  
+INFO  Kernel: selected -> `MarlinLinear`.                                      
+[transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
+Loading weights:   0%|          | 0/482 [00:00<?, ?it/s]Loading weights:   0%|          | 1/482 [00:00<01:17,  6.18it/s]Loading weights:  35%|███▌      | 170/482 [00:00<00:00, 795.45it/s]Loading weights:  72%|███████▏  | 347/482 [00:00<00:00, 1184.48it/s]Loading weights: 100%|██████████| 482/482 [00:00<00:00, 1102.39it/s]
+INFO  gc.collect() reclaimed 404 objects in 0.185s                             
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Llama-3.2-1B-Instruct-GPTQ-8bit on AGENT_1_SUPPORT ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [GPTQ-8BIT]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Llama-3.2-1B-Instruct-GPTQ-8bit …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `MarlinLinear`                  
+INFO  Kernel: selected -> `MarlinLinear`.                                      
+[transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
+Loading weights:   0%|          | 0/482 [00:00<?, ?it/s]Loading weights:   0%|          | 1/482 [00:00<01:16,  6.29it/s]Loading weights:  21%|██        | 102/482 [00:00<00:00, 473.42it/s]Loading weights:  45%|████▌     | 218/482 [00:00<00:00, 737.44it/s]Loading weights:  69%|██████▉   | 334/482 [00:00<00:00, 885.05it/s]Loading weights:  92%|█████████▏| 445/482 [00:00<00:00, 954.02it/s]Loading weights: 100%|██████████| 482/482 [00:00<00:00, 799.89it/s]
+INFO  gc.collect() reclaimed 404 objects in 0.155s                             
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama/Llama-3.2-3B-Instruct on AGENT_1_SUPPORT ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [FP16]  meta-llama/Llama-3.2-3B-Instruct …
+Loading weights:   0%|          | 0/254 [00:00<?, ?it/s]Loading weights:   0%|          | 1/254 [00:00<00:44,  5.73it/s]Loading weights:  16%|█▌        | 40/254 [00:00<00:01, 176.58it/s]Loading weights:  26%|██▌       | 66/254 [00:00<00:00, 208.38it/s]Loading weights:  37%|███▋      | 94/254 [00:00<00:00, 232.27it/s]Loading weights:  48%|████▊     | 122/254 [00:00<00:00, 248.25it/s]Loading weights:  59%|█████▊    | 149/254 [00:00<00:00, 254.87it/s]Loading weights:  69%|██████▉   | 176/254 [00:00<00:00, 256.30it/s]Loading weights:  80%|███████▉  | 203/254 [00:00<00:00, 260.49it/s]Loading weights:  91%|█████████ | 230/254 [00:00<00:00, 259.16it/s]Loading weights: 100%|██████████| 254/254 [00:01<00:00, 240.60it/s]
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Llama-3.2-3B-Instruct-AWQ on AGENT_1_SUPPORT ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [AWQ]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Llama-3.2-3B-Instruct-AWQ …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `AwqMarlinLinear`               
+INFO  Kernel: selected -> `AwqMarlinLinear`.                                   
+Loading weights:   0%|          | 0/646 [00:00<?, ?it/s]Loading weights:   0%|          | 1/646 [00:00<01:45,  6.09it/s]Loading weights: 100%|██████████| 646/646 [00:00<00:00, 2582.53it/s]
+INFO  gc.collect() reclaimed 403 objects in 0.168s                             
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Llama-3.2-3B-Instruct-BNB-4bit on AGENT_1_SUPPORT ---
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [BNB-4BIT]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Llama-3.2-3B-Instruct-BNB-4bit …
+Loading weights:   0%|          | 0/254 [00:00<?, ?it/s]Loading weights:   0%|          | 1/254 [00:00<00:59,  4.26it/s]Loading weights:  11%|█         | 27/254 [00:00<00:02, 100.80it/s]Loading weights:  26%|██▌       | 66/254 [00:00<00:00, 194.16it/s]Loading weights:  40%|████      | 102/254 [00:00<00:00, 243.99it/s]Loading weights:  53%|█████▎    | 135/254 [00:00<00:00, 266.94it/s]Loading weights:  68%|██████▊   | 172/254 [00:00<00:00, 288.69it/s]Loading weights:  82%|████████▏ | 208/254 [00:00<00:00, 303.79it/s]Loading weights:  96%|█████████▌| 243/254 [00:00<00:00, 315.03it/s]Loading weights: 100%|██████████| 254/254 [00:00<00:00, 254.74it/s]
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Llama-3.2-3B-Instruct-BNB-8bit on AGENT_1_SUPPORT ---
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [BNB-8BIT]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Llama-3.2-3B-Instruct-BNB-8bit …
+Loading weights:   0%|          | 0/254 [00:00<?, ?it/s]Loading weights:   0%|          | 1/254 [00:00<01:05,  3.84it/s]Loading weights:   9%|▊         | 22/254 [00:00<00:03, 74.63it/s]Loading weights:  19%|█▉        | 49/254 [00:00<00:01, 137.17it/s]Loading weights:  30%|██▉       | 75/254 [00:00<00:01, 171.73it/s]Loading weights:  38%|███▊      | 96/254 [00:00<00:00, 179.91it/s]Loading weights:  47%|████▋     | 119/254 [00:00<00:00, 192.61it/s]Loading weights:  55%|█████▌    | 140/254 [00:00<00:00, 195.04it/s]Loading weights:  65%|██████▍   | 165/254 [00:01<00:00, 198.22it/s]Loading weights:  74%|███████▍  | 189/254 [00:01<00:00, 208.82it/s]Loading weights:  83%|████████▎ | 212/254 [00:01<00:00, 209.58it/s]Loading weights:  93%|█████████▎| 237/254 [00:01<00:00, 215.51it/s]Loading weights: 100%|██████████| 254/254 [00:01<00:00, 181.71it/s]
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Llama-3.2-3B-Instruct-GPTQ-4bit on AGENT_1_SUPPORT ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [GPTQ]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Llama-3.2-3B-Instruct-GPTQ-4bit …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `MarlinLinear`                  
+INFO  Kernel: selected -> `MarlinLinear`.                                      
+[transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
+Loading weights:   0%|          | 0/842 [00:00<?, ?it/s]Loading weights:   0%|          | 1/842 [00:00<03:21,  4.18it/s]Loading weights:  15%|█▍        | 125/842 [00:00<00:01, 465.72it/s]Loading weights:  29%|██▉       | 248/842 [00:00<00:00, 726.02it/s]Loading weights:  44%|████▍     | 372/842 [00:00<00:00, 888.96it/s]Loading weights:  60%|█████▉    | 505/842 [00:00<00:00, 1027.79it/s]Loading weights:  76%|███████▌  | 638/842 [00:00<00:00, 1110.11it/s]Loading weights:  90%|█████████ | 762/842 [00:00<00:00, 1144.92it/s]Loading weights: 100%|██████████| 842/842 [00:00<00:00, 928.52it/s] 
+INFO  gc.collect() reclaimed 50 objects in 0.166s                              
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Llama-3.2-3B-Instruct-GPTQ-8bit on AGENT_1_SUPPORT ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [GPTQ-8BIT]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Llama-3.2-3B-Instruct-GPTQ-8bit …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `MarlinLinear`                  
+INFO  Kernel: selected -> `MarlinLinear`.                                      
+[transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
+Loading weights:   0%|          | 0/842 [00:00<?, ?it/s]Loading weights:   0%|          | 1/842 [00:00<03:50,  3.65it/s]Loading weights:   9%|▊         | 72/842 [00:00<00:03, 237.49it/s]Loading weights:  18%|█▊        | 151/842 [00:00<00:01, 414.95it/s]Loading weights:  26%|██▌       | 217/842 [00:00<00:01, 488.96it/s]Loading weights:  35%|███▌      | 295/842 [00:00<00:00, 574.90it/s]Loading weights:  43%|████▎     | 364/842 [00:00<00:00, 608.44it/s]Loading weights:  51%|█████     | 431/842 [00:00<00:00, 602.50it/s]Loading weights:  60%|██████    | 509/842 [00:01<00:00, 651.46it/s]Loading weights:  69%|██████▊   | 578/842 [00:01<00:00, 643.95it/s]Loading weights:  77%|███████▋  | 647/842 [00:01<00:00, 656.93it/s]Loading weights:  86%|████████▌ | 724/842 [00:01<00:00, 677.59it/s]Loading weights:  94%|█████████▍| 793/842 [00:01<00:00, 670.52it/s]Loading weights: 100%|██████████| 842/842 [00:01<00:00, 568.36it/s]
+INFO  gc.collect() reclaimed 50 objects in 0.190s                              
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Meta-Llama-3-8B-Instruct-AWQ on AGENT_1_SUPPORT ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [AWQ]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Meta-Llama-3-8B-Instruct-AWQ …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `AwqMarlinLinear`               
+INFO  Kernel: selected -> `AwqMarlinLinear`.                                   
+Loading weights:   0%|          | 0/739 [00:00<?, ?it/s]Loading weights:   0%|          | 1/739 [00:00<03:37,  3.40it/s]Loading weights:  65%|██████▍   | 477/739 [00:00<00:00, 1557.09it/s]Loading weights: 100%|██████████| 739/739 [00:00<00:00, 1490.76it/s]
+INFO  gc.collect() reclaimed 374 objects in 0.154s                             
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Meta-Llama-3-8B-Instruct-BNB-4bit on AGENT_1_SUPPORT ---
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [BNB-4BIT]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Meta-Llama-3-8B-Instruct-BNB-4bit …
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights:   0%|          | 1/291 [00:00<01:33,  3.11it/s]Loading weights:   1%|          | 2/291 [00:00<01:44,  2.77it/s]Loading weights:   7%|▋         | 20/291 [00:00<00:07, 35.32it/s]Loading weights:  14%|█▎        | 40/291 [00:00<00:03, 67.24it/s]Loading weights:  21%|██        | 60/291 [00:01<00:02, 96.74it/s]Loading weights:  27%|██▋       | 78/291 [00:01<00:01, 116.30it/s]Loading weights:  34%|███▍      | 100/291 [00:01<00:01, 142.25it/s]Loading weights:  41%|████      | 118/291 [00:01<00:01, 145.58it/s]Loading weights:  48%|████▊     | 139/291 [00:01<00:00, 160.47it/s]Loading weights:  54%|█████▍    | 157/291 [00:01<00:00, 158.64it/s]Loading weights:  62%|██████▏   | 181/291 [00:01<00:00, 178.26it/s]Loading weights:  69%|██████▊   | 200/291 [00:01<00:00, 171.24it/s]Loading weights:  75%|███████▍  | 218/291 [00:01<00:00, 167.25it/s]Loading weights:  82%|████████▏ | 240/291 [00:02<00:00, 179.33it/s]Loading weights:  89%|████████▉ | 260/291 [00:02<00:00, 180.28it/s]Loading weights:  96%|█████████▌| 280/291 [00:02<00:00, 185.03it/s]Loading weights: 100%|██████████| 291/291 [00:02<00:00, 127.96it/s]
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Meta-Llama-3-8B-Instruct-BNB-8bit on AGENT_1_SUPPORT ---
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [BNB-8BIT]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Meta-Llama-3-8B-Instruct-BNB-8bit …
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights:   0%|          | 1/291 [00:00<01:41,  2.84it/s]Loading weights:   1%|          | 2/291 [00:00<01:45,  2.74it/s]Loading weights:   4%|▍         | 13/291 [00:00<00:12, 22.60it/s]Loading weights:   8%|▊         | 23/291 [00:00<00:07, 36.47it/s]Loading weights:  13%|█▎        | 38/291 [00:01<00:04, 61.34it/s]Loading weights:  17%|█▋        | 49/291 [00:01<00:03, 71.65it/s]Loading weights:  20%|██        | 59/291 [00:01<00:03, 77.26it/s]Loading weights:  24%|██▎       | 69/291 [00:01<00:02, 82.88it/s]Loading weights:  29%|██▉       | 85/291 [00:01<00:02, 98.07it/s]Loading weights:  33%|███▎      | 96/291 [00:01<00:02, 94.89it/s]Loading weights:  38%|███▊      | 112/291 [00:01<00:01, 106.21it/s]Loading weights:  43%|████▎     | 124/291 [00:01<00:01, 102.55it/s]Loading weights:  47%|████▋     | 137/291 [00:01<00:01, 109.14it/s]Loading weights:  51%|█████     | 149/291 [00:02<00:01, 105.37it/s]Loading weights:  55%|█████▍    | 160/291 [00:02<00:01, 105.55it/s]Loading weights:  59%|█████▉    | 173/291 [00:02<00:01, 112.06it/s]Loading weights:  64%|██████▎   | 185/291 [00:02<00:01, 94.01it/s] Loading weights:  67%|██████▋   | 196/291 [00:02<00:01, 76.47it/s]Loading weights:  70%|███████   | 205/291 [00:02<00:01, 69.63it/s]Loading weights:  76%|███████▌  | 220/291 [00:02<00:00, 83.48it/s]Loading weights:  79%|███████▉  | 230/291 [00:03<00:00, 81.55it/s]Loading weights:  82%|████████▏ | 240/291 [00:03<00:00, 83.35it/s]Loading weights:  86%|████████▋ | 251/291 [00:03<00:00, 87.53it/s]Loading weights:  90%|█████████ | 262/291 [00:03<00:00, 92.09it/s]Loading weights:  94%|█████████▍| 274/291 [00:03<00:00, 94.44it/s]Loading weights:  98%|█████████▊| 285/291 [00:03<00:00, 93.47it/s]Loading weights: 100%|██████████| 291/291 [00:03<00:00, 78.73it/s]
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Meta-Llama-3-8B-Instruct-GPTQ-4bit on AGENT_1_SUPPORT ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [GPTQ]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Meta-Llama-3-8B-Instruct-GPTQ-4bit …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `MarlinLinear`                  
+INFO  Kernel: selected -> `MarlinLinear`.                                      
+[transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
+Loading weights:   0%|          | 0/963 [00:00<?, ?it/s]Loading weights:   0%|          | 1/963 [00:00<11:50,  1.35it/s]Loading weights:   7%|▋         | 64/963 [00:00<00:08, 101.84it/s]Loading weights:  13%|█▎        | 124/963 [00:00<00:04, 190.90it/s]Loading weights:  19%|█▉        | 185/963 [00:01<00:02, 277.18it/s]Loading weights:  25%|██▌       | 243/963 [00:01<00:02, 323.92it/s]Loading weights:  32%|███▏      | 305/963 [00:01<00:01, 388.95it/s]Loading weights:  38%|███▊      | 368/963 [00:01<00:01, 443.06it/s]Loading weights:  45%|████▍     | 429/963 [00:01<00:01, 481.53it/s]Loading weights:  50%|█████     | 485/963 [00:01<00:01, 471.81it/s]Loading weights:  56%|█████▌    | 538/963 [00:01<00:00, 470.77it/s]Loading weights:  61%|██████    | 589/963 [00:01<00:00, 432.91it/s]Loading weights:  66%|██████▌   | 637/963 [00:01<00:00, 428.76it/s]Loading weights:  71%|███████   | 686/963 [00:02<00:00, 438.40it/s]Loading weights:  76%|███████▌  | 733/963 [00:02<00:00, 438.11it/s]Loading weights:  82%|████████▏ | 789/963 [00:02<00:00, 457.95it/s]Loading weights:  87%|████████▋ | 836/963 [00:02<00:00, 460.73it/s]Loading weights:  92%|█████████▏| 883/963 [00:02<00:00, 396.33it/s]Loading weights:  98%|█████████▊| 941/963 [00:02<00:00, 442.49it/s]Loading weights: 100%|██████████| 963/963 [00:02<00:00, 357.81it/s]
+INFO  gc.collect() reclaimed 50 objects in 0.158s                              
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Meta-Llama-3-8B-Instruct-GPTQ-8bit on AGENT_1_SUPPORT ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [GPTQ-8BIT]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Meta-Llama-3-8B-Instruct-GPTQ-8bit …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `MarlinLinear`                  
+INFO  Kernel: selected -> `MarlinLinear`.                                      
+[transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
+Loading weights:   0%|          | 0/963 [00:00<?, ?it/s]Loading weights:   0%|          | 1/963 [00:00<11:24,  1.40it/s]Loading weights:   4%|▎         | 35/963 [00:00<00:16, 56.93it/s]Loading weights:   7%|▋         | 69/963 [00:00<00:08, 103.55it/s]Loading weights:  11%|█         | 102/963 [00:01<00:06, 140.45it/s]Loading weights:  14%|█▎        | 132/963 [00:01<00:04, 172.00it/s]Loading weights:  18%|█▊        | 176/963 [00:01<00:03, 231.54it/s]Loading weights:  21%|██▏       | 207/963 [00:01<00:03, 240.95it/s]Loading weights:  25%|██▌       | 245/963 [00:01<00:02, 268.23it/s]Loading weights:  29%|██▉       | 278/963 [00:01<00:02, 276.60it/s]Loading weights:  32%|███▏      | 310/963 [00:01<00:02, 266.53it/s]Loading weights:  37%|███▋      | 352/963 [00:01<00:02, 305.15it/s]Loading weights:  40%|███▉      | 385/963 [00:01<00:01, 308.60it/s]Loading weights:  43%|████▎     | 418/963 [00:02<00:01, 302.68it/s]Loading weights:  47%|████▋     | 454/963 [00:02<00:01, 279.47it/s]Loading weights:  51%|█████     | 489/963 [00:02<00:01, 291.27it/s]Loading weights:  54%|█████▍    | 523/963 [00:02<00:01, 293.96it/s]Loading weights:  58%|█████▊    | 562/963 [00:02<00:01, 318.90it/s]Loading weights:  62%|██████▏   | 600/963 [00:02<00:01, 335.35it/s]Loading weights:  66%|██████▌   | 635/963 [00:02<00:01, 311.73it/s]Loading weights:  69%|██████▉   | 667/963 [00:02<00:01, 291.76it/s]Loading weights:  73%|███████▎  | 701/963 [00:03<00:00, 286.06it/s]Loading weights:  77%|███████▋  | 738/963 [00:03<00:00, 307.59it/s]Loading weights:  80%|████████  | 772/963 [00:03<00:00, 313.78it/s]Loading weights:  83%|████████▎ | 804/963 [00:03<00:00, 293.67it/s]Loading weights:  87%|████████▋ | 840/963 [00:03<00:00, 311.09it/s]Loading weights:  91%|█████████ | 872/963 [00:03<00:00, 309.70it/s]Loading weights:  94%|█████████▍| 904/963 [00:03<00:00, 296.17it/s]Loading weights:  98%|█████████▊| 939/963 [00:03<00:00, 299.38it/s]Loading weights: 100%|██████████| 963/963 [00:03<00:00, 249.30it/s]
+INFO  gc.collect() reclaimed 50 objects in 0.158s                              
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+
+--- AGENT_1_SUPPORT Benchmark Complete! Results saved to ./results/benchmark_20260805_163009/AGENT_1_SUPPORT ---
+
+=======================================================
+=== TESTING AGENT: AGENT_2_IT_HELPDESK ===
+=======================================================
+
+--- Benchmarking Model: Qwen2.5-3B-Instruct_FP16_Baseline on AGENT_2_IT_HELPDESK ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [FP16]  /home/ror-technologies/Quantization/models/Qwen2.5-3B-Instruct_FP16_Baseline …
+Loading weights:   0%|          | 0/434 [00:00<?, ?it/s]Loading weights:   0%|          | 1/434 [00:00<01:09,  6.22it/s]Loading weights:  15%|█▍        | 63/434 [00:00<00:01, 294.04it/s]Loading weights:  26%|██▌       | 111/434 [00:00<00:00, 356.12it/s]Loading weights:  37%|███▋      | 159/434 [00:00<00:00, 378.56it/s]Loading weights:  48%|████▊     | 208/434 [00:00<00:00, 404.54it/s]Loading weights:  59%|█████▉    | 255/434 [00:00<00:00, 423.15it/s]Loading weights:  70%|██████▉   | 303/434 [00:00<00:00, 416.17it/s]Loading weights:  81%|████████  | 352/434 [00:00<00:00, 432.18it/s]Loading weights:  92%|█████████▏| 400/434 [00:01<00:00, 431.84it/s]Loading weights: 100%|██████████| 434/434 [00:01<00:00, 401.58it/s]
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: Qwen2.5-3B-Instruct_FP8_Static_per_tensor on AGENT_2_IT_HELPDESK ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [FP16]  /home/ror-technologies/Quantization/models/Qwen2.5-3B-Instruct_FP8_Static_per_tensor …
+Compressing model:   0%|          | 0/475 [00:00<?, ?it/s]Compressing model:  81%|████████▏ | 387/475 [00:00<00:00, 3865.64it/s]Compressing model: 100%|██████████| 475/475 [00:00<00:00, 3893.61it/s]
+Loading weights:   0%|          | 0/938 [00:00<?, ?it/s]Loading weights:  34%|███▍      | 319/938 [00:00<00:00, 3123.26it/s]Loading weights:  68%|██████▊   | 634/938 [00:00<00:00, 3138.00it/s]Loading weights: 100%|██████████| 938/938 [00:00<00:00, 3222.69it/s]
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+Decompressing model:   0%|          | 0/475 [00:00<?, ?it/s]Decompressing model: 100%|██████████| 475/475 [00:00<00:00, 11205.70it/s]
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: Qwen2.5-3B-Instruct_INT4_AWQ on AGENT_2_IT_HELPDESK ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [AWQ]  /home/ror-technologies/Quantization/models/Qwen2.5-3B-Instruct_INT4_AWQ …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `AwqMarlinLinear`               
+INFO  Kernel: selected -> `AwqMarlinLinear`.                                   
+Loading weights:   0%|          | 0/938 [00:00<?, ?it/s]Loading weights:  15%|█▍        | 139/938 [00:00<00:00, 1369.23it/s]Loading weights:  31%|███       | 288/938 [00:00<00:00, 1419.51it/s]Loading weights:  46%|████▌     | 430/938 [00:00<00:00, 1369.63it/s]Loading weights:  61%|██████    | 568/938 [00:00<00:00, 1355.27it/s]Loading weights:  75%|███████▌  | 705/938 [00:00<00:00, 1343.54it/s]Loading weights:  90%|████████▉ | 840/938 [00:00<00:00, 1331.00it/s]Loading weights: 100%|██████████| 938/938 [00:00<00:00, 1365.40it/s]
+INFO  gc.collect() reclaimed 354 objects in 0.162s                             
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: Qwen2.5-7B-Instruct_FP16_Baseline on AGENT_2_IT_HELPDESK ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [FP16]  /home/ror-technologies/Quantization/models/Qwen2.5-7B-Instruct_FP16_Baseline …
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   0%|          | 1/339 [00:00<02:04,  2.72it/s]Loading weights:   5%|▍         | 16/339 [00:00<00:08, 39.21it/s]Loading weights:  12%|█▏        | 40/339 [00:00<00:03, 75.87it/s]Loading weights:  19%|█▉        | 64/339 [00:00<00:02, 97.49it/s]Loading weights:  23%|██▎       | 78/339 [00:00<00:02, 104.44it/s]Loading weights:  30%|██▉       | 101/339 [00:01<00:01, 131.77it/s]Loading weights:  34%|███▍      | 116/339 [00:01<00:01, 135.66it/s]Loading weights:  40%|████      | 136/339 [00:01<00:01, 128.20it/s]Loading weights:  47%|████▋     | 160/339 [00:01<00:01, 110.42it/s]Loading weights:  51%|█████     | 173/339 [00:01<00:01, 101.48it/s]Loading weights:  55%|█████▍    | 186/339 [00:01<00:01, 96.56it/s] Loading weights:  61%|██████▏   | 208/339 [00:02<00:01, 106.39it/s]Loading weights:  65%|██████▌   | 221/339 [00:02<00:01, 96.88it/s] Loading weights:  69%|██████▉   | 234/339 [00:02<00:01, 90.13it/s]Loading weights:  76%|███████▌  | 256/339 [00:02<00:00, 95.00it/s]Loading weights:  79%|███████▉  | 269/339 [00:02<00:00, 87.65it/s]Loading weights:  83%|████████▎ | 282/339 [00:03<00:00, 84.65it/s]Loading weights:  88%|████████▊ | 300/339 [00:03<00:00, 102.09it/s]Loading weights:  92%|█████████▏| 312/339 [00:03<00:00, 92.27it/s] Loading weights:  95%|█████████▍| 322/339 [00:03<00:00, 84.26it/s]Loading weights: 100%|██████████| 339/339 [00:03<00:00, 96.04it/s]
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: Qwen2.5-7B-Instruct_FP8_Static_per_tensor on AGENT_2_IT_HELPDESK ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [FP16]  /home/ror-technologies/Quantization/models/Qwen2.5-7B-Instruct_FP8_Static_per_tensor …
+Compressing model:   0%|          | 0/371 [00:00<?, ?it/s]Compressing model: 100%|██████████| 371/371 [00:00<00:00, 3962.68it/s]
+Loading weights:   0%|          | 0/731 [00:00<?, ?it/s]Loading weights:  19%|█▉        | 138/731 [00:00<00:00, 1354.02it/s]Loading weights:  37%|███▋      | 274/731 [00:00<00:00, 1195.28it/s]Loading weights:  54%|█████▍    | 395/731 [00:00<00:00, 1186.11it/s]Loading weights:  70%|███████   | 515/731 [00:00<00:00, 1128.54it/s]Loading weights:  86%|████████▌ | 629/731 [00:00<00:00, 935.34it/s] Loading weights:  99%|█████████▉| 727/731 [00:00<00:00, 935.90it/s]Loading weights: 100%|██████████| 731/731 [00:00<00:00, 1028.57it/s]
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+Decompressing model:   0%|          | 0/371 [00:00<?, ?it/s]Decompressing model: 100%|██████████| 371/371 [00:00<00:00, 6761.42it/s]
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: Qwen2.5-7B-Instruct_INT4_AWQ on AGENT_2_IT_HELPDESK ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [AWQ]  /home/ror-technologies/Quantization/models/Qwen2.5-7B-Instruct_INT4_AWQ …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `AwqMarlinLinear`               
+INFO  Kernel: selected -> `AwqMarlinLinear`.                                   
+Loading weights:   0%|          | 0/731 [00:00<?, ?it/s]Loading weights:   0%|          | 1/731 [00:00<04:11,  2.90it/s]Loading weights:   8%|▊         | 56/731 [00:00<00:04, 161.64it/s]Loading weights:  12%|█▏        | 88/731 [00:00<00:03, 197.86it/s]Loading weights:  18%|█▊        | 134/731 [00:00<00:02, 262.47it/s]Loading weights:  23%|██▎       | 168/731 [00:00<00:02, 255.81it/s]Loading weights:  28%|██▊       | 208/731 [00:00<00:01, 293.52it/s]Loading weights:  33%|███▎      | 242/731 [00:01<00:01, 285.39it/s]Loading weights:  37%|███▋      | 274/731 [00:01<00:01, 294.60it/s]Loading weights:  42%|████▏     | 308/731 [00:01<00:01, 306.37it/s]Loading weights:  47%|████▋     | 342/731 [00:01<00:01, 303.47it/s]Loading weights:  51%|█████     | 374/731 [00:01<00:01, 254.09it/s]Loading weights:  55%|█████▍    | 402/731 [00:01<00:01, 251.47it/s]Loading weights:  61%|██████    | 445/731 [00:01<00:01, 279.99it/s]Loading weights:  65%|██████▍   | 475/731 [00:01<00:00, 273.59it/s]Loading weights:  69%|██████▉   | 504/731 [00:02<00:00, 261.92it/s]Loading weights:  73%|███████▎  | 537/731 [00:02<00:00, 278.16it/s]Loading weights:  77%|███████▋  | 566/731 [00:02<00:00, 270.38it/s]Loading weights:  81%|████████▏ | 594/731 [00:02<00:00, 234.53it/s]Loading weights:  85%|████████▍ | 619/731 [00:02<00:00, 219.70it/s]Loading weights:  88%|████████▊ | 642/731 [00:02<00:00, 206.60it/s]Loading weights:  91%|█████████ | 664/731 [00:02<00:00, 199.70it/s]Loading weights:  94%|█████████▍| 686/731 [00:02<00:00, 202.51it/s]Loading weights:  98%|█████████▊| 720/731 [00:02<00:00, 236.90it/s]Loading weights: 100%|██████████| 731/731 [00:02<00:00, 244.49it/s]
+INFO  gc.collect() reclaimed 354 objects in 0.209s                             
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: Qwen2.5-14B-Instruct_FP8_Static_per_tensor on AGENT_2_IT_HELPDESK ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [FP16]  /home/ror-technologies/Quantization/models/Qwen2.5-14B-Instruct_FP8_Static_per_tensor …
+Compressing model:   0%|          | 0/631 [00:00<?, ?it/s]Compressing model:  61%|██████▏   | 387/631 [00:00<00:00, 3856.70it/s]Compressing model: 100%|██████████| 631/631 [00:00<00:00, 3874.18it/s]
+Loading weights:   0%|          | 0/1251 [00:00<?, ?it/s]Loading weights:   0%|          | 1/1251 [00:00<10:23,  2.00it/s]Loading weights:  15%|█▍        | 183/1251 [00:00<00:02, 398.74it/s]Loading weights:  23%|██▎       | 282/1251 [00:01<00:07, 137.56it/s]Loading weights:  27%|██▋       | 343/1251 [00:02<00:05, 175.04it/s]Loading weights:  32%|███▏      | 402/1251 [00:02<00:04, 210.56it/s]Loading weights:  36%|███▋      | 456/1251 [00:02<00:03, 249.64it/s]Loading weights:  41%|████▏     | 517/1251 [00:02<00:02, 302.21it/s]Loading weights:  48%|████▊     | 595/1251 [00:02<00:01, 385.92it/s]Loading weights:  53%|█████▎    | 664/1251 [00:02<00:01, 446.69it/s]Loading weights:  59%|█████▉    | 736/1251 [00:02<00:01, 495.22it/s]Loading weights:  65%|██████▍   | 811/1251 [00:02<00:00, 552.90it/s]Loading weights:  75%|███████▍  | 937/1251 [00:02<00:00, 729.91it/s]Loading weights:  83%|████████▎ | 1033/1251 [00:02<00:00, 789.14it/s]Loading weights:  91%|█████████ | 1137/1251 [00:03<00:00, 855.37it/s]Loading weights: 100%|█████████▉| 1245/1251 [00:03<00:00, 914.13it/s]Loading weights: 100%|██████████| 1251/1251 [00:03<00:00, 391.43it/s]
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+Decompressing model:   0%|          | 0/631 [00:00<?, ?it/s]Decompressing model: 100%|██████████| 631/631 [00:00<00:00, 6913.45it/s]
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: Qwen2.5-14B-Instruct_INT4_AWQ on AGENT_2_IT_HELPDESK ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [AWQ]  /home/ror-technologies/Quantization/models/Qwen2.5-14B-Instruct_INT4_AWQ …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `AwqMarlinLinear`               
+INFO  Kernel: selected -> `AwqMarlinLinear`.                                   
+Loading weights:   0%|          | 0/1251 [00:00<?, ?it/s]Loading weights:   0%|          | 1/1251 [00:00<09:43,  2.14it/s]Loading weights:  34%|███▍      | 423/1251 [00:00<00:00, 986.39it/s]Loading weights:  53%|█████▎    | 668/1251 [00:00<00:00, 1245.73it/s]Loading weights:  71%|███████   | 885/1251 [00:00<00:00, 1390.04it/s]Loading weights:  87%|████████▋ | 1085/1251 [00:00<00:00, 1482.01it/s]Loading weights: 100%|██████████| 1251/1251 [00:01<00:00, 1219.21it/s]
+INFO  gc.collect() reclaimed 354 objects in 0.166s                             
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama/Llama-3.2-1B-Instruct on AGENT_2_IT_HELPDESK ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [FP16]  meta-llama/Llama-3.2-1B-Instruct …
+Loading weights:   0%|          | 0/146 [00:00<?, ?it/s]Loading weights:   1%|          | 1/146 [00:00<00:52,  2.76it/s]Loading weights:  58%|█████▊    | 84/146 [00:00<00:00, 225.46it/s]Loading weights:  86%|████████▋ | 126/146 [00:00<00:00, 247.44it/s]Loading weights: 100%|██████████| 146/146 [00:00<00:00, 209.36it/s]
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Llama-3.2-1B-Instruct-AWQ on AGENT_2_IT_HELPDESK ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [AWQ]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Llama-3.2-1B-Instruct-AWQ …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `AwqMarlinLinear`               
+INFO  Kernel: selected -> `AwqMarlinLinear`.                                   
+Loading weights:   0%|          | 0/370 [00:00<?, ?it/s]Loading weights:   0%|          | 1/370 [00:00<00:44,  8.27it/s]Loading weights:  89%|████████▊ | 328/370 [00:00<00:00, 1746.15it/s]Loading weights: 100%|██████████| 370/370 [00:00<00:00, 1483.30it/s]
+INFO  gc.collect() reclaimed 374 objects in 0.157s                             
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Llama-3.2-1B-Instruct-BNB-4bit on AGENT_2_IT_HELPDESK ---
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [BNB-4BIT]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Llama-3.2-1B-Instruct-BNB-4bit …
+Loading weights:   0%|          | 0/146 [00:00<?, ?it/s]Loading weights:  81%|████████  | 118/146 [00:00<00:00, 1177.26it/s]Loading weights: 100%|██████████| 146/146 [00:00<00:00, 1268.39it/s]
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Llama-3.2-1B-Instruct-BNB-8bit on AGENT_2_IT_HELPDESK ---
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [BNB-8BIT]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Llama-3.2-1B-Instruct-BNB-8bit …
+Loading weights:   0%|          | 0/146 [00:00<?, ?it/s]Loading weights:  68%|██████▊   | 100/146 [00:00<00:00, 985.05it/s]Loading weights: 100%|██████████| 146/146 [00:00<00:00, 1131.10it/s]
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Llama-3.2-1B-Instruct-GPTQ-4bit on AGENT_2_IT_HELPDESK ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [GPTQ]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Llama-3.2-1B-Instruct-GPTQ-4bit …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `MarlinLinear`                  
+INFO  Kernel: selected -> `MarlinLinear`.                                      
+[transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
+Loading weights:   0%|          | 0/482 [00:00<?, ?it/s]Loading weights: 100%|██████████| 482/482 [00:00<00:00, 5281.63it/s]
+INFO  gc.collect() reclaimed 404 objects in 0.157s                             
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Llama-3.2-1B-Instruct-GPTQ-8bit on AGENT_2_IT_HELPDESK ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [GPTQ-8BIT]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Llama-3.2-1B-Instruct-GPTQ-8bit …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `MarlinLinear`                  
+INFO  Kernel: selected -> `MarlinLinear`.                                      
+[transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
+Loading weights:   0%|          | 0/482 [00:00<?, ?it/s]Loading weights:  60%|██████    | 291/482 [00:00<00:00, 2903.70it/s]Loading weights: 100%|██████████| 482/482 [00:00<00:00, 3516.32it/s]
+INFO  gc.collect() reclaimed 404 objects in 0.159s                             
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama/Llama-3.2-3B-Instruct on AGENT_2_IT_HELPDESK ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [FP16]  meta-llama/Llama-3.2-3B-Instruct …
+Loading weights:   0%|          | 0/254 [00:00<?, ?it/s]Loading weights:   0%|          | 1/254 [00:00<02:15,  1.87it/s]Loading weights:  26%|██▌       | 66/254 [00:00<00:01, 134.05it/s]Loading weights:  39%|███▉      | 100/254 [00:00<00:00, 157.55it/s]Loading weights:  50%|█████     | 128/254 [00:00<00:00, 162.27it/s]Loading weights:  60%|█████▉    | 152/254 [00:01<00:00, 151.50it/s]Loading weights:  68%|██████▊   | 172/254 [00:01<00:00, 152.60it/s]Loading weights:  75%|███████▌  | 191/254 [00:01<00:00, 151.77it/s]Loading weights:  82%|████████▏ | 209/254 [00:01<00:00, 145.28it/s]Loading weights:  89%|████████▊ | 225/254 [00:01<00:00, 141.27it/s]Loading weights:  94%|█████████▍| 240/254 [00:01<00:00, 135.99it/s]Loading weights: 100%|██████████| 254/254 [00:01<00:00, 136.57it/s]
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Llama-3.2-3B-Instruct-AWQ on AGENT_2_IT_HELPDESK ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [AWQ]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Llama-3.2-3B-Instruct-AWQ …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `AwqMarlinLinear`               
+INFO  Kernel: selected -> `AwqMarlinLinear`.                                   
+Loading weights:   0%|          | 0/646 [00:00<?, ?it/s]Loading weights:   0%|          | 1/646 [00:00<02:54,  3.70it/s]Loading weights:  29%|██▉       | 187/646 [00:00<00:00, 631.80it/s]Loading weights:  45%|████▍     | 290/646 [00:00<00:00, 741.97it/s]Loading weights:  60%|██████    | 390/646 [00:00<00:00, 815.45it/s]Loading weights:  76%|███████▌  | 489/646 [00:00<00:00, 845.53it/s]Loading weights:  91%|█████████ | 589/646 [00:00<00:00, 888.77it/s]Loading weights: 100%|██████████| 646/646 [00:00<00:00, 762.22it/s]
+INFO  gc.collect() reclaimed 403 objects in 0.181s                             
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Llama-3.2-3B-Instruct-BNB-4bit on AGENT_2_IT_HELPDESK ---
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [BNB-4BIT]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Llama-3.2-3B-Instruct-BNB-4bit …
+Loading weights:   0%|          | 0/254 [00:00<?, ?it/s]Loading weights:  54%|█████▎    | 136/254 [00:00<00:00, 1339.34it/s]Loading weights: 100%|██████████| 254/254 [00:00<00:00, 1395.10it/s]
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Llama-3.2-3B-Instruct-BNB-8bit on AGENT_2_IT_HELPDESK ---
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [BNB-8BIT]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Llama-3.2-3B-Instruct-BNB-8bit …
+Loading weights:   0%|          | 0/254 [00:00<?, ?it/s]Loading weights:  15%|█▌        | 39/254 [00:00<00:00, 377.74it/s]Loading weights:  56%|█████▌    | 142/254 [00:00<00:00, 756.30it/s]Loading weights: 100%|██████████| 254/254 [00:00<00:00, 842.51it/s]
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Llama-3.2-3B-Instruct-GPTQ-4bit on AGENT_2_IT_HELPDESK ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [GPTQ]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Llama-3.2-3B-Instruct-GPTQ-4bit …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `MarlinLinear`                  
+INFO  Kernel: selected -> `MarlinLinear`.                                      
+[transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
+Loading weights:   0%|          | 0/842 [00:00<?, ?it/s]Loading weights:  33%|███▎      | 278/842 [00:00<00:00, 2761.95it/s]Loading weights: 100%|██████████| 842/842 [00:00<00:00, 4310.98it/s]
+INFO  gc.collect() reclaimed 50 objects in 0.162s                              
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Llama-3.2-3B-Instruct-GPTQ-8bit on AGENT_2_IT_HELPDESK ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [GPTQ-8BIT]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Llama-3.2-3B-Instruct-GPTQ-8bit …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `MarlinLinear`                  
+INFO  Kernel: selected -> `MarlinLinear`.                                      
+[transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
+Loading weights:   0%|          | 0/842 [00:00<?, ?it/s]Loading weights:  28%|██▊       | 235/842 [00:00<00:00, 2349.55it/s]Loading weights:  68%|██████▊   | 574/842 [00:00<00:00, 2954.00it/s]Loading weights: 100%|██████████| 842/842 [00:00<00:00, 3011.89it/s]
+INFO  gc.collect() reclaimed 50 objects in 0.156s                              
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Meta-Llama-3-8B-Instruct-AWQ on AGENT_2_IT_HELPDESK ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [AWQ]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Meta-Llama-3-8B-Instruct-AWQ …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `AwqMarlinLinear`               
+INFO  Kernel: selected -> `AwqMarlinLinear`.                                   
+Loading weights:   0%|          | 0/739 [00:00<?, ?it/s]Loading weights:   0%|          | 1/739 [00:01<16:13,  1.32s/it]Loading weights:   4%|▍         | 32/739 [00:01<00:24, 29.05it/s]Loading weights:  10%|█         | 76/739 [00:01<00:08, 76.48it/s]Loading weights:  17%|█▋        | 124/739 [00:01<00:04, 131.57it/s]Loading weights:  23%|██▎       | 171/739 [00:01<00:03, 184.62it/s]Loading weights:  29%|██▉       | 215/739 [00:01<00:02, 232.88it/s]Loading weights:  36%|███▌      | 266/739 [00:02<00:01, 291.77it/s]Loading weights:  42%|████▏     | 309/739 [00:02<00:01, 318.33it/s]Loading weights:  48%|████▊     | 355/739 [00:02<00:01, 350.56it/s]Loading weights:  55%|█████▍    | 404/739 [00:02<00:00, 386.34it/s]Loading weights:  61%|██████▏   | 454/739 [00:02<00:00, 414.35it/s]Loading weights:  68%|██████▊   | 500/739 [00:02<00:00, 425.37it/s]Loading weights:  74%|███████▍  | 549/739 [00:02<00:00, 439.47it/s]Loading weights:  81%|████████▏ | 602/739 [00:02<00:00, 457.51it/s]Loading weights:  88%|████████▊ | 651/739 [00:02<00:00, 455.58it/s]Loading weights:  95%|█████████▍| 700/739 [00:02<00:00, 455.13it/s]Loading weights: 100%|██████████| 739/739 [00:03<00:00, 245.24it/s]
+INFO  gc.collect() reclaimed 374 objects in 1.761s                             
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Meta-Llama-3-8B-Instruct-BNB-4bit on AGENT_2_IT_HELPDESK ---
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [BNB-4BIT]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Meta-Llama-3-8B-Instruct-BNB-4bit …
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights:   0%|          | 1/291 [00:00<01:07,  4.27it/s]Loading weights:   7%|▋         | 19/291 [00:00<00:03, 68.99it/s]Loading weights:  13%|█▎        | 38/291 [00:00<00:02, 102.69it/s]Loading weights:  19%|█▉        | 56/291 [00:00<00:01, 124.34it/s]Loading weights:  27%|██▋       | 80/291 [00:00<00:01, 158.03it/s]Loading weights:  34%|███▎      | 98/291 [00:01<00:02, 70.07it/s] Loading weights:  40%|████      | 117/291 [00:01<00:01, 87.86it/s]Loading weights:  47%|████▋     | 137/291 [00:01<00:01, 105.71it/s]Loading weights:  54%|█████▍    | 157/291 [00:01<00:01, 122.44it/s]Loading weights:  60%|█████▉    | 174/291 [00:01<00:00, 132.87it/s]Loading weights:  66%|██████▋   | 193/291 [00:01<00:00, 142.65it/s]Loading weights:  73%|███████▎  | 211/291 [00:01<00:00, 151.24it/s]Loading weights:  79%|███████▊  | 229/291 [00:01<00:00, 158.22it/s]Loading weights:  86%|████████▋ | 251/291 [00:02<00:00, 173.31it/s]Loading weights:  93%|█████████▎| 270/291 [00:02<00:00, 174.62it/s]Loading weights: 100%|██████████| 291/291 [00:02<00:00, 128.01it/s]
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Meta-Llama-3-8B-Instruct-BNB-8bit on AGENT_2_IT_HELPDESK ---
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [BNB-8BIT]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Meta-Llama-3-8B-Instruct-BNB-8bit …
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights:   0%|          | 1/291 [00:00<00:29,  9.98it/s]Loading weights:   1%|          | 2/291 [00:00<00:30,  9.42it/s]Loading weights:   4%|▍         | 13/291 [00:00<00:06, 45.08it/s]Loading weights:   8%|▊         | 24/291 [00:00<00:04, 65.19it/s]Loading weights:  13%|█▎        | 37/291 [00:00<00:02, 85.30it/s]Loading weights:  17%|█▋        | 49/291 [00:00<00:02, 93.02it/s]Loading weights:  20%|██        | 59/291 [00:00<00:02, 93.78it/s]Loading weights:  24%|██▎       | 69/291 [00:00<00:02, 95.38it/s]Loading weights:  29%|██▉       | 85/291 [00:01<00:02, 101.66it/s]Loading weights:  33%|███▎      | 96/291 [00:01<00:01, 102.60it/s]Loading weights:  37%|███▋      | 109/291 [00:01<00:01, 108.82it/s]Loading weights:  42%|████▏     | 121/291 [00:01<00:01, 110.21it/s]Loading weights:  46%|████▌     | 133/291 [00:01<00:01, 103.73it/s]Loading weights:  51%|█████     | 147/291 [00:01<00:01, 113.39it/s]Loading weights:  55%|█████▍    | 159/291 [00:01<00:01, 100.37it/s]Loading weights:  59%|█████▉    | 172/291 [00:01<00:01, 107.79it/s]Loading weights:  63%|██████▎   | 184/291 [00:01<00:01, 100.99it/s]Loading weights:  67%|██████▋   | 195/291 [00:02<00:01, 48.04it/s] Loading weights:  71%|███████▏  | 208/291 [00:02<00:01, 59.45it/s]Loading weights:  76%|███████▌  | 220/291 [00:02<00:01, 69.27it/s]Loading weights:  79%|███████▉  | 230/291 [00:02<00:00, 74.30it/s]Loading weights:  82%|████████▏ | 240/291 [00:02<00:00, 78.84it/s]Loading weights:  87%|████████▋ | 253/291 [00:03<00:00, 89.95it/s]Loading weights:  91%|█████████ | 265/291 [00:03<00:00, 93.02it/s]Loading weights:  95%|█████████▍| 276/291 [00:03<00:00, 90.96it/s]Loading weights: 100%|██████████| 291/291 [00:03<00:00, 86.04it/s]
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Meta-Llama-3-8B-Instruct-GPTQ-4bit on AGENT_2_IT_HELPDESK ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [GPTQ]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Meta-Llama-3-8B-Instruct-GPTQ-4bit …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `MarlinLinear`                  
+INFO  Kernel: selected -> `MarlinLinear`.                                      
+[transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
+Loading weights:   0%|          | 0/963 [00:00<?, ?it/s]Loading weights:   0%|          | 2/963 [00:00<01:28, 10.90it/s]Loading weights:  11%|█         | 103/963 [00:00<00:01, 443.55it/s]Loading weights:  18%|█▊        | 172/963 [00:00<00:01, 532.28it/s]Loading weights:  24%|██▍       | 235/963 [00:00<00:01, 566.03it/s]Loading weights:  31%|███       | 300/963 [00:00<00:01, 592.82it/s]Loading weights:  38%|███▊      | 364/963 [00:01<00:02, 234.12it/s]Loading weights:  44%|████▍     | 425/963 [00:01<00:01, 288.65it/s]Loading weights:  51%|█████     | 489/963 [00:01<00:01, 345.14it/s]Loading weights:  57%|█████▋    | 553/963 [00:01<00:01, 395.39it/s]Loading weights:  64%|██████▍   | 618/963 [00:01<00:00, 449.87it/s]Loading weights:  71%|███████   | 682/963 [00:01<00:00, 492.65it/s]Loading weights:  77%|███████▋  | 742/963 [00:01<00:00, 518.17it/s]Loading weights:  84%|████████▎ | 806/963 [00:01<00:00, 547.17it/s]Loading weights:  90%|█████████ | 867/963 [00:02<00:00, 561.51it/s]Loading weights:  96%|█████████▋| 928/963 [00:02<00:00, 567.83it/s]Loading weights: 100%|██████████| 963/963 [00:02<00:00, 443.66it/s]
+INFO  gc.collect() reclaimed 50 objects in 0.158s                              
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Meta-Llama-3-8B-Instruct-GPTQ-8bit on AGENT_2_IT_HELPDESK ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [GPTQ-8BIT]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Meta-Llama-3-8B-Instruct-GPTQ-8bit …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `MarlinLinear`                  
+INFO  Kernel: selected -> `MarlinLinear`.                                      
+[transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
+Loading weights:   0%|          | 0/963 [00:00<?, ?it/s]Loading weights:   0%|          | 1/963 [00:00<01:39,  9.67it/s]Loading weights:   0%|          | 2/963 [00:00<02:50,  5.63it/s]Loading weights:   7%|▋         | 65/963 [00:00<00:04, 202.98it/s]Loading weights:  10%|█         | 99/963 [00:00<00:03, 236.08it/s]Loading weights:  14%|█▎        | 131/963 [00:00<00:03, 254.73it/s]Loading weights:  20%|██        | 193/963 [00:00<00:02, 353.60it/s]Loading weights:  28%|██▊       | 274/963 [00:00<00:01, 474.71it/s]Loading weights:  35%|███▍      | 335/963 [00:00<00:01, 502.80it/s]Loading weights:  41%|████▏     | 398/963 [00:01<00:01, 537.05it/s]Loading weights:  47%|████▋     | 456/963 [00:01<00:00, 549.29it/s]Loading weights:  53%|█████▎    | 515/963 [00:01<00:00, 528.35it/s]Loading weights:  59%|█████▉    | 569/963 [00:01<00:00, 528.05it/s]Loading weights:  65%|██████▍   | 623/963 [00:01<00:00, 438.17it/s]Loading weights:  70%|██████▉   | 670/963 [00:01<00:00, 397.14it/s]Loading weights:  74%|███████▍  | 713/963 [00:01<00:00, 381.69it/s]Loading weights:  78%|███████▊  | 753/963 [00:01<00:00, 383.03it/s]Loading weights:  82%|████████▏ | 793/963 [00:02<00:00, 170.22it/s]Loading weights:  87%|████████▋ | 836/963 [00:02<00:00, 204.85it/s]Loading weights:  91%|█████████ | 875/963 [00:02<00:00, 230.37it/s]Loading weights:  94%|█████████▍| 909/963 [00:02<00:00, 233.40it/s]Loading weights:  98%|█████████▊| 943/963 [00:03<00:00, 247.96it/s]Loading weights: 100%|██████████| 963/963 [00:03<00:00, 316.27it/s]
+INFO  gc.collect() reclaimed 50 objects in 0.158s                              
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+
+--- AGENT_2_IT_HELPDESK Benchmark Complete! Results saved to ./results/benchmark_20260805_163009/AGENT_2_IT_HELPDESK ---
+
+=======================================================
+=== TESTING AGENT: AGENT_3_FINANCE ===
+=======================================================
+
+--- Benchmarking Model: Qwen2.5-3B-Instruct_FP16_Baseline on AGENT_3_FINANCE ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [FP16]  /home/ror-technologies/Quantization/models/Qwen2.5-3B-Instruct_FP16_Baseline …
+Loading weights:   0%|          | 0/434 [00:00<?, ?it/s]Loading weights:   0%|          | 1/434 [00:00<00:59,  7.31it/s]Loading weights:  15%|█▍        | 63/434 [00:00<00:01, 301.77it/s]Loading weights:  26%|██▌       | 111/434 [00:00<00:00, 349.04it/s]Loading weights:  37%|███▋      | 160/434 [00:00<00:00, 386.85it/s]Loading weights:  48%|████▊     | 207/434 [00:00<00:00, 408.78it/s]Loading weights:  57%|█████▋    | 249/434 [00:00<00:00, 411.24it/s]Loading weights:  70%|██████▉   | 303/434 [00:00<00:00, 424.36it/s]Loading weights:  81%|████████▏ | 353/434 [00:00<00:00, 440.32it/s]Loading weights:  92%|█████████▏| 399/434 [00:01<00:00, 443.07it/s]Loading weights: 100%|██████████| 434/434 [00:01<00:00, 407.45it/s]
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: Qwen2.5-3B-Instruct_FP8_Static_per_tensor on AGENT_3_FINANCE ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [FP16]  /home/ror-technologies/Quantization/models/Qwen2.5-3B-Instruct_FP8_Static_per_tensor …
+Compressing model:   0%|          | 0/475 [00:00<?, ?it/s]Compressing model:  82%|████████▏ | 391/475 [00:00<00:00, 3893.62it/s]Compressing model: 100%|██████████| 475/475 [00:00<00:00, 3932.78it/s]
+Loading weights:   0%|          | 0/938 [00:00<?, ?it/s]Loading weights:   0%|          | 1/938 [00:00<02:11,  7.12it/s]Loading weights:  59%|█████▉    | 556/938 [00:00<00:00, 2800.10it/s]Loading weights:  94%|█████████▍| 886/938 [00:00<00:00, 3006.37it/s]Loading weights: 100%|██████████| 938/938 [00:00<00:00, 2641.66it/s]
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+Decompressing model:   0%|          | 0/475 [00:00<?, ?it/s]Decompressing model: 100%|██████████| 475/475 [00:00<00:00, 11210.24it/s]
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: Qwen2.5-3B-Instruct_INT4_AWQ on AGENT_3_FINANCE ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [AWQ]  /home/ror-technologies/Quantization/models/Qwen2.5-3B-Instruct_INT4_AWQ …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `AwqMarlinLinear`               
+INFO  Kernel: selected -> `AwqMarlinLinear`.                                   
+Loading weights:   0%|          | 0/938 [00:00<?, ?it/s]Loading weights:  11%|█         | 104/938 [00:00<00:00, 841.22it/s]Loading weights:  23%|██▎       | 217/938 [00:00<00:00, 984.97it/s]Loading weights:  39%|███▉      | 366/938 [00:00<00:00, 1179.32it/s]Loading weights:  53%|█████▎    | 499/938 [00:00<00:00, 1223.79it/s]Loading weights:  67%|██████▋   | 629/938 [00:00<00:00, 1229.77it/s]Loading weights:  81%|████████  | 760/938 [00:00<00:00, 1249.94it/s]Loading weights:  95%|█████████▌| 893/938 [00:00<00:00, 1264.87it/s]Loading weights: 100%|██████████| 938/938 [00:00<00:00, 1226.07it/s]
+INFO  gc.collect() reclaimed 354 objects in 0.162s                             
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: Qwen2.5-7B-Instruct_FP16_Baseline on AGENT_3_FINANCE ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [FP16]  /home/ror-technologies/Quantization/models/Qwen2.5-7B-Instruct_FP16_Baseline …
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   0%|          | 1/339 [00:00<01:57,  2.88it/s]Loading weights:   5%|▍         | 16/339 [00:00<00:07, 41.52it/s]Loading weights:  12%|█▏        | 40/339 [00:00<00:03, 79.43it/s]Loading weights:  19%|█▉        | 64/339 [00:00<00:02, 103.69it/s]Loading weights:  26%|██▌       | 88/339 [00:00<00:02, 120.75it/s]Loading weights:  30%|███       | 102/339 [00:01<00:01, 122.50it/s]Loading weights:  37%|███▋      | 124/339 [00:01<00:01, 125.75it/s]Loading weights:  44%|████▎     | 148/339 [00:01<00:01, 133.92it/s]Loading weights:  48%|████▊     | 162/339 [00:01<00:01, 114.08it/s]Loading weights:  51%|█████▏    | 174/339 [00:01<00:01, 102.11it/s]Loading weights:  55%|█████▍    | 186/339 [00:01<00:01, 99.39it/s] Loading weights:  61%|██████▏   | 208/339 [00:02<00:01, 104.92it/s]Loading weights:  65%|██████▌   | 221/339 [00:02<00:01, 94.45it/s] Loading weights:  69%|██████▉   | 234/339 [00:02<00:01, 89.88it/s]Loading weights:  76%|███████▌  | 256/339 [00:02<00:00, 99.90it/s]Loading weights:  79%|███████▉  | 269/339 [00:02<00:00, 91.18it/s]Loading weights:  83%|████████▎ | 282/339 [00:02<00:00, 86.47it/s]Loading weights:  90%|████████▉ | 304/339 [00:03<00:00, 109.06it/s]Loading weights:  97%|█████████▋| 328/339 [00:03<00:00, 124.93it/s]Loading weights: 100%|██████████| 339/339 [00:03<00:00, 105.21it/s]
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: Qwen2.5-7B-Instruct_FP8_Static_per_tensor on AGENT_3_FINANCE ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [FP16]  /home/ror-technologies/Quantization/models/Qwen2.5-7B-Instruct_FP8_Static_per_tensor …
+Compressing model:   0%|          | 0/371 [00:00<?, ?it/s]Compressing model: 100%|██████████| 371/371 [00:00<00:00, 3996.79it/s]
+Loading weights:   0%|          | 0/731 [00:00<?, ?it/s]Loading weights:   0%|          | 2/731 [00:00<01:44,  7.00it/s]Loading weights:  30%|██▉       | 216/731 [00:00<00:00, 712.00it/s]Loading weights:  47%|████▋     | 344/731 [00:00<00:00, 892.40it/s]Loading weights:  66%|██████▌   | 479/731 [00:00<00:00, 1030.04it/s]Loading weights:  86%|████████▌ | 627/731 [00:00<00:00, 1157.93it/s]Loading weights: 100%|██████████| 731/731 [00:00<00:00, 761.29it/s] 
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+Decompressing model:   0%|          | 0/371 [00:00<?, ?it/s]Decompressing model: 100%|██████████| 371/371 [00:00<00:00, 6729.78it/s]
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: Qwen2.5-7B-Instruct_INT4_AWQ on AGENT_3_FINANCE ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [AWQ]  /home/ror-technologies/Quantization/models/Qwen2.5-7B-Instruct_INT4_AWQ …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `AwqMarlinLinear`               
+INFO  Kernel: selected -> `AwqMarlinLinear`.                                   
+Loading weights:   0%|          | 0/731 [00:00<?, ?it/s]Loading weights:   0%|          | 1/731 [00:00<03:01,  4.02it/s]Loading weights:  61%|██████    | 447/731 [00:00<00:00, 1617.54it/s]Loading weights:  96%|█████████▋| 705/731 [00:00<00:00, 1930.42it/s]Loading weights: 100%|██████████| 731/731 [00:00<00:00, 1577.90it/s]
+INFO  gc.collect() reclaimed 354 objects in 0.159s                             
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: Qwen2.5-14B-Instruct_FP8_Static_per_tensor on AGENT_3_FINANCE ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [FP16]  /home/ror-technologies/Quantization/models/Qwen2.5-14B-Instruct_FP8_Static_per_tensor …
+Compressing model:   0%|          | 0/631 [00:00<?, ?it/s]Compressing model:  63%|██████▎   | 397/631 [00:00<00:00, 3942.24it/s]Compressing model: 100%|██████████| 631/631 [00:00<00:00, 3922.17it/s]
+Loading weights:   0%|          | 0/1251 [00:00<?, ?it/s]Loading weights:   0%|          | 1/1251 [00:00<18:49,  1.11it/s]Loading weights:   5%|▌         | 67/1251 [00:01<00:13, 91.06it/s]Loading weights:   8%|▊         | 106/1251 [00:01<00:08, 137.61it/s]Loading weights:  15%|█▌        | 190/1251 [00:01<00:04, 264.52it/s]Loading weights:  23%|██▎       | 293/1251 [00:01<00:02, 419.40it/s]Loading weights:  32%|███▏      | 399/1251 [00:01<00:01, 558.47it/s]Loading weights:  42%|████▏     | 525/1251 [00:01<00:00, 727.67it/s]Loading weights:  52%|█████▏    | 647/1251 [00:01<00:00, 852.44it/s]Loading weights:  61%|██████    | 764/1251 [00:01<00:00, 931.85it/s]Loading weights:  71%|███████   | 890/1251 [00:01<00:00, 1011.23it/s]Loading weights:  81%|████████▏ | 1019/1251 [00:01<00:00, 1077.72it/s]Loading weights:  91%|█████████ | 1136/1251 [00:02<00:00, 1100.17it/s]Loading weights: 100%|██████████| 1251/1251 [00:02<00:00, 586.22it/s] 
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+Decompressing model:   0%|          | 0/631 [00:00<?, ?it/s]Decompressing model: 100%|██████████| 631/631 [00:00<00:00, 6957.65it/s]
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: Qwen2.5-14B-Instruct_INT4_AWQ on AGENT_3_FINANCE ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [AWQ]  /home/ror-technologies/Quantization/models/Qwen2.5-14B-Instruct_INT4_AWQ …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `AwqMarlinLinear`               
+INFO  Kernel: selected -> `AwqMarlinLinear`.                                   
+Loading weights:   0%|          | 0/1251 [00:00<?, ?it/s]Loading weights:   5%|▍         | 59/1251 [00:00<00:02, 578.44it/s]Loading weights:   9%|▉         | 117/1251 [00:00<00:02, 478.02it/s]Loading weights:  13%|█▎        | 166/1251 [00:00<00:02, 445.68it/s]Loading weights:  17%|█▋        | 213/1251 [00:00<00:02, 448.13it/s]Loading weights:  21%|██        | 261/1251 [00:00<00:02, 454.47it/s]Loading weights:  25%|██▍       | 307/1251 [00:00<00:02, 450.63it/s]Loading weights:  28%|██▊       | 353/1251 [00:00<00:02, 425.80it/s]Loading weights:  32%|███▏      | 396/1251 [00:00<00:02, 420.18it/s]Loading weights:  36%|███▌      | 446/1251 [00:00<00:01, 442.11it/s]Loading weights:  39%|███▉      | 491/1251 [00:01<00:01, 440.13it/s]Loading weights:  43%|████▎     | 536/1251 [00:01<00:01, 434.57it/s]Loading weights:  46%|████▋     | 581/1251 [00:01<00:01, 425.23it/s]Loading weights:  50%|█████     | 631/1251 [00:01<00:01, 437.77it/s]Loading weights:  54%|█████▍    | 676/1251 [00:01<00:01, 440.80it/s]Loading weights:  58%|█████▊    | 721/1251 [00:01<00:01, 416.81it/s]Loading weights:  61%|██████    | 763/1251 [00:01<00:01, 403.21it/s]Loading weights:  65%|██████▍   | 813/1251 [00:01<00:01, 426.66it/s]Loading weights:  69%|██████▊   | 858/1251 [00:01<00:00, 429.27it/s]Loading weights:  72%|███████▏  | 905/1251 [00:02<00:00, 435.68it/s]Loading weights:  76%|███████▌  | 949/1251 [00:02<00:00, 434.24it/s]Loading weights:  80%|███████▉  | 995/1251 [00:02<00:00, 436.89it/s]Loading weights:  84%|████████▎ | 1046/1251 [00:02<00:00, 457.92it/s]Loading weights:  87%|████████▋ | 1092/1251 [00:02<00:00, 457.08it/s]Loading weights:  91%|█████████ | 1138/1251 [00:02<00:00, 444.66it/s]Loading weights:  95%|█████████▍| 1183/1251 [00:02<00:00, 433.83it/s]Loading weights:  98%|█████████▊| 1229/1251 [00:02<00:00, 437.20it/s]Loading weights: 100%|██████████| 1251/1251 [00:02<00:00, 442.11it/s]
+INFO  gc.collect() reclaimed 354 objects in 0.173s                             
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama/Llama-3.2-1B-Instruct on AGENT_3_FINANCE ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [FP16]  meta-llama/Llama-3.2-1B-Instruct …
+Loading weights:   0%|          | 0/146 [00:00<?, ?it/s]Loading weights:   1%|          | 1/146 [00:00<00:17,  8.34it/s]Loading weights:  39%|███▉      | 57/146 [00:00<00:00, 299.30it/s]Loading weights:  71%|███████   | 103/146 [00:00<00:00, 354.70it/s]Loading weights: 100%|██████████| 146/146 [00:00<00:00, 356.00it/s]
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Llama-3.2-1B-Instruct-AWQ on AGENT_3_FINANCE ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [AWQ]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Llama-3.2-1B-Instruct-AWQ …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `AwqMarlinLinear`               
+INFO  Kernel: selected -> `AwqMarlinLinear`.                                   
+Loading weights:   0%|          | 0/370 [00:00<?, ?it/s]Loading weights:   0%|          | 1/370 [00:00<00:59,  6.20it/s]Loading weights: 100%|██████████| 370/370 [00:00<00:00, 1422.30it/s]
+INFO  gc.collect() reclaimed 374 objects in 0.167s                             
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Llama-3.2-1B-Instruct-BNB-4bit on AGENT_3_FINANCE ---
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [BNB-4BIT]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Llama-3.2-1B-Instruct-BNB-4bit …
+Loading weights:   0%|          | 0/146 [00:00<?, ?it/s]Loading weights:  43%|████▎     | 63/146 [00:00<00:00, 627.99it/s]Loading weights: 100%|██████████| 146/146 [00:00<00:00, 970.80it/s]
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Llama-3.2-1B-Instruct-BNB-8bit on AGENT_3_FINANCE ---
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [BNB-8BIT]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Llama-3.2-1B-Instruct-BNB-8bit …
+Loading weights:   0%|          | 0/146 [00:00<?, ?it/s]Loading weights:  53%|█████▎    | 77/146 [00:00<00:00, 759.48it/s]Loading weights: 100%|██████████| 146/146 [00:00<00:00, 1024.08it/s]
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Llama-3.2-1B-Instruct-GPTQ-4bit on AGENT_3_FINANCE ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [GPTQ]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Llama-3.2-1B-Instruct-GPTQ-4bit …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `MarlinLinear`                  
+INFO  Kernel: selected -> `MarlinLinear`.                                      
+[transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
+Loading weights:   0%|          | 0/482 [00:00<?, ?it/s]Loading weights:  84%|████████▎ | 403/482 [00:00<00:00, 4024.82it/s]Loading weights: 100%|██████████| 482/482 [00:00<00:00, 4365.80it/s]
+INFO  gc.collect() reclaimed 404 objects in 0.157s                             
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Llama-3.2-1B-Instruct-GPTQ-8bit on AGENT_3_FINANCE ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [GPTQ-8BIT]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Llama-3.2-1B-Instruct-GPTQ-8bit …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `MarlinLinear`                  
+INFO  Kernel: selected -> `MarlinLinear`.                                      
+[transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
+Loading weights:   0%|          | 0/482 [00:00<?, ?it/s]Loading weights:  37%|███▋      | 179/482 [00:00<00:00, 1786.33it/s]Loading weights: 100%|██████████| 482/482 [00:00<00:00, 2851.39it/s]
+INFO  gc.collect() reclaimed 404 objects in 0.157s                             
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama/Llama-3.2-3B-Instruct on AGENT_3_FINANCE ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [FP16]  meta-llama/Llama-3.2-3B-Instruct …
+Loading weights:   0%|          | 0/254 [00:00<?, ?it/s]Loading weights:   0%|          | 1/254 [00:00<00:47,  5.38it/s]Loading weights:  19%|█▉        | 48/254 [00:00<00:01, 191.57it/s]Loading weights:  30%|███       | 77/254 [00:00<00:00, 223.93it/s]Loading weights:  44%|████▎     | 111/254 [00:00<00:00, 250.04it/s]Loading weights:  55%|█████▌    | 140/254 [00:00<00:00, 258.65it/s]Loading weights:  69%|██████▊   | 174/254 [00:00<00:00, 267.98it/s]Loading weights:  83%|████████▎ | 210/254 [00:00<00:00, 276.68it/s]Loading weights:  97%|█████████▋| 246/254 [00:00<00:00, 282.76it/s]Loading weights: 100%|██████████| 254/254 [00:01<00:00, 253.62it/s]
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Llama-3.2-3B-Instruct-AWQ on AGENT_3_FINANCE ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [AWQ]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Llama-3.2-3B-Instruct-AWQ …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `AwqMarlinLinear`               
+INFO  Kernel: selected -> `AwqMarlinLinear`.                                   
+Loading weights:   0%|          | 0/646 [00:00<?, ?it/s]Loading weights:   0%|          | 1/646 [00:00<01:59,  5.40it/s]Loading weights: 100%|██████████| 646/646 [00:00<00:00, 2385.94it/s]
+INFO  gc.collect() reclaimed 403 objects in 0.170s                             
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Llama-3.2-3B-Instruct-BNB-4bit on AGENT_3_FINANCE ---
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [BNB-4BIT]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Llama-3.2-3B-Instruct-BNB-4bit …
+Loading weights:   0%|          | 0/254 [00:00<?, ?it/s]Loading weights:  39%|███▉      | 100/254 [00:00<00:00, 989.01it/s]Loading weights:  92%|█████████▏| 234/254 [00:00<00:00, 1189.13it/s]Loading weights: 100%|██████████| 254/254 [00:00<00:00, 1191.68it/s]
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Llama-3.2-3B-Instruct-BNB-8bit on AGENT_3_FINANCE ---
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [BNB-8BIT]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Llama-3.2-3B-Instruct-BNB-8bit …
+Loading weights:   0%|          | 0/254 [00:00<?, ?it/s]Loading weights:   9%|▊         | 22/254 [00:00<00:01, 217.82it/s]Loading weights:  44%|████▍     | 113/254 [00:00<00:00, 620.35it/s]Loading weights:  88%|████████▊ | 223/254 [00:00<00:00, 837.08it/s]Loading weights: 100%|██████████| 254/254 [00:00<00:00, 770.75it/s]
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Llama-3.2-3B-Instruct-GPTQ-4bit on AGENT_3_FINANCE ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [GPTQ]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Llama-3.2-3B-Instruct-GPTQ-4bit …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `MarlinLinear`                  
+INFO  Kernel: selected -> `MarlinLinear`.                                      
+[transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
+Loading weights:   0%|          | 0/842 [00:00<?, ?it/s]Loading weights:  40%|███▉      | 334/842 [00:00<00:00, 3319.57it/s]Loading weights: 100%|██████████| 842/842 [00:00<00:00, 4337.87it/s]
+INFO  gc.collect() reclaimed 50 objects in 0.158s                              
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Llama-3.2-3B-Instruct-GPTQ-8bit on AGENT_3_FINANCE ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [GPTQ-8BIT]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Llama-3.2-3B-Instruct-GPTQ-8bit …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `MarlinLinear`                  
+INFO  Kernel: selected -> `MarlinLinear`.                                      
+[transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
+Loading weights:   0%|          | 0/842 [00:00<?, ?it/s]Loading weights:  15%|█▌        | 128/842 [00:00<00:00, 1279.67it/s]Loading weights:  54%|█████▍    | 454/842 [00:00<00:00, 2429.50it/s]Loading weights:  92%|█████████▏| 774/842 [00:00<00:00, 2778.35it/s]Loading weights: 100%|██████████| 842/842 [00:00<00:00, 2626.75it/s]
+INFO  gc.collect() reclaimed 50 objects in 0.156s                              
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Meta-Llama-3-8B-Instruct-AWQ on AGENT_3_FINANCE ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [AWQ]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Meta-Llama-3-8B-Instruct-AWQ …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `AwqMarlinLinear`               
+INFO  Kernel: selected -> `AwqMarlinLinear`.                                   
+Loading weights:   0%|          | 0/739 [00:00<?, ?it/s]Loading weights:   0%|          | 1/739 [00:00<01:56,  6.32it/s]Loading weights:  32%|███▏      | 239/739 [00:00<00:00, 1124.22it/s]Loading weights:  66%|██████▋   | 490/739 [00:00<00:00, 1669.30it/s]Loading weights: 100%|██████████| 739/739 [00:00<00:00, 1612.84it/s]
+INFO  gc.collect() reclaimed 374 objects in 0.155s                             
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Meta-Llama-3-8B-Instruct-BNB-4bit on AGENT_3_FINANCE ---
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [BNB-4BIT]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Meta-Llama-3-8B-Instruct-BNB-4bit …
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights:   0%|          | 1/291 [00:00<01:07,  4.31it/s]Loading weights:   1%|          | 2/291 [00:00<01:40,  2.88it/s]Loading weights:  20%|█▉        | 58/291 [00:00<00:02, 110.19it/s]Loading weights:  47%|████▋     | 136/291 [00:00<00:00, 253.03it/s]Loading weights:  74%|███████▍  | 216/291 [00:00<00:00, 380.23it/s]Loading weights: 100%|██████████| 291/291 [00:01<00:00, 274.88it/s]
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Meta-Llama-3-8B-Instruct-BNB-8bit on AGENT_3_FINANCE ---
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [BNB-8BIT]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Meta-Llama-3-8B-Instruct-BNB-8bit …
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights:   0%|          | 1/291 [00:00<03:01,  1.60it/s]Loading weights:  20%|█▉        | 58/291 [00:00<00:02, 106.57it/s]Loading weights:  38%|███▊      | 112/291 [00:00<00:00, 196.96it/s]Loading weights:  57%|█████▋    | 167/291 [00:00<00:00, 277.85it/s]Loading weights:  76%|███████▌  | 220/291 [00:01<00:00, 331.97it/s]Loading weights:  95%|█████████▍| 275/291 [00:01<00:00, 386.13it/s]Loading weights: 100%|██████████| 291/291 [00:01<00:00, 249.65it/s]
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Meta-Llama-3-8B-Instruct-GPTQ-4bit on AGENT_3_FINANCE ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [GPTQ]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Meta-Llama-3-8B-Instruct-GPTQ-4bit …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `MarlinLinear`                  
+INFO  Kernel: selected -> `MarlinLinear`.                                      
+[transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
+Loading weights:   0%|          | 0/963 [00:00<?, ?it/s]Loading weights:   0%|          | 1/963 [00:00<10:58,  1.46it/s]Loading weights:  10%|█         | 100/963 [00:00<00:05, 172.14it/s]Loading weights:  42%|████▏     | 403/963 [00:00<00:00, 737.17it/s]Loading weights:  73%|███████▎  | 699/963 [00:00<00:00, 1224.40it/s]Loading weights: 100%|██████████| 963/963 [00:01<00:00, 900.23it/s] 
+INFO  gc.collect() reclaimed 50 objects in 0.156s                              
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+--- Benchmarking Model: meta-llama__Meta-Llama-3-8B-Instruct-GPTQ-8bit on AGENT_3_FINANCE ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [GPTQ-8BIT]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Meta-Llama-3-8B-Instruct-GPTQ-8bit …
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+823fd78
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `MarlinLinear`                  
+INFO  Kernel: selected -> `MarlinLinear`.                                      
+[transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
+Loading weights:   0%|          | 0/963 [00:00<?, ?it/s]Loading weights:   0%|          | 1/963 [00:00<02:57,  5.43it/s]Loading weights:   0%|          | 2/963 [00:00<02:50,  5.65it/s]Loading weights:   7%|▋         | 72/963 [00:00<00:03, 225.85it/s]Loading weights:  26%|██▋       | 253/963 [00:00<00:00, 711.72it/s]Loading weights:  45%|████▍     | 429/963 [00:00<00:00, 1027.33it/s]Loading weights:  63%|██████▎   | 604/963 [00:00<00:00, 1243.72it/s]Loading weights:  81%|████████  | 776/963 [00:00<00:00, 1382.20it/s]Loading weights:  99%|█████████▊| 950/963 [00:00<00:00, 1489.60it/s]Loading weights: 100%|██████████| 963/963 [00:00<00:00, 991.44it/s] 
+INFO  gc.collect() reclaimed 50 objects in 0.156s                              
+  ✓  Model ready.
+--- Running Trial 1/10 ---
+--- Running Trial 2/10 ---
+--- Running Trial 3/10 ---
+--- Running Trial 4/10 ---
+--- Running Trial 5/10 ---
+--- Running Trial 6/10 ---
+--- Running Trial 7/10 ---
+--- Running Trial 8/10 ---
+--- Running Trial 9/10 ---
+--- Running Trial 10/10 ---
+
+--- AGENT_3_FINANCE Benchmark Complete! Results saved to ./results/benchmark_20260805_163009/AGENT_3_FINANCE ---
