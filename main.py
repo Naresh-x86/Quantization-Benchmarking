@@ -139,6 +139,7 @@ def main():
     use_vllm = config["BENCHMARK"].getboolean("use_vllm", fallback=True)
     repeated_trials = config["BENCHMARK"].getboolean("repeated_trials", fallback=True)
     num_trials = config["BENCHMARK"].getint("number_of_trials", fallback=10) if repeated_trials else 1
+    save_traces = config["BENCHMARK"].getboolean("save_traces", fallback=True)
     output_dir_base = config["BENCHMARK"].get("output_dir", fallback="./results")
     output_prefix = config["BENCHMARK"].get("output_prefix", fallback="benchmark")
     dataset_path = "dataset.json"
@@ -185,6 +186,9 @@ def main():
             
             if use_vllm:
                 cmd.append("--use_vllm")
+                
+            if save_traces:
+                cmd.append("--save_traces")
                 
             try:
                 subprocess.run(cmd, check=True)

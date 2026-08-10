@@ -89,6 +89,7 @@ def parse_args():
     parser.add_argument("--agent_id", type=str, required=True)
     parser.add_argument("--num_trials", type=int, default=1)
     parser.add_argument("--use_vllm", action="store_true")
+    parser.add_argument("--save_traces", action="store_true")
     parser.add_argument("--output_json", type=str, required=True)
     parser.add_argument("--output_dir", type=str, required=True)
     return parser.parse_args()
@@ -246,8 +247,9 @@ def main():
     all_trials_results = []
     
     # Ensure traces directory exists
-    traces_dir = os.path.join(args.output_dir, "traces")
-    os.makedirs(traces_dir, exist_ok=True)
+    if args.save_traces:
+        traces_dir = os.path.join(args.output_dir, "traces")
+        os.makedirs(traces_dir, exist_ok=True)
     
     try:
         # Initialize engine once per model
@@ -308,15 +310,16 @@ def main():
             all_trials_results.append(result_row)
             
             # Save trace as human-readable txt
-            safe_model_name = model_name.replace("/", "__")
-            trace_filename = f"{args.agent_id}_{safe_model_name}_Trial_{trial+1}.txt"
-            trace_path = os.path.join(traces_dir, trace_filename)
-            
-            must_call = task.get('strict_success_criteria', {}).get("must_call", [])
-            formatted_trace = format_trace(agent_result, must_call, task['description'])
-            
-            with open(trace_path, "w") as tf:
-                tf.write(formatted_trace)
+            if args.save_traces:
+                safe_model_name = model_name.replace("/", "__")
+                trace_filename = f"{args.agent_id}_{safe_model_name}_Trial_{trial+1}.txt"
+                trace_path = os.path.join(traces_dir, trace_filename)
+                
+                must_call = task.get('strict_success_criteria', {}).get("must_call", [])
+                formatted_trace = format_trace(agent_result, must_call, task['description'])
+                
+                with open(trace_path, "w") as tf:
+                    tf.write(formatted_trace)
             
     except Exception as e:
         print(f"Error during execution: {e}")
