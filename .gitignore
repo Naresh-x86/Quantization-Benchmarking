@@ -11,3 +11,5 @@ log.txt
 !results/
 !results/**/*.csv
 !results/**/*.json
+
+main.tex
