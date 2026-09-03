@@ -1,0 +1,197 @@
+════════════════════════════════════════════════════════════════════════
+  Agent Readiness Score — AGENT_1_SUPPORT
+════════════════════════════════════════════════════════════════════════
+
+  #1  Qwen2.5-3B-Instruct_INT4_AWQ  [AWQ]
+       ARS: 94.0/100  ████████████████████████████░░  🟢 Production Ready
+       ✅ Best for: Complex multi-step reasoning tasks
+       ⚡ VRAM: 3.8 GB  |  Speed: 62.4 tok/s
+       📊 Reliability=1.00 | Precision=1.00 | Efficiency=0.95 | Deploy=0.91 | Cost=0.63
+  ────────────────────────────────────────────────────────────────────
+
+  #2  meta-llama__Llama-3.2-3B-Instruct-GPTQ-4bit  [GPTQ]
+       ARS: 93.2/100  ███████████████████████████░░░  🟢 Production Ready
+       ✅ Best for: Complex multi-step reasoning tasks
+       ⚡ VRAM: 4.0 GB  |  Speed: 81.2 tok/s
+       📊 Reliability=0.98 | Precision=0.98 | Efficiency=0.98 | Deploy=0.90 | Cost=0.64
+  ────────────────────────────────────────────────────────────────────
+
+  #3  meta-llama__Llama-3.2-3B-Instruct-AWQ  [AWQ]
+       ARS: 92.2/100  ███████████████████████████░░░  🟢 Production Ready
+       ✅ Best for: Complex multi-step reasoning tasks
+       ⚡ VRAM: 4.1 GB  |  Speed: 78.8 tok/s
+       📊 Reliability=0.99 | Precision=0.99 | Efficiency=0.89 | Deploy=0.90 | Cost=0.62
+  ────────────────────────────────────────────────────────────────────
+
+  #4  meta-llama__Llama-3.2-3B-Instruct-BNB-4bit  [BNB-4BIT]
+       ARS: 90.6/100  ███████████████████████████░░░  🟢 Production Ready
+       ✅ Best for: Complex multi-step reasoning tasks
+       ⚡ VRAM: 4.1 GB  |  Speed: 72.8 tok/s
+       📊 Reliability=0.95 | Precision=0.96 | Efficiency=0.89 | Deploy=0.90 | Cost=0.58
+  ────────────────────────────────────────────────────────────────────
+
+  #5  meta-llama__Llama-3.2-3B-Instruct-GPTQ-8bit  [GPTQ-8BIT]
+       ARS: 88.9/100  ██████████████████████████░░░░  🟢 Production Ready
+       ✅ Best for: Complex multi-step reasoning tasks
+       ⚡ VRAM: 5.4 GB  |  Speed: 81.1 tok/s
+       📊 Reliability=0.96 | Precision=0.97 | Efficiency=0.89 | Deploy=0.85 | Cost=0.62
+  ────────────────────────────────────────────────────────────────────
+
+  #6  meta-llama__Meta-Llama-3-8B-Instruct-GPTQ-4bit  [GPTQ]
+       ARS: 88.5/100  ██████████████████████████░░░░  🟢 Production Ready
+       ✅ Best for: Complex multi-step reasoning tasks
+       ⚡ VRAM: 7.2 GB  |  Speed: 67.3 tok/s
+       📊 Reliability=1.00 | Precision=1.00 | Efficiency=0.97 | Deploy=0.77 | Cost=0.61
+  ────────────────────────────────────────────────────────────────────
+
+  #7  Qwen2.5-7B-Instruct_INT4_AWQ  [AWQ]
+       ARS: 88.4/100  ██████████████████████████░░░░  🟢 Production Ready
+       ✅ Best for: Complex multi-step reasoning tasks
+       ⚡ VRAM: 7.1 GB  |  Speed: 72.7 tok/s
+       📊 Reliability=1.00 | Precision=1.00 | Efficiency=0.96 | Deploy=0.78 | Cost=0.58
+  ────────────────────────────────────────────────────────────────────
+
+  #8  meta-llama/Llama-3.2-3B-Instruct  [FP16]
+       ARS: 88.1/100  ██████████████████████████░░░░  🟢 Production Ready
+       ✅ Best for: Complex multi-step reasoning tasks
+       ⚡ VRAM: 7.9 GB  |  Speed: 102.7 tok/s
+       📊 Reliability=0.98 | Precision=0.98 | Efficiency=0.92 | Deploy=0.81 | Cost=0.55
+  ────────────────────────────────────────────────────────────────────
+
+  #9  meta-llama__Meta-Llama-3-8B-Instruct-AWQ  [AWQ]
+       ARS: 88.0/100  ██████████████████████████░░░░  🟢 Production Ready
+       ✅ Best for: Complex multi-step reasoning tasks
+       ⚡ VRAM: 7.4 GB  |  Speed: 65.3 tok/s
+       📊 Reliability=1.00 | Precision=1.00 | Efficiency=0.97 | Deploy=0.76 | Cost=0.57
+  ────────────────────────────────────────────────────────────────────
+
+  #10  Qwen2.5-3B-Instruct_FP16_Baseline  [FP16]
+       ARS: 87.4/100  ██████████████████████████░░░░  🟢 Production Ready
+       ✅ Best for: Complex multi-step reasoning tasks
+       ⚡ VRAM: 7.6 GB  |  Speed: 78.7 tok/s
+       📊 Reliability=1.00 | Precision=1.00 | Efficiency=0.96 | Deploy=0.75 | Cost=0.58
+  ────────────────────────────────────────────────────────────────────
+
+  #11  meta-llama__Meta-Llama-3-8B-Instruct-BNB-4bit  [BNB-4BIT]
+       ARS: 87.3/100  ██████████████████████████░░░░  🟢 Production Ready
+       ✅ Best for: Complex multi-step reasoning tasks
+       ⚡ VRAM: 7.3 GB  |  Speed: 51.3 tok/s
+       📊 Reliability=1.00 | Precision=1.00 | Efficiency=0.92 | Deploy=0.77 | Cost=0.54
+  ────────────────────────────────────────────────────────────────────
+
+  #12  meta-llama__Llama-3.2-3B-Instruct-BNB-8bit  [BNB-8BIT]
+       ARS: 86.1/100  █████████████████████████░░░░░  🟢 Production Ready
+       ✅ Best for: Complex multi-step reasoning tasks
+       ⚡ VRAM: 5.4 GB  |  Speed: 29.2 tok/s
+       📊 Reliability=0.96 | Precision=0.96 | Efficiency=0.72 | Deploy=0.85 | Cost=0.59
+  ────────────────────────────────────────────────────────────────────
+
+  #13  Qwen2.5-3B-Instruct_FP8_Static_per_tensor  [FP16]
+       ARS: 83.9/100  █████████████████████████░░░░░  🟡 Capable
+       ✅ Best for: Complex multi-step reasoning tasks
+       ⚡ VRAM: 8.0 GB  |  Speed: 30.7 tok/s
+       📊 Reliability=0.94 | Precision=0.98 | Efficiency=0.79 | Deploy=0.77 | Cost=0.60
+  ────────────────────────────────────────────────────────────────────
+
+  #14  meta-llama__Meta-Llama-3-8B-Instruct-GPTQ-8bit  [GPTQ-8BIT]
+       ARS: 82.7/100  ████████████████████████░░░░░░  🟡 Capable
+       ✅ Best for: Complex multi-step reasoning tasks
+       ⚡ VRAM: 10.5 GB  |  Speed: 66.5 tok/s
+       📊 Reliability=1.00 | Precision=1.00 | Efficiency=0.96 | Deploy=0.64 | Cost=0.58
+  ────────────────────────────────────────────────────────────────────
+
+  #15  meta-llama__Meta-Llama-3-8B-Instruct-BNB-8bit  [BNB-8BIT]
+       ARS: 80.6/100  ████████████████████████░░░░░░  🟡 Capable
+       ✅ Best for: Complex multi-step reasoning tasks
+       ⚡ VRAM: 10.5 GB  |  Speed: 22.8 tok/s
+       📊 Reliability=1.00 | Precision=1.00 | Efficiency=0.81 | Deploy=0.64 | Cost=0.59
+  ────────────────────────────────────────────────────────────────────
+
+  #16  Qwen2.5-14B-Instruct_INT4_AWQ  [AWQ]
+       ARS: 80.2/100  ████████████████████████░░░░░░  🟡 Capable
+       ✅ Best for: Complex multi-step reasoning tasks
+       ⚡ VRAM: 11.3 GB  |  Speed: 42.9 tok/s
+       📊 Reliability=1.00 | Precision=1.00 | Efficiency=0.88 | Deploy=0.60 | Cost=0.56
+  ────────────────────────────────────────────────────────────────────
+
+  #17  meta-llama/Meta-Llama-3-8B-Instruct  [FP16]
+       ARS: 77.8/100  ███████████████████████░░░░░░░  🟡 Capable
+       ✅ Best for: Complex multi-step reasoning tasks
+       ⚡ VRAM: 16.9 GB  |  Speed: 74.3 tok/s
+       📊 Reliability=1.00 | Precision=1.00 | Efficiency=0.92 | Deploy=0.55 | Cost=0.43
+       ⚠️  EXCEEDS TARGET VRAM — may not fit on device
+  ────────────────────────────────────────────────────────────────────
+
+  #18  meta-llama/Llama-3.2-1B-Instruct  [FP16]
+       ARS: 74.5/100  ██████████████████████░░░░░░░░  🟡 Capable
+       ✅ Best for: Edge deployment on consumer GPUs
+       ⚡ VRAM: 4.2 GB  |  Speed: 170.6 tok/s
+       📊 Reliability=0.68 | Precision=0.55 | Efficiency=0.62 | Deploy=0.92 | Cost=0.60
+  ────────────────────────────────────────────────────────────────────
+
+  #19  Qwen2.5-7B-Instruct_FP8_Static_per_tensor  [FP16]
+       ARS: 72.6/100  █████████████████████░░░░░░░░░  🟡 Capable
+       ✅ Best for: Complex multi-step reasoning tasks
+       ⚡ VRAM: 16.9 GB  |  Speed: 32.7 tok/s
+       📊 Reliability=1.00 | Precision=1.00 | Efficiency=0.78 | Deploy=0.46 | Cost=0.54
+       ⚠️  EXCEEDS TARGET VRAM — may not fit on device
+  ────────────────────────────────────────────────────────────────────
+
+  #20  meta-llama__Llama-3.2-1B-Instruct-GPTQ-8bit  [GPTQ-8BIT]
+       ARS: 71.9/100  █████████████████████░░░░░░░░░  🟡 Capable
+       ✅ Best for: Edge deployment on consumer GPUs
+       ⚡ VRAM: 3.2 GB  |  Speed: 137.0 tok/s
+       📊 Reliability=0.57 | Precision=0.55 | Efficiency=0.58 | Deploy=0.94 | Cost=0.65
+  ────────────────────────────────────────────────────────────────────
+
+  #21  meta-llama__Llama-3.2-1B-Instruct-BNB-4bit  [BNB-4BIT]
+       ARS: 71.9/100  █████████████████████░░░░░░░░░  🟡 Capable
+       ✅ Best for: Edge deployment on consumer GPUs
+       ⚡ VRAM: 2.8 GB  |  Speed: 123.7 tok/s
+       📊 Reliability=0.63 | Precision=0.54 | Efficiency=0.47 | Deploy=0.95 | Cost=0.60
+  ────────────────────────────────────────────────────────────────────
+
+  #22  Qwen2.5-7B-Instruct_FP16_Baseline  [FP16]
+       ARS: 71.8/100  █████████████████████░░░░░░░░░  🟡 Capable
+       ✅ Best for: Complex multi-step reasoning tasks
+       ⚡ VRAM: 16.2 GB  |  Speed: 78.7 tok/s
+       📊 Reliability=1.00 | Precision=1.00 | Efficiency=0.90 | Deploy=0.40 | Cost=0.44
+       ⚠️  EXCEEDS TARGET VRAM — may not fit on device
+  ────────────────────────────────────────────────────────────────────
+
+  #23  meta-llama__Llama-3.2-1B-Instruct-AWQ  [AWQ]
+       ARS: 70.1/100  █████████████████████░░░░░░░░░  🟡 Capable
+       ✅ Best for: Lightweight experimentation
+       ⚡ VRAM: 2.8 GB  |  Speed: 132.0 tok/s
+       📊 Reliability=0.46 | Precision=0.47 | Efficiency=0.69 | Deploy=0.95 | Cost=0.63
+  ────────────────────────────────────────────────────────────────────
+
+  #24  meta-llama__Llama-3.2-1B-Instruct-BNB-8bit  [BNB-8BIT]
+       ARS: 65.5/100  ███████████████████░░░░░░░░░░░  🟠 Limited
+       ✅ Best for: Edge deployment on consumer GPUs
+       ⚡ VRAM: 3.4 GB  |  Speed: 50.7 tok/s
+       📊 Reliability=0.57 | Precision=0.52 | Efficiency=0.20 | Deploy=0.93 | Cost=0.60
+  ────────────────────────────────────────────────────────────────────
+
+  #25  meta-llama__Llama-3.2-1B-Instruct-GPTQ-4bit  [GPTQ]
+       ARS: 57.1/100  █████████████████░░░░░░░░░░░░░  🟠 Limited
+       ✅ Best for: Lightweight experimentation
+       ⚡ VRAM: 2.8 GB  |  Speed: 138.1 tok/s
+       📊 Reliability=0.15 | Precision=0.47 | Efficiency=0.33 | Deploy=0.95 | Cost=0.66
+  ────────────────────────────────────────────────────────────────────
+
+  #26  Qwen2.5-14B-Instruct_FP8_Static_per_tensor  [FP16]
+       ARS: 56.3/100  ████████████████░░░░░░░░░░░░░░  🟠 Limited
+       ✅ Best for: Complex multi-step reasoning tasks
+       ⚡ VRAM: 30.5 GB  |  Speed: 19.0 tok/s
+       📊 Reliability=1.00 | Precision=1.00 | Efficiency=0.55 | Deploy=0.13 | Cost=0.52
+       ⚠️  EXCEEDS TARGET VRAM — may not fit on device
+  ────────────────────────────────────────────────────────────────────
+
+  #27  Qwen2.5-14B-Instruct_FP16_Baseline  [FP16]
+       ARS: 53.5/100  ████████████████░░░░░░░░░░░░░░  🟠 Limited
+       ✅ Best for: Complex multi-step reasoning tasks
+       ⚡ VRAM: 29.6 GB  |  Speed: 42.0 tok/s
+       📊 Reliability=1.00 | Precision=1.00 | Efficiency=0.72 | Deploy=0.02 | Cost=0.40
+       ⚠️  EXCEEDS TARGET VRAM — may not fit on device
+  ────────────────────────────────────────────────────────────────────

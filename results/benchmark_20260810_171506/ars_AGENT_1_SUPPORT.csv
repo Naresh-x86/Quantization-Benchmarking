@@ -1,0 +1,28 @@
+Model,Quantization,Params (B),R,P,E,D,C,ARS,ARS_Label,Best_For,VRAM_Compatible
+Qwen2.5-3B-Instruct_INT4_AWQ,AWQ,3.0,1.0,1.0,0.9489473706499238,0.9147111077017407,0.6275785836159383,94.0,🟢 Production Ready,Complex multi-step reasoning tasks,True
+meta-llama__Llama-3.2-3B-Instruct-GPTQ-4bit,GPTQ,3.0,0.98,0.9765,0.979036861265496,0.9049429995838082,0.6418282933466308,93.2,🟢 Production Ready,Complex multi-step reasoning tasks,True
+meta-llama__Llama-3.2-3B-Instruct-AWQ,AWQ,3.0,0.99,0.9944999999999999,0.888753863209541,0.9020413064216171,0.6170856511508734,92.2,🟢 Production Ready,Complex multi-step reasoning tasks,True
+meta-llama__Llama-3.2-3B-Instruct-BNB-4bit,BNB-4BIT,3.0,0.9503999999999999,0.9647892156862745,0.8912991244411763,0.9033132275216886,0.5774853607996984,90.6,🟢 Production Ready,Complex multi-step reasoning tasks,True
+meta-llama__Llama-3.2-3B-Instruct-GPTQ-8bit,GPTQ-8BIT,3.0,0.96,0.9669582654867257,0.8887134070794418,0.8486796426252409,0.6228006434367859,88.9,🟢 Production Ready,Complex multi-step reasoning tasks,True
+meta-llama__Meta-Llama-3-8B-Instruct-GPTQ-4bit,GPTQ,8.0,1.0,1.0,0.9733220875695119,0.7716076182631989,0.610291243685444,88.5,🟢 Production Ready,Complex multi-step reasoning tasks,True
+Qwen2.5-7B-Instruct_INT4_AWQ,AWQ,7.0,1.0,1.0,0.9609669938190247,0.775873165933476,0.5845059430955796,88.4,🟢 Production Ready,Complex multi-step reasoning tasks,True
+meta-llama/Llama-3.2-3B-Instruct,FP16,3.0,0.98,0.9787532467532468,0.9210621107162231,0.8094444186931566,0.5470405730187718,88.1,🟢 Production Ready,Complex multi-step reasoning tasks,True
+meta-llama__Meta-Llama-3-8B-Instruct-AWQ,AWQ,8.0,1.0,1.0,0.9705463036895718,0.7643715347389225,0.5714115182092763,88.0,🟢 Production Ready,Complex multi-step reasoning tasks,True
+Qwen2.5-3B-Instruct_FP16_Baseline,FP16,3.0,1.0,1.0,0.9558149995215377,0.7545770196010078,0.5751450131398288,87.4,🟢 Production Ready,Complex multi-step reasoning tasks,True
+meta-llama__Meta-Llama-3-8B-Instruct-BNB-4bit,BNB-4BIT,8.0,1.0,1.0,0.924018675005327,0.7685745136968036,0.5418694736063097,87.3,🟢 Production Ready,Complex multi-step reasoning tasks,True
+meta-llama__Llama-3.2-3B-Instruct-BNB-8bit,BNB-8BIT,3.0,0.96,0.9583110072254335,0.7186872483062215,0.8500557662453992,0.5924540402808984,86.1,🟢 Production Ready,Complex multi-step reasoning tasks,True
+Qwen2.5-3B-Instruct_FP8_Static_per_tensor,FP16,3.0,0.9409,0.9834999999999998,0.7872427932308944,0.7718547102750157,0.5960273014150238,83.9,🟡 Capable,Complex multi-step reasoning tasks,True
+meta-llama__Meta-Llama-3-8B-Instruct-GPTQ-8bit,GPTQ-8BIT,8.0,1.0,1.0,0.9584693435552227,0.6360565957944269,0.5799998910496835,82.7,🟡 Capable,Complex multi-step reasoning tasks,True
+meta-llama__Meta-Llama-3-8B-Instruct-BNB-8bit,BNB-8BIT,8.0,1.0,1.0,0.8087315160256972,0.6371287666229801,0.5891022981264891,80.6,🟡 Capable,Complex multi-step reasoning tasks,True
+Qwen2.5-14B-Instruct_INT4_AWQ,AWQ,14.0,1.0,1.0,0.88019267224303,0.6044310526129835,0.5638391916945472,80.2,🟡 Capable,Complex multi-step reasoning tasks,True
+meta-llama/Meta-Llama-3-8B-Instruct,FP16,8.0,1.0,1.0,0.9201853493331114,0.5450057197043319,0.43017138109622827,77.8,🟡 Capable,Complex multi-step reasoning tasks,False
+meta-llama/Llama-3.2-1B-Instruct,FP16,1.0,0.6830999999999999,0.547790802631579,0.6160413325274879,0.9238481459464071,0.5990145486159596,74.5,🟡 Capable,Edge deployment on consumer GPUs,True
+Qwen2.5-7B-Instruct_FP8_Static_per_tensor,FP16,7.0,1.0,1.0,0.7755927305995275,0.45693204317830927,0.5410353940043666,72.6,🟡 Capable,Complex multi-step reasoning tasks,False
+meta-llama__Llama-3.2-1B-Instruct-GPTQ-8bit,GPTQ-8BIT,1.0,0.5683999999999999,0.5493605222007721,0.5818756303910693,0.9359926827467793,0.653625183671288,71.9,🟡 Capable,Edge deployment on consumer GPUs,True
+meta-llama__Llama-3.2-1B-Instruct-BNB-4bit,BNB-4BIT,1.0,0.6256,0.5420871496815287,0.46654026266321824,0.954512599090344,0.5990512303630608,71.9,🟡 Capable,Edge deployment on consumer GPUs,True
+Qwen2.5-7B-Instruct_FP16_Baseline,FP16,7.0,1.0,1.0,0.9007756321970717,0.4030573441927454,0.43819345421618144,71.8,🟡 Capable,Complex multi-step reasoning tasks,False
+meta-llama__Llama-3.2-1B-Instruct-AWQ,AWQ,1.0,0.45580000000000004,0.47399414800995027,0.6879078478325156,0.9541694189644554,0.6317291015058111,70.1,🟡 Capable,Lightweight experimentation,True
+meta-llama__Llama-3.2-1B-Instruct-BNB-8bit,BNB-8BIT,1.0,0.5741999999999999,0.5207565731707318,0.2021701679744808,0.9328398716079644,0.6,65.5,🟠 Limited,Edge deployment on consumer GPUs,True
+meta-llama__Llama-3.2-1B-Instruct-GPTQ-4bit,GPTQ,1.0,0.1462,0.4659469237288135,0.33079158593665153,0.9537937012731893,0.6640452831263792,57.1,🟠 Limited,Lightweight experimentation,True
+Qwen2.5-14B-Instruct_FP8_Static_per_tensor,FP16,14.0,1.0,1.0,0.5543556242790111,0.13417656003862408,0.5230357763204088,56.3,🟠 Limited,Complex multi-step reasoning tasks,False
+Qwen2.5-14B-Instruct_FP16_Baseline,FP16,14.0,1.0,1.0,0.7224149288641575,0.01736550440484358,0.4,53.5,🟠 Limited,Complex multi-step reasoning tasks,False

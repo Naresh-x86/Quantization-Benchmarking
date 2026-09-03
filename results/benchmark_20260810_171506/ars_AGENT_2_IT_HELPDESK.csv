@@ -1,0 +1,28 @@
+Model,Quantization,Params (B),R,P,E,D,C,ARS,ARS_Label,Best_For,VRAM_Compatible
+meta-llama__Llama-3.2-3B-Instruct-GPTQ-4bit,GPTQ,3.0,0.99,0.9679054878048781,0.9155394927870798,0.9034939573490853,0.642636370633943,92.4,🟢 Production Ready,Complex multi-step reasoning tasks,True
+meta-llama__Llama-3.2-3B-Instruct-BNB-4bit,BNB-4BIT,3.0,1.0,0.9461234756097561,0.8306320253692319,0.902804330669476,0.5800192965007825,90.7,🟢 Production Ready,Complex multi-step reasoning tasks,True
+meta-llama__Llama-3.2-3B-Instruct-AWQ,AWQ,3.0,1.0,0.9277951807228917,0.7470338861740067,0.9015897972024842,0.6242729273368279,89.3,🟢 Production Ready,Complex multi-step reasoning tasks,True
+Qwen2.5-3B-Instruct_INT4_AWQ,AWQ,3.0,1.0,0.725625,0.8740195469301629,0.9157015635432315,0.6314045105585694,88.8,🟢 Production Ready,High-throughput batch processing,True
+meta-llama__Meta-Llama-3-8B-Instruct-GPTQ-4bit,GPTQ,8.0,1.0,1.0,0.9728841913123042,0.7721947982563062,0.6193832155742969,88.6,🟢 Production Ready,Complex multi-step reasoning tasks,True
+meta-llama__Llama-3.2-3B-Instruct-GPTQ-8bit,GPTQ-8BIT,3.0,1.0,0.9542195945945946,0.8037764945883623,0.8489401203331787,0.6273516017964713,88.5,🟢 Production Ready,Complex multi-step reasoning tasks,True
+meta-llama__Meta-Llama-3-8B-Instruct-AWQ,AWQ,8.0,1.0,1.0,0.9638745122321553,0.7649913813493717,0.578199359746813,87.9,🟢 Production Ready,Complex multi-step reasoning tasks,True
+meta-llama__Meta-Llama-3-8B-Instruct-BNB-4bit,BNB-4BIT,8.0,1.0,1.0,0.9314339984565442,0.7693663409684298,0.5456612414043649,87.5,🟢 Production Ready,Complex multi-step reasoning tasks,True
+Qwen2.5-7B-Instruct_INT4_AWQ,AWQ,7.0,1.0,0.936375,0.9255792967220817,0.7769166674149163,0.5849382184981129,86.9,🟢 Production Ready,Complex multi-step reasoning tasks,True
+meta-llama__Meta-Llama-3-8B-Instruct-GPTQ-8bit,GPTQ-8BIT,8.0,1.0,0.984375,0.9391840152553386,0.6377544915846886,0.5905540267661443,82.3,🟡 Capable,Complex multi-step reasoning tasks,True
+Qwen2.5-3B-Instruct_FP16_Baseline,FP16,3.0,1.0,0.7579999999999999,0.8463670608073268,0.7587801930191648,0.5693551544793908,82.3,🟡 Capable,High-throughput batch processing,True
+meta-llama__Llama-3.2-3B-Instruct-BNB-8bit,BNB-8BIT,3.0,0.98,0.9282351878612717,0.39984335067664833,0.8499330022029906,0.5976908027233442,81.4,🟡 Capable,Complex multi-step reasoning tasks,True
+Qwen2.5-14B-Instruct_INT4_AWQ,AWQ,14.0,1.0,1.0,0.8787292934924171,0.6067227295043004,0.5698994525684425,80.3,🟡 Capable,Complex multi-step reasoning tasks,True
+meta-llama__Meta-Llama-3-8B-Instruct-BNB-8bit,BNB-8BIT,8.0,1.0,0.977375,0.7256136400576476,0.638497896174006,0.5936297201429254,79.1,🟡 Capable,Complex multi-step reasoning tasks,True
+meta-llama/Meta-Llama-3-8B-Instruct,FP16,8.0,1.0,0.9875,0.9046975157026298,0.5514074201850117,0.4332116900223353,77.6,🟡 Capable,Complex multi-step reasoning tasks,False
+Qwen2.5-3B-Instruct_FP8_Static_per_tensor,FP16,3.0,0.99,0.7204520000000001,0.445701187928551,0.7750684991821252,0.5974667175046966,76.2,🟡 Capable,Standard tool-calling workflows,True
+Qwen2.5-7B-Instruct_FP16_Baseline,FP16,7.0,1.0,0.996875,0.9345200603061914,0.41042383016478456,0.43717736238908894,72.6,🟡 Capable,Complex multi-step reasoning tasks,False
+Qwen2.5-7B-Instruct_FP8_Static_per_tensor,FP16,7.0,1.0,1.0,0.7364880858625166,0.45697694054569377,0.5426419373743825,72.0,🟡 Capable,Complex multi-step reasoning tasks,False
+meta-llama__Llama-3.2-1B-Instruct-AWQ,AWQ,1.0,0.1472,0.48558498023715413,0.7383210957057684,0.9536404941144494,0.6337822935511579,63.4,🟠 Limited,Lightweight experimentation,True
+meta-llama__Llama-3.2-1B-Instruct-GPTQ-8bit,GPTQ-8BIT,1.0,0.128,0.45258793969849254,0.5943230672475928,0.9356919095873236,0.6519981539464069,59.6,🟠 Limited,Lightweight experimentation,True
+meta-llama__Llama-3.2-1B-Instruct-BNB-4bit,BNB-4BIT,1.0,0.1798,0.45654174397031544,0.4393861992618798,0.9546829024350705,0.5996959226846695,59.1,🟠 Limited,Lightweight experimentation,True
+meta-llama/Llama-3.2-1B-Instruct,FP16,1.0,0.11249999999999999,0.45265865992414667,0.61181934475116,0.9237976661372799,0.5949615844558536,58.7,🟠 Limited,Lightweight experimentation,True
+meta-llama__Llama-3.2-1B-Instruct-GPTQ-4bit,GPTQ,1.0,0.08700000000000001,0.44547619047619047,0.4803704300871027,0.9531701621028953,0.6660090708126044,57.5,🟠 Limited,Lightweight experimentation,True
+Qwen2.5-14B-Instruct_FP8_Static_per_tensor,FP16,14.0,1.0,1.0,0.5114451181600621,0.13417656003862408,0.5249767649032322,55.7,🟠 Limited,Complex multi-step reasoning tasks,False
+meta-llama__Llama-3.2-1B-Instruct-BNB-8bit,BNB-8BIT,1.0,0.18630000000000002,0.48650000000000004,0.1661459499640756,0.9334883557327631,0.6,54.8,🟠 Limited,Lightweight experimentation,True
+Qwen2.5-14B-Instruct_FP16_Baseline,FP16,14.0,1.0,1.0,0.7167731141372888,0.030193572372946287,0.4,54.0,🟠 Limited,Complex multi-step reasoning tasks,False
+meta-llama/Llama-3.2-3B-Instruct,FP16,3.0,0.0,0.0,0.0,0.3,0.0,12.0,⛔ Not Recommended,Experimental / testing only,False

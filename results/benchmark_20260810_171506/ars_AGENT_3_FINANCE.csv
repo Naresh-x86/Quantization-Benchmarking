@@ -1,0 +1,28 @@
+Model,Quantization,Params (B),R,P,E,D,C,ARS,ARS_Label,Best_For,VRAM_Compatible
+Qwen2.5-3B-Instruct_INT4_AWQ,AWQ,3.0,0.99,0.685125,0.9822341696421686,0.9153215794510147,0.6291324585984426,89.5,🟢 Production Ready,High-throughput batch processing,True
+meta-llama__Llama-3.2-3B-Instruct-BNB-4bit,BNB-4BIT,3.0,0.98,0.6964578836930455,0.8542414351599444,0.9036343925915228,0.579691758538926,86.8,🟢 Production Ready,High-throughput batch processing,True
+meta-llama__Llama-3.2-3B-Instruct-GPTQ-4bit,GPTQ,3.0,0.92,0.6564095991189427,0.8748585493472887,0.905372824455704,0.6452533798117241,85.4,🟢 Production Ready,High-throughput batch processing,True
+Qwen2.5-7B-Instruct_INT4_AWQ,AWQ,7.0,1.0,0.6875,0.9732058640867238,0.7765242325831703,0.5823839894035118,83.9,🟡 Capable,High-throughput batch processing,True
+meta-llama__Llama-3.2-3B-Instruct-AWQ,AWQ,3.0,0.87,0.6576437807881773,0.8400263243128134,0.9044929237203079,0.6181796388123517,83.5,🟡 Capable,High-throughput batch processing,True
+Qwen2.5-3B-Instruct_FP16_Baseline,FP16,3.0,1.0,0.6875,0.9437192922084447,0.7576847570688086,0.5701845989879756,82.6,🟡 Capable,High-throughput batch processing,True
+meta-llama__Llama-3.2-3B-Instruct-GPTQ-8bit,GPTQ-8BIT,3.0,0.88,0.6571137387387387,0.8694668435975053,0.8490425063054451,0.6272020141898578,82.0,🟡 Capable,High-throughput batch processing,True
+meta-llama/Llama-3.2-3B-Instruct,FP16,3.0,0.95,0.6698561320754717,0.8669162505611498,0.8091289177681948,0.5514843343913196,81.9,🟡 Capable,High-throughput batch processing,True
+meta-llama__Meta-Llama-3-8B-Instruct-AWQ,AWQ,8.0,0.9603999999999999,0.685875,0.9104778738053538,0.7645287479666149,0.5820555222827632,81.4,🟡 Capable,High-throughput batch processing,True
+meta-llama__Llama-3.2-3B-Instruct-BNB-8bit,BNB-8BIT,3.0,0.95,0.6660900068807339,0.6077451262435658,0.8520379225817691,0.5964537613570111,79.9,🟡 Capable,Standard tool-calling workflows,True
+Qwen2.5-3B-Instruct_FP8_Static_per_tensor,FP16,3.0,1.0,0.6875,0.6771756227200805,0.7733246871989834,0.596803191277067,79.4,🟡 Capable,Standard tool-calling workflows,True
+meta-llama__Meta-Llama-3-8B-Instruct-GPTQ-4bit,GPTQ,8.0,0.7055999999999999,0.6495,0.93171375197417,0.7717512433901412,0.6175765402768221,75.3,🟡 Capable,High-throughput batch processing,True
+Qwen2.5-14B-Instruct_INT4_AWQ,AWQ,14.0,1.0,0.6875,0.8425351611686733,0.6056457437156335,0.564460967129149,75.0,🟡 Capable,High-throughput batch processing,True
+Qwen2.5-7B-Instruct_FP8_Static_per_tensor,FP16,7.0,1.0,0.6875,0.7792389087588297,0.46495631515407204,0.5422818269944351,68.3,🟠 Limited,Standard tool-calling workflows,False
+meta-llama__Meta-Llama-3-8B-Instruct-BNB-8bit,BNB-8BIT,8.0,0.8464,0.659125,0.5412585158038589,0.6372825765537411,0.59470766219948,67.6,🟠 Limited,Standard tool-calling workflows,True
+Qwen2.5-7B-Instruct_FP16_Baseline,FP16,7.0,1.0,0.6875,0.9160619887405637,0.406459965477585,0.4356931234635758,67.5,🟠 Limited,High-throughput batch processing,False
+meta-llama/Meta-Llama-3-8B-Instruct,FP16,8.0,0.8281000000000001,0.6629999999999999,0.8396899037132178,0.5489170232665719,0.4330116112162401,67.4,🟠 Limited,High-throughput batch processing,False
+meta-llama__Meta-Llama-3-8B-Instruct-GPTQ-8bit,GPTQ-8BIT,8.0,0.6400000000000001,0.634911227154047,0.8731708672211411,0.6374610656612939,0.5920875325632496,67.1,🟠 Limited,Standard tool-calling workflows,True
+meta-llama__Llama-3.2-1B-Instruct-GPTQ-8bit,GPTQ-8BIT,1.0,0.245,0.5098240469208211,0.6508593300394706,0.9356648131333458,0.6578307001821273,64.3,🟠 Limited,Lightweight experimentation,True
+meta-llama/Llama-3.2-1B-Instruct,FP16,1.0,0.2475,0.5032609208972845,0.6037510564084292,0.9240937000525751,0.6006120205229775,62.8,🟠 Limited,Lightweight experimentation,True
+meta-llama__Llama-3.2-1B-Instruct-BNB-8bit,BNB-8BIT,1.0,0.33599999999999997,0.5140563909774436,0.3643167482842205,0.9342450499061253,0.6,61.9,🟠 Limited,Lightweight experimentation,True
+meta-llama__Llama-3.2-1B-Instruct-BNB-4bit,BNB-4BIT,1.0,0.17400000000000002,0.48526845151953696,0.4907370578193543,0.9547300597226682,0.6002637199369741,60.2,🟠 Limited,Lightweight experimentation,True
+meta-llama__Llama-3.2-1B-Instruct-GPTQ-4bit,GPTQ,1.0,0.0098,0.3518,0.7395368849607884,0.9532442599285573,0.6677862016636099,58.1,🟠 Limited,Lightweight experimentation,True
+meta-llama__Meta-Llama-3-8B-Instruct-BNB-4bit,BNB-4BIT,8.0,0.1122,0.4899797904191617,0.8202853198927911,0.7668023561207775,0.5545006757358205,55.9,🟠 Limited,Lightweight experimentation,True
+meta-llama__Llama-3.2-1B-Instruct-AWQ,AWQ,1.0,0.0776,0.4109776119402985,0.3599365431968574,0.9535251002819134,0.6372884723628494,54.8,🟠 Limited,Lightweight experimentation,True
+Qwen2.5-14B-Instruct_FP8_Static_per_tensor,FP16,14.0,1.0,0.6875,0.4501629106550585,0.13417656003862408,0.5288393139809053,50.1,🟠 Limited,Standard tool-calling workflows,False
+Qwen2.5-14B-Instruct_FP16_Baseline,FP16,14.0,1.0,0.6875,0.7015711431014745,0.0272709235670639,0.4,48.9,🔴 Experimental,Standard tool-calling workflows,False
