@@ -405,3 +405,121 @@ table still predict what actually happens.
 No column in this document is read from `benchmark_AGENT_*_all_summary.csv`.
 Those files, and the proxy-agent methodology behind them, remain ARS's
 domain.
+
+---
+
+## 12. EKOI Workflow × Model Recommendation Matrix
+
+The ECAS scoreboard (Section 6) answers *"which models are worth investing
+in?"* — this section answers the follow-up: *"which model should we assign
+to which workflow?"*
+
+### 12.1 Workflow Demand Classification
+
+Each of the 7 EKOI workflows is classified by three factors that determine
+how sensitive it is to model quality:
+
+- **LLM-Critical Artifacts** — how many artifacts in the chain rely on the
+  LLM's language understanding (as opposed to classical ML like anomaly
+  detection or forecasting, which is model-agnostic).
+- **Reasoning Depth** — total artifact steps the LLM must orchestrate
+  sequentially. More steps = higher compounding error risk from
+  quantization degradation.
+- **Output Sensitivity** — consequence of a wrong output (compliance/legal
+  risk vs. internal analytics).
+
+| # | Workflow | Steps | LLM-Critical | Output Sensitivity | Demand |
+|:---:|:---|:---:|:---:|:---|:---:|
+| W1 | Talent Sourcing & Candidate Matching | 4 | 2 | Medium — recruiter reviews shortlist | **MEDIUM** |
+| W2 | Workforce Demand & Resource Allocation | 5 | 2 | Medium — delivery manager reviews | **MEDIUM** |
+| W3 | Onboarding & Compliance Verification | 4 | 4 | **High** — compliance / legal risk | **HIGH** |
+| W4 | Payroll Anomaly Audit | 2 | 1 | **High** — financial accuracy | **MEDIUM** |
+| W5 | Skill Gap & Succession Planning | 4 | 3 | Medium — HR reviews recommendations | **HIGH** |
+| W6 | HR Knowledge Assistant (RAG) | 3 | 3 | **High** — policy accuracy with citations | **HIGH** |
+| W7 | Offboarding Analytics & Exit Intelligence | 3 | 3 | Low–Medium — analytics / clearance | **MEDIUM** |
+
+**W4's MEDIUM classification despite high output sensitivity:** the anomaly
+detection itself is classical ML (Isolation Forests / Z-Score). The LLM
+only generates the NudgeEngine alert context — a narrow, well-bounded task.
+
+### 12.2 ECAS Thresholds by Demand Class
+
+| Demand | Min ECAS_pre | Eligible Variants (of 27) | Rationale |
+|:---:|:---:|:---:|:---|
+| **HIGH** | ≥ 85 | 10 | Multiple LLM-critical artifacts; compliance- or policy-sensitive outputs; quantization degradation compounds across steps. |
+| **MEDIUM** | ≥ 75 | 21 | Fewer LLM-critical steps or a human-in-the-loop safeguard absorbs errors. |
+
+### 12.3 Per-Workflow Recommendations
+
+**W1 — Talent Sourcing (MEDIUM, ≥ 75):** 21 variants qualify. Top pick:
+Qwen2.5-7B AWQ (91.9). 3B models acceptable — DocumentParser and
+EntityExtractor are the only LLM-critical steps, and the recruiter reviews
+the shortlist.
+
+**W2 — Resource Allocation (MEDIUM, ≥ 75):** 21 variants qualify. Top pick:
+Qwen2.5-7B AWQ (91.9). Core forecasting and anomaly detection are classical
+ML; the LLM handles SemanticMatching and NudgeEngine recommendations.
+
+**W3 — Onboarding Compliance (HIGH, ≥ 85):** 10 variants qualify. Top pick:
+**Qwen2.5-14B AWQ (93.6)**. All 4 artifacts are LLM-critical. PolicyRAG
+cross-references documents against state compliance policies — incorrect
+answers carry legal risk. All 3B models excluded (max 83.9).
+
+**W4 — Payroll Audit (MEDIUM, ≥ 75):** 21 variants qualify. Top pick:
+Qwen2.5-7B AWQ (91.9). Simplest workflow (2 steps). Anomaly detection is
+classical ML; the LLM only triages severity and generates alert context.
+
+**W5 — Succession Planning (HIGH, ≥ 85):** 10 variants qualify. Top pick:
+**Qwen2.5-14B AWQ (93.6)**. Sentiment analysis of performance reviews
+requires nuanced language understanding that degrades below 7B. Succession
+rankings feed C-level decisions.
+
+**W6 — HR Knowledge RAG (HIGH, ≥ 85):** 10 variants qualify. Top pick:
+**Qwen2.5-14B AWQ (93.6)**. The purest LLM-dependent workflow — answer
+quality is entirely a function of instruction-following and grounded
+generation capability. RAG hallucination is the primary risk. No 3B model
+has `S_capability` above 75.6.
+
+**W7 — Offboarding Analytics (MEDIUM, ≥ 75):** 21 variants qualify. Top
+pick: Qwen2.5-7B AWQ (91.9). Outputs are analytics and clearance tracking,
+not compliance decisions. Sentiment and thematic grouping are coarser tasks
+than policy reasoning.
+
+### 12.4 Summary — Recommended Model per Workflow
+
+| Workflow | Demand | Min ECAS | Recommended Model | ECAS | VRAM |
+|:---|:---:|:---:|:---|:---:|:---:|
+| **W1** Talent Sourcing | MEDIUM | 75 | Qwen2.5-7B AWQ | 91.9 | 11.4 GB |
+| **W2** Resource Allocation | MEDIUM | 75 | Qwen2.5-7B AWQ | 91.9 | 11.4 GB |
+| **W3** Onboarding Compliance | HIGH | 85 | Qwen2.5-14B AWQ | 93.6 | 11.4 GB |
+| **W4** Payroll Audit | MEDIUM | 75 | Qwen2.5-7B AWQ | 91.9 | 11.4 GB |
+| **W5** Succession Planning | HIGH | 85 | Qwen2.5-14B AWQ | 93.6 | 11.4 GB |
+| **W6** HR Knowledge RAG | HIGH | 85 | Qwen2.5-14B AWQ | 93.6 | 11.4 GB |
+| **W7** Offboarding Analytics | MEDIUM | 75 | Qwen2.5-7B AWQ | 91.9 | 11.4 GB |
+
+### 12.5 Deployment Consolidation
+
+The 7 workflows collapse into **2 model tiers**:
+
+| Tier | Model | Workflows | VRAM |
+|:---|:---|:---|:---:|
+| **Tier 1 — High** | Qwen2.5-14B-Instruct AWQ (INT4) | W3, W5, W6 | 11.4 GB |
+| **Tier 2 — Medium** | Qwen2.5-7B-Instruct AWQ (INT4) | W1, W2, W4, W7 | 11.4 GB |
+
+Both tiers use ~11.4 GB VRAM (INT4 quantization), fitting on a single 16 GB
+GPU with headroom for KV cache. For operational simplicity:
+
+> **Single-model deployment:** Qwen2.5-14B-Instruct AWQ (INT4) at ECAS 93.6
+> covers all 7 workflows at 11.4 GB VRAM.
+
+### 12.6 From Estimate to Measurement
+
+These recommendations are ECAS estimates — a **prior**. The deployment
+lifecycle (Section 8) applies:
+
+1. Deploy the recommended model(s) to EKOI staging.
+2. Run each workflow with real or representative data.
+3. Measure ARS on actual task performance — the **posterior**.
+4. If ARS confirms ECAS (within ~5 points), proceed to production.
+5. If ARS diverges, recalibrate the demand classification and re-evaluate.
+
