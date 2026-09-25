@@ -1,0 +1,42 @@
+╔══════════════════════════════════════════════════════════════╗
+║           Quantization Benchmark Suite                      ║
+╚══════════════════════════════════════════════════════════════╝
+Timestamp           : 20260925_102955
+Config              : /app/config.ini
+Agents              : ['AGENT_2_IT_HELPDESK']
+Qwen models         : 0
+Llama models        : 1
+Total models        : 1
+Trials/model        : 100
+vLLM Engine         : True
+vLLM Port           : 8008
+KV Cache Memory     : auto (prevents full GPU pre-reservation)
+GPU Memory Util     : 0.7
+Output Directory    : /results/benchmark_20260925_102955
+Log File            : /results/benchmark_20260925_102955/output.log
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  MODEL: meta-llama__Llama-3.2-1B-Instruct-AWQ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Source: Local directory (/models/llama/meta-llama__Llama-3.2-1B-Instruct-AWQ)
+
+  [vLLM] Launching server for model: /models/llama/meta-llama__Llama-3.2-1B-Instruct-AWQ (port 8008) (kv_cache: 256M) ...
+  [vLLM] Waiting for server readiness at http://localhost:8008/health ...
+  [vLLM] ✓ Server ready in 135.4s.
+
+  ── Agent: AGENT_2_IT_HELPDESK ──
+  [vLLM] Stopping container 'vllm-server'...
+
+================================================================
+  Aggregating final results...
+================================================================
+
+  ✓ AGENT_2_IT_HELPDESK: Results saved to /results/benchmark_20260925_102955/AGENT_2_IT_HELPDESK
+
+================================================================
+  All benchmarks complete.
+  Full directory : /results/benchmark_20260925_102955
+  Output log     : /results/benchmark_20260925_102955/output.log
+================================================================
+

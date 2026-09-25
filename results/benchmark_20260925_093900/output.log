@@ -1,0 +1,52 @@
+╔══════════════════════════════════════════════════════════════╗
+║           Quantization Benchmark Suite                      ║
+╚══════════════════════════════════════════════════════════════╝
+Timestamp           : 20260925_093900
+Config              : /app/config.ini
+Agents              : ['AGENT_2_IT_HELPDESK']
+Qwen models         : 0
+Llama models        : 1
+Total models        : 1
+Trials/model        : 100
+vLLM Engine         : True
+GPU Memory Util     : 0.05 (KV-cache minimized for accurate VRAM)
+Output Directory    : /results/benchmark_20260925_093900
+Log File            : /results/benchmark_20260925_093900/output.log
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  MODEL: meta-llama__Llama-3.2-1B-Instruct-BNB-4bit
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Source: Local directory (/models/llama/meta-llama__Llama-3.2-1B-Instruct-BNB-4bit)
+
+  [vLLM] Launching server for model: /models/llama/meta-llama__Llama-3.2-1B-Instruct-BNB-4bit ...
+  [vLLM] Waiting for server readiness at http://localhost:8000/health ...
+  [vLLM] ✗ Timed out waiting for server (300s). Dumping logs:
+WARNING 09-25 09:39:12 [argparse_utils.py:276] With `vllm serve`, you should provide the model as a positional argument or in a config file instead of via the `--model` option. The `--model` option will be removed in a future version.
+
+  ✗ Skipping model meta-llama__Llama-3.2-1B-Instruct-BNB-4bit due to vLLM server startup failure.
+
+================================================================
+  Aggregating final results...
+================================================================
+
+Traceback (most recent call last):
+  File "/app/main.py", line 410, in <module>
+    main()
+  File "/app/main.py", line 397, in main
+    aggregate_results(df, agent_id, agent_output_dir, output_prefix)
+  File "/app/main.py", line 59, in aggregate_results
+    grouped = df.groupby(["Model", "Quantization", "Params (B)"])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pandas/util/_decorators.py", line 336, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pandas/core/frame.py", line 10835, in groupby
+    return DataFrameGroupBy(
+           ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pandas/core/groupby/groupby.py", line 1095, in __init__
+    grouper, exclusions, obj = get_grouper(
+                               ^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pandas/core/groupby/grouper.py", line 901, in get_grouper
+    raise KeyError(gpr)
+KeyError: 'Quantization'
