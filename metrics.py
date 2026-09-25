@@ -74,8 +74,13 @@ class GPUTracker:
                     self.power_readings.append(power)
 
                     # Memory in bytes → GB
-                    mem_info = pynvml.nvmlDeviceGetMemoryInfo(self.handle)
-                    self.memory_readings.append(mem_info.used / (1024 ** 3))
+                    # Prefer exact compute process VRAM (isolated to the model server)
+                    c_procs = pynvml.nvmlDeviceGetComputeRunningProcesses(self.handle)
+                    if c_procs:
+                        self.memory_readings.append(sum(p.usedGpuMemory for p in c_procs) / (1024 ** 3))
+                    else:
+                        mem_info = pynvml.nvmlDeviceGetMemoryInfo(self.handle)
+                        self.memory_readings.append(mem_info.used / (1024 ** 3))
 
                     # GPU utilisation %
                     util = pynvml.nvmlDeviceGetUtilizationRates(self.handle)

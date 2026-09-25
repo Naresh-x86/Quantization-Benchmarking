@@ -56,14 +56,47 @@ def _get_model_metadata(model_name: str):
 
     quant_type = "FP16"
     model_upper = model_name.upper()
-    if   "AWQ"       in model_upper: quant_type = "AWQ"
-    elif "GPTQ-8BIT" in model_upper: quant_type = "GPTQ-8BIT"
-    elif "GPTQ"      in model_upper: quant_type = "GPTQ"
-    elif "BNB-8BIT"  in model_upper: quant_type = "BNB-8BIT"
-    elif "BNB-4BIT"  in model_upper: quant_type = "BNB-4BIT"
-    elif "BNB"       in model_upper: quant_type = "BNB-4BIT"
+    if   "AWQ"         in model_upper: quant_type = "AWQ"
+    elif "GPTQ-8BIT"   in model_upper: quant_type = "GPTQ-8BIT"
+    elif "GPTQ"        in model_upper: quant_type = "GPTQ"
+    elif "FP8"         in model_upper: quant_type = "FP8"
+    elif "SMOOTHQUANT" in model_upper: quant_type = "INT8-SmoothQuant"
+    elif "BNB-8BIT"    in model_upper: quant_type = "BNB-8BIT"
+    elif "BNB-4BIT"    in model_upper: quant_type = "BNB-4BIT"
+    elif "BNB"         in model_upper: quant_type = "BNB"
 
     return quant_type, params_billion
+
+
+def get_recommended_kv_cache(model_path: str, model_name: str, max_model_len: int = 4096) -> str:
+    """Calculate minimal KV cache memory needed for single-concurrency inference."""
+    config_file = os.path.join(model_path, "config.json") if os.path.isdir(model_path) else None
+    if config_file and os.path.exists(config_file):
+        try:
+            with open(config_file, "r") as f:
+                cfg = json.load(f)
+            layers = cfg.get("num_hidden_layers", 32)
+            kv_heads = cfg.get("num_key_value_heads", cfg.get("num_attention_heads", 32))
+            head_dim = cfg.get("head_dim", cfg.get("hidden_size", 4096) // cfg.get("num_attention_heads", 32))
+            bytes_per_token = 2 * layers * kv_heads * head_dim * 2
+            needed_bytes = bytes_per_token * max_model_len
+            # 1.5x buffer (min 256MB) for graph capture & safety
+            target_mb = max(256, int(needed_bytes * 1.5 / (1024 * 1024)))
+            return f"{target_mb}M"
+        except Exception:
+            pass
+
+    # Fallback based on model parameter count
+    params = _get_model_metadata(model_name)[1]
+    if params <= 2:
+        return "256M"
+    elif params <= 4:
+        return "512M"
+    elif params <= 8:
+        return "768M"
+    else:
+        return "1024M"
+
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -195,9 +228,13 @@ def start_vllm_server(
     max_model_len: int,
     port: int = 8008,
     container_name: str = "vllm-server",
+    kv_cache_memory: str = None,
+    fast_warmup: bool = False,
 ) -> bool:
     """Launch the official vllm/vllm-openai container and wait for /health."""
-    print(f"\n  [vLLM] Launching server for model: {model_to_serve} (port {port}) ...")
+    mode_str = "fast warmup" if fast_warmup else "compiled graphs"
+    kv_info = f" (kv_cache: {kv_cache_memory}, {mode_str})" if kv_cache_memory else f" (gpu_mem_util: {gpu_mem_util}, {mode_str})"
+    print(f"\n  [vLLM] Launching server for model: {model_to_serve} (port {port}){kv_info} ...")
     # Ensure vLLM image exists locally; if not, pull with visible progress
     vllm_image = "vllm/vllm-openai:latest"
     img_check = subprocess.run(["docker", "image", "inspect", vllm_image], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -234,6 +271,10 @@ def start_vllm_server(
         "--port", str(port),
         "--trust-remote-code",
     ]
+    if kv_cache_memory:
+        docker_cmd.extend(["--kv-cache-memory-bytes", str(kv_cache_memory)])
+    if fast_warmup:
+        docker_cmd.extend(["--enforce-eager", "--no-enable-flashinfer-autotune"])
 
     res = subprocess.run(docker_cmd, capture_output=True, text=True)
     if res.returncode != 0:
@@ -317,7 +358,9 @@ def main():
     max_new_tokens         = int(inf.get("max_new_tokens", 512))
     temperature            = float(inf.get("temperature",    0.2))
     do_sample              = inf.get("do_sample", "True").strip().lower() == "true"
-    gpu_memory_utilization = float(inf.get("gpu_memory_utilization", 0.05))
+    gpu_memory_utilization = float(inf.get("gpu_memory_utilization", 0.7))
+    kv_cache_memory        = inf.get("kv_cache_memory", "auto").strip()
+    fast_warmup            = inf.get("fast_warmup", "True").strip().lower() == "true"
     max_model_len          = int(inf.get("max_model_len", 4096))
     vllm_port              = int(inf.get("vllm_port", os.environ.get("VLLM_PORT", 8008)))
 
@@ -346,7 +389,9 @@ def main():
     print(f"Trials/model        : {num_trials}")
     print(f"vLLM Engine         : {use_vllm}")
     print(f"vLLM Port           : {vllm_port}")
-    print(f"GPU Memory Util     : {gpu_memory_utilization} (KV-cache minimized for accurate VRAM)")
+    print(f"KV Cache Memory     : {kv_cache_memory} (prevents full GPU pre-reservation)")
+    print(f"Fast Warmup         : {fast_warmup} (eager mode, skips graph capture & autotune)")
+    print(f"GPU Memory Util     : {gpu_memory_utilization}")
     print(f"Output Directory    : {run_output_dir}")
     print(f"Log File            : {log_path}")
     print()
@@ -360,6 +405,23 @@ def main():
         print(f"  MODEL: {model_name}")
         print(f"{'━'*64}")
 
+        quant_type, params_b = _get_model_metadata(model_name)
+
+        # Check vLLM compatibility with BitsAndBytes (BNB)
+        if use_vllm and quant_type.startswith("BNB"):
+            print(f"  ✗ Skipping model '{model_name}':")
+            print(f"    vLLM v0.30 does not support BitsAndBytes ({quant_type}) quantized checkpoints.")
+            print(f"    Supported quantization formats for vLLM: AWQ, GPTQ, FP8, FP16.")
+            for agent_id in agents_enabled:
+                results_by_agent[agent_id].append({
+                    "Model": model_name,
+                    "Quantization": quant_type,
+                    "Params (B)": params_b,
+                    "Success": False,
+                    "Error": f"vLLM does not support BitsAndBytes ({quant_type})",
+                })
+            continue
+
         # Resolve model path: if not a local folder on disk, it's an HF repo ID in HF cache
         if os.path.exists(model_path):
             model_to_serve = model_path
@@ -368,6 +430,12 @@ def main():
             model_to_serve = model_name
             print(f"  Source: Hugging Face cache ({model_name})")
 
+        actual_kv_cache = kv_cache_memory
+        if actual_kv_cache and actual_kv_cache.lower() == "auto":
+            actual_kv_cache = get_recommended_kv_cache(model_to_serve, model_name, max_model_len)
+        elif actual_kv_cache and actual_kv_cache.lower() in ("none", "false", "off"):
+            actual_kv_cache = None
+
         vllm_started = False
         if use_vllm:
             vllm_started = start_vllm_server(
@@ -375,10 +443,11 @@ def main():
                 gpu_mem_util=gpu_memory_utilization,
                 max_model_len=max_model_len,
                 port=vllm_port,
+                kv_cache_memory=actual_kv_cache,
+                fast_warmup=fast_warmup,
             )
             if not vllm_started:
                 print(f"  ✗ Skipping model {model_name} due to vLLM server startup failure.")
-                quant_type, params_b = _get_model_metadata(model_name)
                 for agent_id in agents_enabled:
                     results_by_agent[agent_id].append({
                         "Model": model_name,
@@ -388,8 +457,6 @@ def main():
                         "Error": "vLLM server startup failed"
                     })
                 continue
-
-        quant_type, params_b = _get_model_metadata(model_name)
         try:
             # Benchmark each enabled agent with the currently loaded model
             for agent_id in agents_enabled:

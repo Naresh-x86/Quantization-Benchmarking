@@ -1,0 +1,88 @@
+╔══════════════════════════════════════════════════════════════╗
+║           Quantization Benchmark Suite                      ║
+╚══════════════════════════════════════════════════════════════╝
+Timestamp           : 20260925_103529
+Config              : /app/config.ini
+Agents              : ['AGENT_1_SUPPORT']
+Qwen models         : 1
+Llama models        : 3
+Total models        : 4
+Trials/model        : 100
+vLLM Engine         : True
+vLLM Port           : 8008
+KV Cache Memory     : auto (prevents full GPU pre-reservation)
+GPU Memory Util     : 0.7
+Output Directory    : /results/benchmark_20260925_103529
+Log File            : /results/benchmark_20260925_103529/output.log
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  MODEL: Qwen2.5-3B-Instruct_FP8_Static_per_tensor
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Source: Local directory (/models/qwen/Qwen2.5-3B-Instruct_FP8_Static_per_tensor)
+
+  [vLLM] Launching server for model: /models/qwen/Qwen2.5-3B-Instruct_FP8_Static_per_tensor (port 8008) (kv_cache: 256M) ...
+  [vLLM] Waiting for server readiness at http://localhost:8008/health ...
+  [vLLM] ✓ Server ready in 138.5s.
+
+  ── Agent: AGENT_1_SUPPORT ──
+  [vLLM] Stopping container 'vllm-server'...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  MODEL: meta-llama/Llama-3.2-1B-Instruct
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Source: Hugging Face cache (meta-llama/Llama-3.2-1B-Instruct)
+
+  [vLLM] Launching server for model: meta-llama/Llama-3.2-1B-Instruct (port 8008) (kv_cache: 256M) ...
+  [vLLM] Waiting for server readiness at http://localhost:8008/health ...
+  [vLLM] ✓ Server ready in 150.5s.
+
+  ── Agent: AGENT_1_SUPPORT ──
+  [vLLM] Stopping container 'vllm-server'...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  MODEL: meta-llama__Llama-3.2-3B-Instruct-BNB-8bit
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Source: Local directory (/models/llama/meta-llama__Llama-3.2-3B-Instruct-BNB-8bit)
+
+  [vLLM] Launching server for model: /models/llama/meta-llama__Llama-3.2-3B-Instruct-BNB-8bit (port 8008) (kv_cache: 672M) ...
+  [vLLM] Waiting for server readiness at http://localhost:8008/health ...
+  [vLLM] ✗ Container 'vllm-server' exited unexpectedly. Logs:
+WARNING 09-25 10:45:10 [argparse_utils.py:276] With `vllm serve`, you should provide the model as a positional argument or in a config file instead of via the `--model` option. The `--model` option will be removed in a future version.
+(APIServer pid=1) INFO 09-25 10:45:10 [api_utils.py:347] 
+(APIServer pid=1) INFO 09-25 10:45:10 [api_utils.py:347]        █     █     █▄   ▄█
+(APIServer pid=1) INFO 09-25 10:45:10 [api_utils.py:347]  ▄▄ ▄█ █     █     █ ▀▄▀ █  version 0.30.0
+(APIServer pid=1) INFO 09-25 10:45:10 [api_utils.py:347]   █▄█▀ █     █     █     █  model   /models/llama/meta-llama__Llama-3.2-3B-Instruct-BNB-8bit
+(APIServer pid=1) INFO 09-25 10:45:10 [api_utils.py:347]    ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀
+(APIServer pid=1) INFO 09-25 10:45:10 [api_utils.py:347] 
+(APIServer pid=1) INFO 09-25 10:45:10 [api_utils.py:286] non-default args: {'model_tag': '/models/llama/meta-llama__Llama-3.2-3B-Instruct-BNB-8bit', 'port': 8008, 'model': '/models/llama/meta-llama__Llama-3.2-3B-Instruct-BNB-8bit', 'trust_remote_code': True, 'max_model_len': 4096, 'gpu_memory_utilization': 0.7, 'kv_cache_memory_bytes': 704643072}
+(APIServer pid=1) WARNING 09-25 10:45:10 [envs.py:2248] Unknown vLLM environment variable detected: VLLM_ATTENTION_BACKEND
+(APIServer pid=1) INFO 09-25 10:45:16 [model.py:692] Resolved architecture: LlamaForCausalLM
+(APIServer pid=1) INFO 09-25 10:45:16 [model.py:2030] Using max model len 4096
+
+  ✗ Skipping model meta-llama__Llama-3.2-3B-Instruct-BNB-8bit due to vLLM server startup failure.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  MODEL: meta-llama__Llama-3.2-3B-Instruct-GPTQ-4bit
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Source: Local directory (/models/llama/meta-llama__Llama-3.2-3B-Instruct-GPTQ-4bit)
+
+  [vLLM] Launching server for model: /models/llama/meta-llama__Llama-3.2-3B-Instruct-GPTQ-4bit (port 8008) (kv_cache: 672M) ...
+  [vLLM] Waiting for server readiness at http://localhost:8008/health ...
+  [vLLM] ✓ Server ready in 126.4s.
+
+  ── Agent: AGENT_1_SUPPORT ──
+  [vLLM] Stopping container 'vllm-server'...
+
+================================================================
+  Aggregating final results...
+================================================================
+
+  ✓ AGENT_1_SUPPORT: Results saved to /results/benchmark_20260925_103529/AGENT_1_SUPPORT
+
+================================================================
+  All benchmarks complete.
+  Full directory : /results/benchmark_20260925_103529
+  Output log     : /results/benchmark_20260925_103529/output.log
+================================================================
+

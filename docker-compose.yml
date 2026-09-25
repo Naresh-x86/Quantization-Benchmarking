@@ -33,8 +33,10 @@ services:
       - /home/ror-technologies/.cache/huggingface:/root/.cache/huggingface:ro
       # Results — written by main.py; accessible on the host at ./results
       - ./results:/results
-      # Config file on host
+      # Config and scripts on host
       - ./config.ini:/app/config.ini:ro
+      - ./main.py:/app/main.py:ro
+      - ./metrics.py:/app/metrics.py:ro
       # Socket so the container can launch sibling vLLM containers via the host Docker daemon
       - /var/run/docker.sock:/var/run/docker.sock
 
@@ -44,6 +46,7 @@ services:
 
     # Allow the benchmark container to talk to vLLM on localhost
     network_mode: host
+    pid: host
 
     environment:
       - BENCHMARK_CONFIG=/app/config.ini
