@@ -1,7 +1,7 @@
-torch
-transformers>=4.40.0
-accelerate
+# Benchmark harness dependencies.
+# vLLM itself runs in a separate container (vllm/vllm-openai).
+# This image only needs the OpenAI client + GPU telemetry + data libraries.
+
+openai>=1.0.0
 nvidia-ml-py
 pandas
-vllm>=0.4.0
-autoawq

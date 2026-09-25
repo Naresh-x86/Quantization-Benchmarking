@@ -7,10 +7,18 @@ models/
 venv/
 log.txt
 
-# Allow results directory and its CSV/JSON files to be tracked
+# Loose log files at repo root
+output*.log
+logs/
+
+# ECAS / ARS research artifacts (moved to research/)
+research/
+
+# Allow results directory structure but ignore bulk data
 !results/
 !results/**/*.csv
 !results/**/*.json
 
-main.tex
-review_and_shortcomings.pdf
+# Docs build artifacts
+docs/main.tex
+docs/review_and_shortcomings.pdf

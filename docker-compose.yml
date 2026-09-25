@@ -1,0 +1,53 @@
+services:
+
+  # ── Benchmark harness container ─────────────────────────────────────────────
+  # This container holds only the Python benchmark code.
+  # It does NOT auto-start the benchmark — you trigger it manually via:
+  #
+  #   docker compose up -d bench
+  #   docker exec -it quant-bench bash /app/run_benchmark.sh
+  #
+  # The vLLM server is started/stopped per-model inside run_benchmark.sh.
+  bench:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: quant-bench
+    image: quant-bench:latest
+
+    # GPU passthrough — exposes all NVIDIA GPUs (RTX 5090)
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+    # Bind-mount host model directories (read-only) and the results directory
+    volumes:
+      # Models — adjust the host paths to wherever your weights live
+      - /home/ror-technologies/Quantization/models:/models/qwen:ro
+      - /home/ror-technologies/IT-helpdesk-agent/quantized_models:/models/llama:ro
+      # Results — written by main.py; accessible on the host at ./results
+      - ./results:/results
+      # Socket so the container can launch sibling vLLM containers
+      - /var/run/docker.sock:/var/run/docker.sock
+
+    # Stay alive so we can exec commands into it
+    stdin_open: true
+    tty: true
+
+    # Allow the benchmark container to talk to vLLM on localhost
+    network_mode: host
+
+    environment:
+      - BENCHMARK_CONFIG=/app/config.ini
+      # Disable flashinfer JIT (fails on RTX 5090 compute_120a with older nvcc)
+      - VLLM_ATTENTION_BACKEND=FLASH_ATTN
+      - VLLM_USE_MODELSCOPE=False
+      # HF cache inside the container (optional — remove if not needed)
+      - HF_HOME=/models/.cache/huggingface
+
+    # Container stays running; benchmark is triggered manually
+    command: ["/bin/bash"]

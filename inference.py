@@ -1,97 +1,69 @@
-"""LLM inference engine for the IT-helpdesk benchmark.
+"""LLM inference engine — vLLM (OpenAI-compatible) backend.
 
-Handles loading pre-quantized Llama checkpoints from the local quantized_models/
-folder (AWQ 4-bit, GPTQ 4-bit/8-bit, BNB 4-bit/8-bit) AND unquantized FP16
-baselines directly from HuggingFace — all via the Hugging Face Transformers
-back-end.
+This module talks to a vLLM server running in the *same* docker-compose stack
+via its OpenAI-compatible /v1/chat/completions endpoint.  All heavy model
+loading is handled by the vLLM container; this process only sends HTTP
+requests.
 
-Quantization back-end notes:
-  AWQ       → autoawq reads the quantization_config from the saved config.json
-  GPTQ      → auto-gptq / optimum reads the quantization_config from config.json
-  BNB-*     → bitsandbytes reads the quantization_config from config.json
-  FP16      → no quantization; loads in float16 directly from HF or local path
+The vLLM server is launched by the benchmark runner (run_benchmark.sh) before
+main.py is called, and torn down automatically after all benchmarks finish.
 
-Usage:
-    # Pre-quantized local checkpoint
-    engine = LLMEngine("quantized_models/meta-llama__Llama-3.2-1B-Instruct-AWQ",
-                       quant_type="AWQ")
+Key vLLM flag used for accurate VRAM measurement
+─────────────────────────────────────────────────
+  --gpu-memory-utilization <float>  (default 0.90)
 
-    # Unquantized FP16 baseline straight from HuggingFace
-    engine = LLMEngine("meta-llama/Llama-3.2-1B-Instruct", quant_type="FP16")
+vLLM pre-allocates 90 % of VRAM as a KV-cache reserve, so nvidia-smi always
+shows ~28 GB regardless of model size.  We override this to a very small value
+(e.g. 0.05) so that only the model weights occupy VRAM, giving an accurate
+per-model VRAM reading from pynvml.
 
-    output = engine.generate(messages)   # list of {"role":…, "content":…}
-    tflops = engine.calculate_tflops(params_b=1.24, tokens=80, duration_sec=2.1)
+This value is read from config.ini → [INFERENCE] → gpu_memory_utilization and
+is forwarded to the vLLM process via the VLLM_GPU_MEMORY_UTIL environment
+variable set in run_benchmark.sh.
 """
 
 import time
-import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer
+import openai
 
 
 class LLMEngine:
-    """Transformers-based inference engine.
-
-    Accepts any pre-quantized local checkpoint (AWQ / GPTQ / BNB) or an
-    unquantized HuggingFace model ID for FP16 baseline comparison.
-    """
+    """OpenAI-compatible client that talks to a running vLLM server."""
 
     def __init__(
         self,
         model_path: str,
-        quant_type: str = "AWQ",
-        use_vllm: bool = False,
+        quant_type: str = "FP16",
+        use_vllm: bool = True,
         max_new_tokens: int = 512,
         temperature: float = 0.2,
         do_sample: bool = True,
+        vllm_base_url: str = "http://localhost:8000/v1",
+        # gpu_memory_utilization is handled at server-start time (not per-request)
     ):
-        self.model_path    = model_path
-        self.quant_type    = quant_type.upper()
-        self.use_vllm      = use_vllm
+        self.model_path = model_path
+        self.quant_type = quant_type.upper()
+        self.use_vllm = use_vllm
         self.max_new_tokens = max_new_tokens
-        self.temperature   = temperature
-        self.do_sample     = do_sample
+        self.temperature = temperature if do_sample else 0.0
+        self.vllm_base_url = vllm_base_url
 
-        print(f"  Loading [{self.quant_type}]  {model_path} …")
-        self.tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True)
-        if self.tokenizer.pad_token_id is None:
-            self.tokenizer.pad_token = self.tokenizer.eos_token
+        # The model name sent to the vLLM API must match what the server loaded.
+        # vLLM uses the model path as the model ID.
+        self.model_id = model_path
 
-        load_kwargs: dict = {
-            "device_map":       "cuda",
-            "trust_remote_code": True,
-        }
+        self.client = openai.OpenAI(
+            base_url=vllm_base_url,
+            api_key="EMPTY",  # vLLM does not require a real key
+        )
 
-        if self.quant_type == "FP16":
-            # Unquantized baseline — load in float16, no quantization_config needed.
-            load_kwargs["torch_dtype"] = torch.float16
-
-        elif self.quant_type in ("AWQ", "GPTQ", "GPTQ-4BIT", "GPTQ-8BIT"):
-            # AWQ and GPTQ checkpoints embed their quantization_config in config.json.
-            # AutoModelForCausalLM picks it up automatically when the right backend
-            # (autoawq / auto-gptq / optimum) is installed.
-            load_kwargs["torch_dtype"] = torch.float16
-
-        elif self.quant_type in ("BNB-4BIT", "BNB-8BIT"):
-            # BNB checkpoints saved by quantize_bnb.py also embed quantization_config
-            # in config.json, so from_pretrained re-applies the same quantization.
-            # No extra BitsAndBytesConfig needed — it's already in the saved config.
-            load_kwargs["torch_dtype"] = torch.float16
-
-        else:
-            # Unknown type — attempt plain float16 load and warn.
-            print(f"  Warning: unknown quant_type '{self.quant_type}', loading as FP16.")
-            load_kwargs["torch_dtype"] = torch.float16
-
-        self.model = AutoModelForCausalLM.from_pretrained(model_path, **load_kwargs)
-        self.model.eval()
-        print(f"  ✓  Model ready.")
+        print(f"  vLLM engine ready → model: {model_path}  base_url: {vllm_base_url}")
 
     # ------------------------------------------------------------------
     # Core generation
     # ------------------------------------------------------------------
 
     def generate(self, messages: list) -> dict:
-        """Run one forward pass given a chat-template message list.
+        """Send a chat-completion request to the vLLM server.
 
         Args:
             messages: list of {"role": str, "content": str} dicts
@@ -100,49 +72,33 @@ class LLMEngine:
             dict with keys:
               text, prompt_tokens, generated_tokens, duration, tokens_per_sec
         """
-        encoded = self.tokenizer.apply_chat_template(
-            messages,
-            add_generation_prompt=True,
-            return_tensors="pt",
-            return_dict=True,
-            truncation=True,
-            max_length=1024,
-        )
-        device         = next(self.model.parameters()).device
-        input_ids      = encoded["input_ids"].to(device)
-        attention_mask = encoded["attention_mask"].to(device)
-        prompt_tokens  = int(input_ids.shape[1])
-
         start = time.time()
-        with torch.no_grad():
-            output_ids = self.model.generate(
-                input_ids=input_ids,
-                attention_mask=attention_mask,
-                max_new_tokens=self.max_new_tokens,
-                max_length=None,
-                temperature=self.temperature,
-                do_sample=self.do_sample,
-                pad_token_id=self.tokenizer.eos_token_id,
-            )
-        if torch.cuda.is_available():
-            torch.cuda.synchronize()
+        response = self.client.chat.completions.create(
+            model=self.model_id,
+            messages=messages,
+            max_tokens=self.max_new_tokens,
+            temperature=self.temperature,
+        )
         duration = time.time() - start
 
-        new_ids          = output_ids[0][prompt_tokens:]
-        generated_tokens = int(new_ids.shape[0])
-        text             = self.tokenizer.decode(new_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False)
-        tokens_per_sec   = generated_tokens / duration if duration > 0 else 0.0
+        choice = response.choices[0]
+        text = choice.message.content or ""
+
+        usage = response.usage
+        prompt_tokens = usage.prompt_tokens if usage else 0
+        generated_tokens = usage.completion_tokens if usage else len(text.split())
+        tokens_per_sec = generated_tokens / duration if duration > 0 else 0.0
 
         return {
-            "text":             text,
-            "prompt_tokens":    prompt_tokens,
+            "text": text,
+            "prompt_tokens": prompt_tokens,
             "generated_tokens": generated_tokens,
-            "duration":         duration,
-            "tokens_per_sec":   tokens_per_sec,
+            "duration": duration,
+            "tokens_per_sec": tokens_per_sec,
         }
 
     # ------------------------------------------------------------------
-    # TFLOPS heuristic (Naresh's formula, adopted here)
+    # TFLOPS heuristic
     # ------------------------------------------------------------------
 
     def calculate_tflops(
@@ -157,12 +113,6 @@ class LLMEngine:
           N = generated tokens
           P = total parameters (params_billion × 1e9)
           T = wall-clock generation time in seconds
-
-        This is the same rough heuristic used by Naresh (and widely in ML
-        benchmarking). It does NOT distinguish INT4 from INT8 or FP16
-        arithmetic throughput — it's a token-throughput proxy that at least
-        varies meaningfully by measured duration and actual token count,
-        unlike the old static-param estimate.
         """
         if duration_sec <= 0 or params_billion <= 0:
             return 0.0
