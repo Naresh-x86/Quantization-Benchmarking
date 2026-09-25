@@ -37,7 +37,7 @@ class LLMEngine:
         max_new_tokens: int = 512,
         temperature: float = 0.2,
         do_sample: bool = True,
-        vllm_base_url: str = "http://localhost:8000/v1",
+        vllm_base_url: str = "http://localhost:8008/v1",
         # gpu_memory_utilization is handled at server-start time (not per-request)
     ):
         self.model_path = model_path

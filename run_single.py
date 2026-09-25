@@ -242,7 +242,7 @@ def main():
         model_path = model_name  # fallback to HF Hub ID
 
     # vLLM base URL: use env var (set by run_benchmark.sh) or default
-    vllm_base_url = os.environ.get("VLLM_BASE_URL", "http://localhost:8000/v1")
+    vllm_base_url = os.environ.get("VLLM_BASE_URL", "http://localhost:8008/v1")
 
     all_trials_results = []
 

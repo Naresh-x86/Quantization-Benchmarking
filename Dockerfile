@@ -12,7 +12,7 @@ FROM python:3.11-slim
 RUN apt-get update && apt-get install -y --no-install-recommends \
         gcc \
         curl \
-        docker.io \
+        docker-cli \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
@@ -30,6 +30,7 @@ COPY agent.py \
      tools.py \
      dataset.json \
      config.ini \
+     run_benchmark.sh \
      ./
 
 # Results are written to /results which is bind-mounted from the host.

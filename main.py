@@ -48,6 +48,24 @@ def _load_models_from_section(config, section_name: str, dir_key: str) -> list:
     return models
 
 
+def _get_model_metadata(model_name: str):
+    """Derive quant_type and params_billion from model name for reporting."""
+    import re
+    match = re.search(r'(\d+(?:\.\d+)?)[Bb]', model_name)
+    params_billion = float(match.group(1)) if match else 7.0
+
+    quant_type = "FP16"
+    model_upper = model_name.upper()
+    if   "AWQ"       in model_upper: quant_type = "AWQ"
+    elif "GPTQ-8BIT" in model_upper: quant_type = "GPTQ-8BIT"
+    elif "GPTQ"      in model_upper: quant_type = "GPTQ"
+    elif "BNB-8BIT"  in model_upper: quant_type = "BNB-8BIT"
+    elif "BNB-4BIT"  in model_upper: quant_type = "BNB-4BIT"
+    elif "BNB"       in model_upper: quant_type = "BNB-4BIT"
+
+    return quant_type, params_billion
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # Result aggregation
 # ─────────────────────────────────────────────────────────────────────────────
@@ -55,6 +73,13 @@ def _load_models_from_section(config, section_name: str, dir_key: str) -> list:
 def aggregate_results(df: pd.DataFrame, agent_id: str, output_dir: str, prefix: str):
     if df.empty:
         return
+
+    # Ensure required grouping columns exist and have non-null values
+    for col, default_val in [("Model", "Unknown"), ("Quantization", "Unknown"), ("Params (B)", 0.0)]:
+        if col not in df.columns:
+            df[col] = default_val
+        else:
+            df[col] = df[col].fillna(default_val)
 
     grouped = df.groupby(["Model", "Quantization", "Params (B)"])
 
@@ -168,11 +193,22 @@ def start_vllm_server(
     model_to_serve: str,
     gpu_mem_util: float,
     max_model_len: int,
-    port: int = 8000,
+    port: int = 8008,
     container_name: str = "vllm-server",
 ) -> bool:
     """Launch the official vllm/vllm-openai container and wait for /health."""
-    print(f"\n  [vLLM] Launching server for model: {model_to_serve} ...")
+    print(f"\n  [vLLM] Launching server for model: {model_to_serve} (port {port}) ...")
+    # Ensure vLLM image exists locally; if not, pull with visible progress
+    vllm_image = "vllm/vllm-openai:latest"
+    img_check = subprocess.run(["docker", "image", "inspect", vllm_image], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    if img_check.returncode != 0:
+        print(f"  [vLLM] Image '{vllm_image}' not found locally.")
+        print(f"  [vLLM] Pulling image now (approx. 10–15 GB, one-time download)...")
+        pull_res = subprocess.run(["docker", "pull", vllm_image])
+        if pull_res.returncode != 0:
+            print(f"  [vLLM] ✗ Failed to pull '{vllm_image}'. Please check internet connectivity.")
+            return False
+
     subprocess.run(["docker", "rm", "-f", container_name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     host_qwen  = os.environ.get("HOST_MODELS_QWEN", "/home/ror-technologies/Quantization/models")
@@ -197,7 +233,6 @@ def start_vllm_server(
         "--max-model-len", str(max_model_len),
         "--port", str(port),
         "--trust-remote-code",
-        "--disable-log-requests",
     ]
 
     res = subprocess.run(docker_cmd, capture_output=True, text=True)
@@ -209,6 +244,18 @@ def start_vllm_server(
     max_wait = 300
     start_t = time.time()
     while time.time() - start_t < max_wait:
+        # Check if container died unexpectedly
+        inspect_state = subprocess.run(
+            ["docker", "inspect", "-f", "{{.State.Running}}", container_name],
+            capture_output=True, text=True
+        )
+        if inspect_state.stdout.strip() != "true":
+            print(f"  [vLLM] ✗ Container '{container_name}' exited unexpectedly. Logs:")
+            logs = subprocess.run(["docker", "logs", "--tail", "100", container_name], capture_output=True, text=True)
+            print(logs.stdout or logs.stderr)
+            subprocess.run(["docker", "rm", "-f", container_name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            return False
+
         try:
             with urllib.request.urlopen(f"http://localhost:{port}/health", timeout=2) as resp:
                 if resp.status == 200:
@@ -219,7 +266,7 @@ def start_vllm_server(
             time.sleep(3)
 
     print(f"  [vLLM] ✗ Timed out waiting for server ({max_wait}s). Dumping logs:")
-    logs = subprocess.run(["docker", "logs", "--tail", "40", container_name], capture_output=True, text=True)
+    logs = subprocess.run(["docker", "logs", "--tail", "100", container_name], capture_output=True, text=True)
     print(logs.stdout or logs.stderr)
     subprocess.run(["docker", "rm", "-f", container_name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     return False
@@ -272,6 +319,7 @@ def main():
     do_sample              = inf.get("do_sample", "True").strip().lower() == "true"
     gpu_memory_utilization = float(inf.get("gpu_memory_utilization", 0.05))
     max_model_len          = int(inf.get("max_model_len", 4096))
+    vllm_port              = int(inf.get("vllm_port", os.environ.get("VLLM_PORT", 8008)))
 
     # ── Output directory for this run ────────────────────────────────────────
     timestamp     = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -297,6 +345,7 @@ def main():
     print(f"Total models        : {len(all_models)}")
     print(f"Trials/model        : {num_trials}")
     print(f"vLLM Engine         : {use_vllm}")
+    print(f"vLLM Port           : {vllm_port}")
     print(f"GPU Memory Util     : {gpu_memory_utilization} (KV-cache minimized for accurate VRAM)")
     print(f"Output Directory    : {run_output_dir}")
     print(f"Log File            : {log_path}")
@@ -325,16 +374,22 @@ def main():
                 model_to_serve=model_to_serve,
                 gpu_mem_util=gpu_memory_utilization,
                 max_model_len=max_model_len,
+                port=vllm_port,
             )
             if not vllm_started:
                 print(f"  ✗ Skipping model {model_name} due to vLLM server startup failure.")
+                quant_type, params_b = _get_model_metadata(model_name)
                 for agent_id in agents_enabled:
                     results_by_agent[agent_id].append({
-                        "Model": model_name, "Success": False,
+                        "Model": model_name,
+                        "Quantization": quant_type,
+                        "Params (B)": params_b,
+                        "Success": False,
                         "Error": "vLLM server startup failed"
                     })
                 continue
 
+        quant_type, params_b = _get_model_metadata(model_name)
         try:
             # Benchmark each enabled agent with the currently loaded model
             for agent_id in agents_enabled:
@@ -365,20 +420,30 @@ def main():
                     cmd.append("--save_traces")
 
                 try:
-                    subprocess.run(cmd, check=True)
+                    subprocess.run(
+                        cmd,
+                        check=True,
+                        env={**os.environ, "VLLM_BASE_URL": f"http://localhost:{vllm_port}/v1"}
+                    )
                     if os.path.exists(output_json):
                         with open(output_json, "r") as f:
                             results_by_agent[agent_id].extend(json.load(f))
                         os.remove(output_json)
                     else:
                         results_by_agent[agent_id].append({
-                            "Model": model_name, "Success": False,
+                            "Model": model_name,
+                            "Quantization": quant_type,
+                            "Params (B)": params_b,
+                            "Success": False,
                             "Error": "Subprocess failed to write output.",
                         })
                 except subprocess.CalledProcessError as e:
                     print(f"  ✗ Error running {model_name} on {agent_id}. Exit code: {e.returncode}")
                     results_by_agent[agent_id].append({
-                        "Model": model_name, "Success": False,
+                        "Model": model_name,
+                        "Quantization": quant_type,
+                        "Params (B)": params_b,
+                        "Success": False,
                         "Error": f"Subprocess crashed with code {e.returncode}",
                     })
         finally:
