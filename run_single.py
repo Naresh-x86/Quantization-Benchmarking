@@ -83,15 +83,22 @@ def format_trace(agent_result: dict, must_call_raw: list, task_description: str)
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model_path", type=str, required=True)
-    parser.add_argument("--model_name", type=str, required=True)
-    parser.add_argument("--dataset", type=str, required=True)
-    parser.add_argument("--agent_id", type=str, required=True)
-    parser.add_argument("--num_trials", type=int, default=1)
-    parser.add_argument("--use_vllm", action="store_true")
-    parser.add_argument("--save_traces", action="store_true")
-    parser.add_argument("--output_json", type=str, required=True)
-    parser.add_argument("--output_dir", type=str, required=True)
+    parser.add_argument("--model_path",     type=str,   required=True)
+    parser.add_argument("--model_name",     type=str,   required=True)
+    parser.add_argument("--dataset",        type=str,   required=True)
+    parser.add_argument("--agent_id",       type=str,   required=True)
+    parser.add_argument("--num_trials",     type=int,   default=1)
+    parser.add_argument("--use_vllm",       action="store_true")
+    parser.add_argument("--save_traces",    action="store_true")
+    parser.add_argument("--output_json",    type=str,   required=True)
+    parser.add_argument("--output_dir",     type=str,   required=True)
+    # Inference hyperparameters (forwarded from config.ini via main.py)
+    parser.add_argument("--temperature",    type=float, default=0.2)
+    parser.add_argument("--top_p",          type=float, default=0.95)
+    parser.add_argument("--max_new_tokens", type=int,   default=512)
+    parser.add_argument("--max_steps",      type=int,   default=15)
+    parser.add_argument("--no_sample",      action="store_true",
+                        help="Disable sampling (greedy decoding)")
     return parser.parse_args()
 
 def get_params_billion_from_name(model_name: str) -> float:
@@ -253,8 +260,18 @@ def main():
     
     try:
         # Initialize engine once per model
-        engine = LLMEngine(model_path, use_vllm=args.use_vllm, quant_type=quant_type)
-        agent = ReActAgent(engine, agent_id=args.agent_id)
+        do_sample = not args.no_sample
+        print(f"  [Inference Settings] Temperature={args.temperature} | Top-P={args.top_p} | Max New Tokens={args.max_new_tokens} | Sample={do_sample} | Max Steps={args.max_steps}")
+        engine = LLMEngine(
+            model_path,
+            use_vllm=args.use_vllm,
+            quant_type=quant_type,
+            temperature=args.temperature,
+            max_new_tokens=args.max_new_tokens,
+            do_sample=do_sample,
+            top_p=args.top_p,
+        )
+        agent = ReActAgent(engine, agent_id=args.agent_id, max_steps=args.max_steps)
         
         for trial in range(args.num_trials):
             print(f"--- Running Trial {trial+1}/{args.num_trials} ---")

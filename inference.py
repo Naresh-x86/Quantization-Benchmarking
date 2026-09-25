@@ -43,13 +43,15 @@ class LLMEngine:
         max_new_tokens: int = 512,
         temperature: float = 0.2,
         do_sample: bool = True,
+        top_p: float = 0.95,
     ):
-        self.model_path    = model_path
-        self.quant_type    = quant_type.upper()
-        self.use_vllm      = use_vllm
+        self.model_path     = model_path
+        self.quant_type     = quant_type.upper()
+        self.use_vllm       = use_vllm
         self.max_new_tokens = max_new_tokens
-        self.temperature   = temperature
-        self.do_sample     = do_sample
+        self.temperature    = float(temperature)
+        self.do_sample      = bool(do_sample)
+        self.top_p          = float(top_p) if top_p is not None else 1.0
 
         print(f"  Loading [{self.quant_type}]  {model_path} …")
         self.tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True)
@@ -114,16 +116,23 @@ class LLMEngine:
         prompt_tokens  = int(input_ids.shape[1])
 
         start = time.time()
+        gen_kwargs = {
+            "input_ids": input_ids,
+            "attention_mask": attention_mask,
+            "max_new_tokens": self.max_new_tokens,
+            "max_length": None,
+            "pad_token_id": self.tokenizer.eos_token_id,
+        }
+        if self.do_sample and self.temperature > 0.0:
+            gen_kwargs["do_sample"] = True
+            gen_kwargs["temperature"] = self.temperature
+            if self.top_p < 1.0:
+                gen_kwargs["top_p"] = self.top_p
+        else:
+            gen_kwargs["do_sample"] = False
+
         with torch.no_grad():
-            output_ids = self.model.generate(
-                input_ids=input_ids,
-                attention_mask=attention_mask,
-                max_new_tokens=self.max_new_tokens,
-                max_length=None,
-                temperature=self.temperature,
-                do_sample=self.do_sample,
-                pad_token_id=self.tokenizer.eos_token_id,
-            )
+            output_ids = self.model.generate(**gen_kwargs)
         if torch.cuda.is_available():
             torch.cuda.synchronize()
         duration = time.time() - start
