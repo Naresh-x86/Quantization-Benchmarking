@@ -274,8 +274,6 @@ def main():
         agent = ReActAgent(engine, agent_id=args.agent_id, max_steps=args.max_steps)
         
         for trial in range(args.num_trials):
-            print(f"--- Running Trial {trial+1}/{args.num_trials} ---")
-            
             tracker = GPUTracker(poll_interval=0.05)
             tracker.start()
             
@@ -285,6 +283,9 @@ def main():
             )
             
             gpu_metrics = tracker.stop()
+            
+            status = "SUCCESS" if agent_result.get("success", False) else "FAILED"
+            print(f"--- Ran Trial {trial+1}/{args.num_trials} ({status}) ---")
             
             tflops = engine.calculate_tflops(
                 params_billion, 
