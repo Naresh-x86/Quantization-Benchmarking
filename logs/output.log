@@ -1,0 +1,121 @@
+Starting Benchmark Suite V2
+Agents: ['AGENT_2_IT_HELPDESK']
+Qwen models enabled:  0
+Llama models enabled: 1
+Total models: 1
+Trials per model: 100
+Output Directory: ./results/benchmark_20260925_085150
+
+
+=======================================================
+=== TESTING AGENT: AGENT_2_IT_HELPDESK ===
+=======================================================
+
+--- Benchmarking Model: meta-llama__Llama-3.2-3B-Instruct-BNB-4bit on AGENT_2_IT_HELPDESK ---
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+  Loading [BNB-4BIT]  /home/ror-technologies/IT-helpdesk-agent/quantized_models/meta-llama__Llama-3.2-3B-Instruct-BNB-4bit …
+Loading weights:   0%|          | 0/254 [00:00<?, ?it/s]Loading weights:  42%|████▏     | 107/254 [00:00<00:00, 1064.64it/s]Loading weights:  99%|█████████▉| 252/254 [00:00<00:00, 1290.11it/s]Loading weights: 100%|██████████| 254/254 [00:00<00:00, 1264.15it/s]
+  ✓  Model ready.
+--- Running Trial 1/100 ---
+--- Running Trial 2/100 ---
+--- Running Trial 3/100 ---
+--- Running Trial 4/100 ---
+--- Running Trial 5/100 ---
+--- Running Trial 6/100 ---
+--- Running Trial 7/100 ---
+--- Running Trial 8/100 ---
+--- Running Trial 9/100 ---
+--- Running Trial 10/100 ---
+--- Running Trial 11/100 ---
+--- Running Trial 12/100 ---
+--- Running Trial 13/100 ---
+--- Running Trial 14/100 ---
+--- Running Trial 15/100 ---
+--- Running Trial 16/100 ---
+--- Running Trial 17/100 ---
+--- Running Trial 18/100 ---
+--- Running Trial 19/100 ---
+--- Running Trial 20/100 ---
+--- Running Trial 21/100 ---
+--- Running Trial 22/100 ---
+--- Running Trial 23/100 ---
+--- Running Trial 24/100 ---
+--- Running Trial 25/100 ---
+--- Running Trial 26/100 ---
+--- Running Trial 27/100 ---
+--- Running Trial 28/100 ---
+--- Running Trial 29/100 ---
+--- Running Trial 30/100 ---
+--- Running Trial 31/100 ---
+--- Running Trial 32/100 ---
+--- Running Trial 33/100 ---
+--- Running Trial 34/100 ---
+--- Running Trial 35/100 ---
+--- Running Trial 36/100 ---
+--- Running Trial 37/100 ---
+--- Running Trial 38/100 ---
+--- Running Trial 39/100 ---
+--- Running Trial 40/100 ---
+--- Running Trial 41/100 ---
+--- Running Trial 42/100 ---
+--- Running Trial 43/100 ---
+--- Running Trial 44/100 ---
+--- Running Trial 45/100 ---
+--- Running Trial 46/100 ---
+--- Running Trial 47/100 ---
+--- Running Trial 48/100 ---
+--- Running Trial 49/100 ---
+--- Running Trial 50/100 ---
+--- Running Trial 51/100 ---
+--- Running Trial 52/100 ---
+--- Running Trial 53/100 ---
+--- Running Trial 54/100 ---
+--- Running Trial 55/100 ---
+--- Running Trial 56/100 ---
+--- Running Trial 57/100 ---
+--- Running Trial 58/100 ---
+--- Running Trial 59/100 ---
+--- Running Trial 60/100 ---
+--- Running Trial 61/100 ---
+--- Running Trial 62/100 ---
+--- Running Trial 63/100 ---
+--- Running Trial 64/100 ---
+--- Running Trial 65/100 ---
+--- Running Trial 66/100 ---
+--- Running Trial 67/100 ---
+--- Running Trial 68/100 ---
+--- Running Trial 69/100 ---
+--- Running Trial 70/100 ---
+--- Running Trial 71/100 ---
+--- Running Trial 72/100 ---
+--- Running Trial 73/100 ---
+--- Running Trial 74/100 ---
+--- Running Trial 75/100 ---
+--- Running Trial 76/100 ---
+--- Running Trial 77/100 ---
+--- Running Trial 78/100 ---
+--- Running Trial 79/100 ---
+--- Running Trial 80/100 ---
+--- Running Trial 81/100 ---
+--- Running Trial 82/100 ---
+--- Running Trial 83/100 ---
+--- Running Trial 84/100 ---
+--- Running Trial 85/100 ---
+--- Running Trial 86/100 ---
+--- Running Trial 87/100 ---
+--- Running Trial 88/100 ---
+--- Running Trial 89/100 ---
+--- Running Trial 90/100 ---
+--- Running Trial 91/100 ---
+--- Running Trial 92/100 ---
+--- Running Trial 93/100 ---
+--- Running Trial 94/100 ---
+--- Running Trial 95/100 ---
+--- Running Trial 96/100 ---
+--- Running Trial 97/100 ---
+--- Running Trial 98/100 ---
+--- Running Trial 99/100 ---
+--- Running Trial 100/100 ---
+
+--- AGENT_2_IT_HELPDESK Benchmark Complete! Results saved to ./results/benchmark_20260925_085150/AGENT_2_IT_HELPDESK ---

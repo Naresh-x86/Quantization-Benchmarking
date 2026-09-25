@@ -7,10 +7,6 @@ models/
 venv/
 log.txt
 
-# Loose log files at repo root
-output*.log
-logs/
-
 # ECAS / ARS research artifacts (moved to research/)
 research/
 
