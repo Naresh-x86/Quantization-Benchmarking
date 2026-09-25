@@ -105,11 +105,25 @@ def get_params_billion_from_name(model_name: str) -> float:
     return float(match.group(1)) if match else 7.0
 
 
-def get_weights_size_gb(model_path: str) -> float:
-    """Sum .safetensors / .bin file sizes as a proxy for weight VRAM footprint."""
+def get_weights_size_gb(model_path: str, model_name: str = "") -> float:
+    """Sum .safetensors / .bin file sizes as a proxy for weight VRAM footprint.
+    Checks model_path first; if not found on disk, checks the Hugging Face cache snapshot.
+    """
     total_bytes = 0
+    search_dir = None
     if os.path.exists(model_path):
-        for root, _, files in os.walk(model_path):
+        search_dir = model_path
+    elif model_name:
+        hf_home = os.environ.get("HF_HOME", os.path.expanduser("~/.cache/huggingface"))
+        hub_folder = f"models--{model_name.replace('/', '--')}"
+        snapshots_dir = os.path.join(hf_home, "hub", hub_folder, "snapshots")
+        if os.path.isdir(snapshots_dir):
+            snaps = os.listdir(snapshots_dir)
+            if snaps:
+                search_dir = os.path.join(snapshots_dir, snaps[0])
+
+    if search_dir and os.path.isdir(search_dir):
+        for root, _, files in os.walk(search_dir):
             for fname in files:
                 if fname.endswith((".safetensors", ".bin")):
                     total_bytes += os.path.getsize(os.path.join(root, fname))
@@ -213,7 +227,7 @@ def main():
     model_name      = args.model_name
     model_path      = args.model_path
     params_billion  = get_params_billion_from_name(model_name)
-    weights_size_gb = get_weights_size_gb(model_path)
+    weights_size_gb = get_weights_size_gb(model_path, model_name)
 
     quant_type  = "FP16"
     model_upper = model_name.upper()

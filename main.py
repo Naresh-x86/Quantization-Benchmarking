@@ -1,20 +1,23 @@
 #!/usr/bin/env python3
 """Benchmark entry-point.
 
-Reads config.ini, iterates over enabled agents × enabled models, and for
-each (agent, model) pair spawns run_single.py as a subprocess.
+Reads config.ini, iterates over enabled models × enabled agents, launches
+the vLLM server container per model on demand, runs run_single.py, and
+shuts down the vLLM container cleanly.
 
 Output (stdout + stderr) of the entire run is tee'd to
   <output_dir>/<prefix>_<timestamp>/output.log
-automatically — no need to pipe manually.
+automatically — no manual piping needed.
 """
 
 import os
 import sys
 import json
+import time
 import datetime
 import subprocess
 import configparser
+import urllib.request
 import pandas as pd
 
 
@@ -134,8 +137,7 @@ def aggregate_results(df: pd.DataFrame, agent_id: str, output_dir: str, prefix: 
 # ─────────────────────────────────────────────────────────────────────────────
 
 class _Tee:
-    """Wraps a file-like object so that every write goes both to the original
-    stream and to *log_file*."""
+    """Wraps a stream so that every write goes both to the console and to log_file."""
 
     def __init__(self, original, log_file):
         self._orig = original
@@ -152,11 +154,82 @@ class _Tee:
         self._log.flush()
 
     def fileno(self):
-        # subprocess.run needs a real fd; delegate to the original stream
         return self._orig.fileno()
 
     def isatty(self):
         return False
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# vLLM container orchestration
+# ─────────────────────────────────────────────────────────────────────────────
+
+def start_vllm_server(
+    model_to_serve: str,
+    gpu_mem_util: float,
+    max_model_len: int,
+    port: int = 8000,
+    container_name: str = "vllm-server",
+) -> bool:
+    """Launch the official vllm/vllm-openai container and wait for /health."""
+    print(f"\n  [vLLM] Launching server for model: {model_to_serve} ...")
+    subprocess.run(["docker", "rm", "-f", container_name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+    host_qwen  = os.environ.get("HOST_MODELS_QWEN", "/home/ror-technologies/Quantization/models")
+    host_llama = os.environ.get("HOST_MODELS_LLAMA", "/home/ror-technologies/IT-helpdesk-agent/quantized_models")
+    host_hf    = os.environ.get("HOST_HF_HOME", "/home/ror-technologies/.cache/huggingface")
+
+    docker_cmd = [
+        "docker", "run", "-d",
+        "--name", container_name,
+        "--gpus", "all",
+        "--network", "host",
+        "--ipc", "host",
+        "-v", f"{host_qwen}:/models/qwen:ro",
+        "-v", f"{host_llama}:/models/llama:ro",
+        "-v", f"{host_hf}:/root/.cache/huggingface:ro",
+        "-e", "HF_HOME=/root/.cache/huggingface",
+        "-e", "VLLM_ATTENTION_BACKEND=FLASH_ATTN",
+        "-e", "VLLM_USE_MODELSCOPE=False",
+        "vllm/vllm-openai:latest",
+        "--model", model_to_serve,
+        "--gpu-memory-utilization", str(gpu_mem_util),
+        "--max-model-len", str(max_model_len),
+        "--port", str(port),
+        "--trust-remote-code",
+        "--disable-log-requests",
+    ]
+
+    res = subprocess.run(docker_cmd, capture_output=True, text=True)
+    if res.returncode != 0:
+        print(f"  [vLLM] ✗ Failed to launch container: {res.stderr.strip()}")
+        return False
+
+    print(f"  [vLLM] Waiting for server readiness at http://localhost:{port}/health ...")
+    max_wait = 300
+    start_t = time.time()
+    while time.time() - start_t < max_wait:
+        try:
+            with urllib.request.urlopen(f"http://localhost:{port}/health", timeout=2) as resp:
+                if resp.status == 200:
+                    elapsed = round(time.time() - start_t, 1)
+                    print(f"  [vLLM] ✓ Server ready in {elapsed}s.")
+                    return True
+        except Exception:
+            time.sleep(3)
+
+    print(f"  [vLLM] ✗ Timed out waiting for server ({max_wait}s). Dumping logs:")
+    logs = subprocess.run(["docker", "logs", "--tail", "40", container_name], capture_output=True, text=True)
+    print(logs.stdout or logs.stderr)
+    subprocess.run(["docker", "rm", "-f", container_name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    return False
+
+
+def stop_vllm_server(container_name: str = "vllm-server"):
+    """Stop the vLLM server container and wait for GPU memory release."""
+    print(f"  [vLLM] Stopping container '{container_name}'...")
+    subprocess.run(["docker", "rm", "-f", container_name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    time.sleep(3)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -194,9 +267,11 @@ def main():
 
     # ── Inference settings ───────────────────────────────────────────────────
     inf = config["INFERENCE"] if "INFERENCE" in config else {}
-    max_new_tokens = int(inf.get("max_new_tokens", 512))
-    temperature    = float(inf.get("temperature",    0.2))
-    do_sample      = inf.get("do_sample", "True").strip().lower() == "true"
+    max_new_tokens         = int(inf.get("max_new_tokens", 512))
+    temperature            = float(inf.get("temperature",    0.2))
+    do_sample              = inf.get("do_sample", "True").strip().lower() == "true"
+    gpu_memory_utilization = float(inf.get("gpu_memory_utilization", 0.05))
+    max_model_len          = int(inf.get("max_model_len", 4096))
 
     # ── Output directory for this run ────────────────────────────────────────
     timestamp     = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -214,83 +289,118 @@ def main():
     print(f"╔══════════════════════════════════════════════════════════════╗")
     print(f"║           Quantization Benchmark Suite                      ║")
     print(f"╚══════════════════════════════════════════════════════════════╝")
-    print(f"Timestamp      : {timestamp}")
-    print(f"Config         : {config_path}")
-    print(f"Agents         : {agents_enabled}")
-    print(f"Qwen models    : {len(qwen_models)}")
-    print(f"Llama models   : {len(llama_models)}")
-    print(f"Total models   : {len(all_models)}")
-    print(f"Trials/model   : {num_trials}")
-    print(f"vLLM           : {use_vllm}")
-    print(f"Output dir     : {run_output_dir}")
-    print(f"Log file       : {log_path}")
+    print(f"Timestamp           : {timestamp}")
+    print(f"Config              : {config_path}")
+    print(f"Agents              : {agents_enabled}")
+    print(f"Qwen models         : {len(qwen_models)}")
+    print(f"Llama models        : {len(llama_models)}")
+    print(f"Total models        : {len(all_models)}")
+    print(f"Trials/model        : {num_trials}")
+    print(f"vLLM Engine         : {use_vllm}")
+    print(f"GPU Memory Util     : {gpu_memory_utilization} (KV-cache minimized for accurate VRAM)")
+    print(f"Output Directory    : {run_output_dir}")
+    print(f"Log File            : {log_path}")
     print()
 
-    # ── Run benchmarks ───────────────────────────────────────────────────────
     dataset_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "dataset.json")
+    results_by_agent = {agent_id: [] for agent_id in agents_enabled}
 
-    for agent_id in agents_enabled:
-        print(f"\n{'='*64}")
-        print(f"  TESTING AGENT: {agent_id}")
-        print(f"{'='*64}\n")
+    # ── Model Loop ───────────────────────────────────────────────────────────
+    for model_name, model_path in all_models:
+        print(f"\n{'━'*64}")
+        print(f"  MODEL: {model_name}")
+        print(f"{'━'*64}")
 
-        agent_results   = []
-        agent_output_dir = os.path.join(run_output_dir, agent_id)
-        os.makedirs(agent_output_dir, exist_ok=True)
+        # Resolve model path: if not a local folder on disk, it's an HF repo ID in HF cache
+        if os.path.exists(model_path):
+            model_to_serve = model_path
+            print(f"  Source: Local directory ({model_path})")
+        else:
+            model_to_serve = model_name
+            print(f"  Source: Hugging Face cache ({model_name})")
 
-        for model_name, model_path in all_models:
-            print(f"--- Benchmarking: {model_name} ---")
-            safe_name   = model_name.replace("/", "__")
-            output_json = os.path.join(run_output_dir, f"temp_{safe_name}_{agent_id}.json")
-
-            cmd = [
-                sys.executable, os.path.join(os.path.dirname(os.path.abspath(__file__)), "run_single.py"),
-                "--model_path",    model_path,
-                "--model_name",    model_name,
-                "--dataset",       dataset_path,
-                "--agent_id",      agent_id,
-                "--num_trials",    str(num_trials),
-                "--output_json",   output_json,
-                "--output_dir",    agent_output_dir,
-                "--max_new_tokens", str(max_new_tokens),
-                "--temperature",   str(temperature),
-            ]
-            if use_vllm:
-                cmd.append("--use_vllm")
-            if do_sample:
-                cmd.append("--do_sample")
-            if save_traces:
-                cmd.append("--save_traces")
-
-            try:
-                # Inherit the tee'd stdout/stderr so subprocess output also goes to the log
-                subprocess.run(cmd, check=True)
-
-                if os.path.exists(output_json):
-                    with open(output_json, "r") as f:
-                        agent_results.extend(json.load(f))
-                    os.remove(output_json)
-                else:
-                    agent_results.append({
+        vllm_started = False
+        if use_vllm:
+            vllm_started = start_vllm_server(
+                model_to_serve=model_to_serve,
+                gpu_mem_util=gpu_memory_utilization,
+                max_model_len=max_model_len,
+            )
+            if not vllm_started:
+                print(f"  ✗ Skipping model {model_name} due to vLLM server startup failure.")
+                for agent_id in agents_enabled:
+                    results_by_agent[agent_id].append({
                         "Model": model_name, "Success": False,
-                        "Error": "Subprocess failed to write output.",
+                        "Error": "vLLM server startup failed"
                     })
+                continue
 
-            except subprocess.CalledProcessError as e:
-                print(f"  ✗ Error running {model_name}. Exit code: {e.returncode}")
-                agent_results.append({
-                    "Model": model_name, "Success": False,
-                    "Error": f"Subprocess crashed with code {e.returncode}",
-                })
+        try:
+            # Benchmark each enabled agent with the currently loaded model
+            for agent_id in agents_enabled:
+                print(f"\n  ── Agent: {agent_id} ──")
+                agent_output_dir = os.path.join(run_output_dir, agent_id)
+                os.makedirs(agent_output_dir, exist_ok=True)
 
+                safe_name   = model_name.replace("/", "__")
+                output_json = os.path.join(run_output_dir, f"temp_{safe_name}_{agent_id}.json")
+
+                cmd = [
+                    sys.executable, os.path.join(os.path.dirname(os.path.abspath(__file__)), "run_single.py"),
+                    "--model_path",     model_path,
+                    "--model_name",     model_name,
+                    "--dataset",        dataset_path,
+                    "--agent_id",       agent_id,
+                    "--num_trials",     str(num_trials),
+                    "--output_json",    output_json,
+                    "--output_dir",     agent_output_dir,
+                    "--max_new_tokens", str(max_new_tokens),
+                    "--temperature",    str(temperature),
+                ]
+                if use_vllm:
+                    cmd.append("--use_vllm")
+                if do_sample:
+                    cmd.append("--do_sample")
+                if save_traces:
+                    cmd.append("--save_traces")
+
+                try:
+                    subprocess.run(cmd, check=True)
+                    if os.path.exists(output_json):
+                        with open(output_json, "r") as f:
+                            results_by_agent[agent_id].extend(json.load(f))
+                        os.remove(output_json)
+                    else:
+                        results_by_agent[agent_id].append({
+                            "Model": model_name, "Success": False,
+                            "Error": "Subprocess failed to write output.",
+                        })
+                except subprocess.CalledProcessError as e:
+                    print(f"  ✗ Error running {model_name} on {agent_id}. Exit code: {e.returncode}")
+                    results_by_agent[agent_id].append({
+                        "Model": model_name, "Success": False,
+                        "Error": f"Subprocess crashed with code {e.returncode}",
+                    })
+        finally:
+            if use_vllm and vllm_started:
+                stop_vllm_server()
+
+    # ── Aggregate and Save Results ────────────────────────────────────────────
+    print(f"\n{'='*64}")
+    print(f"  Aggregating final results...")
+    print(f"{'='*64}\n")
+
+    for agent_id, agent_results in results_by_agent.items():
         if agent_results:
             df = pd.DataFrame(agent_results)
+            agent_output_dir = os.path.join(run_output_dir, agent_id)
             aggregate_results(df, agent_id, agent_output_dir, output_prefix)
-            print(f"\n✓ {agent_id} complete — results saved to {agent_output_dir}")
+            print(f"  ✓ {agent_id}: Results saved to {agent_output_dir}")
 
     print(f"\n{'='*64}")
-    print(f"  All benchmarks finished.")
-    print(f"  Results + log: {run_output_dir}")
+    print(f"  All benchmarks complete.")
+    print(f"  Full directory : {run_output_dir}")
+    print(f"  Output log     : {log_path}")
     print(f"{'='*64}\n")
 
     log_file.close()

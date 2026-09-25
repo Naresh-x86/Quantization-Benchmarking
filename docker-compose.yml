@@ -1,13 +1,13 @@
 services:
 
   # ── Benchmark harness container ─────────────────────────────────────────────
-  # This container holds only the Python benchmark code.
+  # This container holds the Python benchmark code and controls benchmark execution.
   # It does NOT auto-start the benchmark — you trigger it manually via:
   #
   #   docker compose up -d bench
   #   docker exec -it quant-bench bash /app/run_benchmark.sh
   #
-  # The vLLM server is started/stopped per-model inside run_benchmark.sh.
+  # main.py manages the vLLM server container (vllm-server) automatically per model.
   bench:
     build:
       context: .
@@ -26,12 +26,14 @@ services:
 
     # Bind-mount host model directories (read-only) and the results directory
     volumes:
-      # Models — adjust the host paths to wherever your weights live
+      # Local models directories on the host
       - /home/ror-technologies/Quantization/models:/models/qwen:ro
       - /home/ror-technologies/IT-helpdesk-agent/quantized_models:/models/llama:ro
+      # HF cache directory on the host (where baseline unquantized Llama models live)
+      - /home/ror-technologies/.cache/huggingface:/root/.cache/huggingface:ro
       # Results — written by main.py; accessible on the host at ./results
       - ./results:/results
-      # Socket so the container can launch sibling vLLM containers
+      # Socket so the container can launch sibling vLLM containers via the host Docker daemon
       - /var/run/docker.sock:/var/run/docker.sock
 
     # Stay alive so we can exec commands into it
@@ -43,11 +45,14 @@ services:
 
     environment:
       - BENCHMARK_CONFIG=/app/config.ini
+      - HF_HOME=/root/.cache/huggingface
+      # Host paths passed down so spawned sibling vLLM container mounts the host filesystem correctly
+      - HOST_MODELS_QWEN=/home/ror-technologies/Quantization/models
+      - HOST_MODELS_LLAMA=/home/ror-technologies/IT-helpdesk-agent/quantized_models
+      - HOST_HF_HOME=/home/ror-technologies/.cache/huggingface
       # Disable flashinfer JIT (fails on RTX 5090 compute_120a with older nvcc)
       - VLLM_ATTENTION_BACKEND=FLASH_ATTN
       - VLLM_USE_MODELSCOPE=False
-      # HF cache inside the container (optional — remove if not needed)
-      - HF_HOME=/models/.cache/huggingface
 
     # Container stays running; benchmark is triggered manually
     command: ["/bin/bash"]
