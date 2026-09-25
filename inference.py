@@ -41,7 +41,7 @@ class LLMEngine:
         quant_type: str = "AWQ",
         use_vllm: bool = False,
         max_new_tokens: int = 512,
-        temperature: float = 0.7,
+        temperature: float = 0.2,
         do_sample: bool = True,
     ):
         self.model_path    = model_path
