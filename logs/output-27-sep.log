@@ -9315,3 +9315,20 @@ Triton       : 3.6.0
 --- Ran Trial 98/100 (SUCCESS) ---
 --- Ran Trial 99/100 (SUCCESS) ---
 --- Ran Trial 100/100 (FAILED) ---
+[hf-refactor 1fb6edd] New results
+ 15 files changed, 26956 insertions(+), 3 deletions(-)
+ create mode 100644 output.log
+ create mode 100644 results/benchmark_20260927_181700/AGENT_1_SUPPORT/benchmark_AGENT_1_SUPPORT_all_summary.csv
+ create mode 100644 results/benchmark_20260927_181700/AGENT_1_SUPPORT/benchmark_AGENT_1_SUPPORT_failures_only.csv
+ create mode 100644 results/benchmark_20260927_181700/AGENT_1_SUPPORT/benchmark_AGENT_1_SUPPORT_raw_trials.csv
+ create mode 100644 results/benchmark_20260927_181700/AGENT_1_SUPPORT/benchmark_AGENT_1_SUPPORT_successes_only.csv
+ create mode 100644 results/benchmark_20260927_181700/AGENT_2_IT_HELPDESK/benchmark_AGENT_2_IT_HELPDESK_all_summary.csv
+ create mode 100644 results/benchmark_20260927_181700/AGENT_2_IT_HELPDESK/benchmark_AGENT_2_IT_HELPDESK_failures_only.csv
+ create mode 100644 results/benchmark_20260927_181700/AGENT_2_IT_HELPDESK/benchmark_AGENT_2_IT_HELPDESK_raw_trials.csv
+ create mode 100644 results/benchmark_20260927_181700/AGENT_2_IT_HELPDESK/benchmark_AGENT_2_IT_HELPDESK_successes_only.csv
+ create mode 100644 results/benchmark_20260927_181700/AGENT_3_FINANCE/benchmark_AGENT_3_FINANCE_all_summary.csv
+ create mode 100644 results/benchmark_20260927_181700/AGENT_3_FINANCE/benchmark_AGENT_3_FINANCE_failures_only.csv
+ create mode 100644 results/benchmark_20260927_181700/AGENT_3_FINANCE/benchmark_AGENT_3_FINANCE_raw_trials.csv
+ create mode 100644 results/benchmark_20260927_181700/AGENT_3_FINANCE/benchmark_AGENT_3_FINANCE_successes_only.csv
+ create mode 100644 results/benchmark_20260927_181700/output.log
+fatal: could not read Username for 'https://github.com': No such device or address
