@@ -1,0 +1,719 @@
+  [Inference Settings] Temperature=0.2 | Top-P=0.95 | Max New Tokens=512 | Sample=True | Max Steps=15
+  Loading [FP16]  /home/ror-technologies/Quantization/models/Qwen2.5-14B-Instruct_FP16_Baseline …
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+Loading weights:   0%|          | 0/579 [00:00<?, ?it/s]Loading weights:   0%|          | 1/579 [00:01<12:19,  1.28s/it]Loading weights:   0%|          | 2/579 [00:01<05:40,  1.69it/s]Loading weights:   7%|▋         | 42/579 [00:01<00:11, 48.31it/s]Loading weights:  10%|█         | 60/579 [00:01<00:07, 66.48it/s]Loading weights:  13%|█▎        | 75/579 [00:01<00:06, 72.33it/s]Loading weights:  15%|█▌        | 88/579 [00:02<00:07, 65.45it/s]Loading weights:  17%|█▋        | 100/579 [00:02<00:07, 65.31it/s]Loading weights:  19%|█▉        | 112/579 [00:02<00:06, 69.72it/s]Loading weights:  21%|██▏       | 124/579 [00:02<00:06, 71.56it/s]Loading weights:  23%|██▎       | 136/579 [00:02<00:06, 70.72it/s]Loading weights:  26%|██▌       | 148/579 [00:02<00:06, 70.35it/s]Loading weights:  28%|██▊       | 160/579 [00:03<00:06, 66.98it/s]Loading weights:  29%|██▉       | 168/579 [00:03<00:07, 56.65it/s]Loading weights:  30%|███       | 175/579 [00:03<00:07, 57.68it/s]Loading weights:  32%|███▏      | 184/579 [00:03<00:06, 56.64it/s]Loading weights:  34%|███▍      | 196/579 [00:03<00:06, 63.14it/s]Loading weights:  36%|███▌      | 208/579 [00:03<00:05, 62.68it/s]Loading weights:  38%|███▊      | 220/579 [00:04<00:05, 65.93it/s]Loading weights:  40%|████      | 232/579 [00:04<00:05, 67.31it/s]Loading weights:  42%|████▏     | 244/579 [00:04<00:05, 65.59it/s]Loading weights:  44%|████▍     | 256/579 [00:04<00:04, 67.99it/s]Loading weights:  46%|████▋     | 268/579 [00:04<00:04, 69.53it/s]Loading weights:  48%|████▊     | 280/579 [00:04<00:04, 66.99it/s]Loading weights:  50%|█████     | 292/579 [00:05<00:04, 67.69it/s]Loading weights:  53%|█████▎    | 304/579 [00:05<00:04, 67.86it/s]Loading weights:  55%|█████▍    | 316/579 [00:05<00:03, 70.22it/s]Loading weights:  57%|█████▋    | 328/579 [00:05<00:03, 70.66it/s]Loading weights:  59%|█████▊    | 340/579 [00:05<00:03, 70.82it/s]Loading weights:  61%|██████    | 352/579 [00:05<00:03, 70.65it/s]Loading weights:  63%|██████▎   | 364/579 [00:06<00:03, 66.56it/s]Loading weights:  65%|██████▍   | 376/579 [00:06<00:02, 68.56it/s]Loading weights:  67%|██████▋   | 388/579 [00:06<00:02, 69.31it/s]Loading weights:  69%|██████▉   | 400/579 [00:06<00:02, 67.21it/s]Loading weights:  71%|███████   | 412/579 [00:06<00:02, 68.71it/s]Loading weights:  73%|███████▎  | 424/579 [00:07<00:02, 66.51it/s]Loading weights:  75%|███████▌  | 436/579 [00:07<00:02, 70.94it/s]Loading weights:  77%|███████▋  | 448/579 [00:07<00:01, 71.65it/s]Loading weights:  79%|███████▉  | 460/579 [00:07<00:01, 71.67it/s]Loading weights:  82%|████████▏ | 472/579 [00:07<00:01, 67.82it/s]Loading weights:  84%|████████▎ | 484/579 [00:07<00:01, 72.31it/s]Loading weights:  86%|████████▌ | 496/579 [00:08<00:01, 72.47it/s]Loading weights:  88%|████████▊ | 508/579 [00:08<00:01, 70.21it/s]Loading weights:  90%|████████▉ | 520/579 [00:08<00:00, 73.45it/s]Loading weights:  92%|█████████▏| 532/579 [00:08<00:00, 71.98it/s]Loading weights:  94%|█████████▍| 544/579 [00:08<00:00, 72.21it/s]Loading weights:  96%|█████████▌| 556/579 [00:08<00:00, 72.21it/s]Loading weights:  98%|█████████▊| 568/579 [00:09<00:00, 71.91it/s]Loading weights: 100%|██████████| 579/579 [00:09<00:00, 63.59it/s]
+  ✓  Model ready.
+--- Ran Trial 1/100 (SUCCESS) ---
+--- Ran Trial 2/100 (SUCCESS) ---
+--- Ran Trial 3/100 (SUCCESS) ---
+--- Ran Trial 4/100 (SUCCESS) ---
+--- Ran Trial 5/100 (SUCCESS) ---
+--- Ran Trial 6/100 (SUCCESS) ---
+--- Ran Trial 7/100 (SUCCESS) ---
+--- Ran Trial 8/100 (SUCCESS) ---
+--- Ran Trial 9/100 (SUCCESS) ---
+--- Ran Trial 10/100 (SUCCESS) ---
+--- Ran Trial 11/100 (SUCCESS) ---
+--- Ran Trial 12/100 (SUCCESS) ---
+--- Ran Trial 13/100 (SUCCESS) ---
+--- Ran Trial 14/100 (SUCCESS) ---
+--- Ran Trial 15/100 (SUCCESS) ---
+--- Ran Trial 16/100 (SUCCESS) ---
+--- Ran Trial 17/100 (SUCCESS) ---
+--- Ran Trial 18/100 (SUCCESS) ---
+--- Ran Trial 19/100 (SUCCESS) ---
+--- Ran Trial 20/100 (SUCCESS) ---
+--- Ran Trial 21/100 (SUCCESS) ---
+--- Ran Trial 22/100 (SUCCESS) ---
+--- Ran Trial 23/100 (SUCCESS) ---
+--- Ran Trial 24/100 (SUCCESS) ---
+--- Ran Trial 25/100 (SUCCESS) ---
+--- Ran Trial 26/100 (SUCCESS) ---
+--- Ran Trial 27/100 (SUCCESS) ---
+--- Ran Trial 28/100 (SUCCESS) ---
+--- Ran Trial 29/100 (SUCCESS) ---
+--- Ran Trial 30/100 (SUCCESS) ---
+--- Ran Trial 31/100 (SUCCESS) ---
+--- Ran Trial 32/100 (SUCCESS) ---
+--- Ran Trial 33/100 (SUCCESS) ---
+--- Ran Trial 34/100 (SUCCESS) ---
+--- Ran Trial 35/100 (SUCCESS) ---
+--- Ran Trial 36/100 (SUCCESS) ---
+--- Ran Trial 37/100 (SUCCESS) ---
+--- Ran Trial 38/100 (SUCCESS) ---
+--- Ran Trial 39/100 (SUCCESS) ---
+--- Ran Trial 40/100 (SUCCESS) ---
+--- Ran Trial 41/100 (SUCCESS) ---
+--- Ran Trial 42/100 (SUCCESS) ---
+--- Ran Trial 43/100 (SUCCESS) ---
+--- Ran Trial 44/100 (SUCCESS) ---
+--- Ran Trial 45/100 (SUCCESS) ---
+--- Ran Trial 46/100 (SUCCESS) ---
+--- Ran Trial 47/100 (SUCCESS) ---
+--- Ran Trial 48/100 (SUCCESS) ---
+--- Ran Trial 49/100 (SUCCESS) ---
+--- Ran Trial 50/100 (SUCCESS) ---
+--- Ran Trial 51/100 (SUCCESS) ---
+--- Ran Trial 52/100 (SUCCESS) ---
+--- Ran Trial 53/100 (SUCCESS) ---
+--- Ran Trial 54/100 (SUCCESS) ---
+--- Ran Trial 55/100 (SUCCESS) ---
+--- Ran Trial 56/100 (SUCCESS) ---
+--- Ran Trial 57/100 (SUCCESS) ---
+--- Ran Trial 58/100 (SUCCESS) ---
+--- Ran Trial 59/100 (SUCCESS) ---
+--- Ran Trial 60/100 (SUCCESS) ---
+--- Ran Trial 61/100 (SUCCESS) ---
+--- Ran Trial 62/100 (SUCCESS) ---
+--- Ran Trial 63/100 (SUCCESS) ---
+--- Ran Trial 64/100 (SUCCESS) ---
+--- Ran Trial 65/100 (SUCCESS) ---
+--- Ran Trial 66/100 (SUCCESS) ---
+--- Ran Trial 67/100 (SUCCESS) ---
+--- Ran Trial 68/100 (SUCCESS) ---
+--- Ran Trial 69/100 (SUCCESS) ---
+--- Ran Trial 70/100 (SUCCESS) ---
+--- Ran Trial 71/100 (SUCCESS) ---
+--- Ran Trial 72/100 (SUCCESS) ---
+--- Ran Trial 73/100 (SUCCESS) ---
+--- Ran Trial 74/100 (SUCCESS) ---
+--- Ran Trial 75/100 (SUCCESS) ---
+--- Ran Trial 76/100 (SUCCESS) ---
+--- Ran Trial 77/100 (SUCCESS) ---
+--- Ran Trial 78/100 (SUCCESS) ---
+--- Ran Trial 79/100 (SUCCESS) ---
+--- Ran Trial 80/100 (SUCCESS) ---
+--- Ran Trial 81/100 (SUCCESS) ---
+--- Ran Trial 82/100 (SUCCESS) ---
+--- Ran Trial 83/100 (SUCCESS) ---
+--- Ran Trial 84/100 (SUCCESS) ---
+--- Ran Trial 85/100 (SUCCESS) ---
+--- Ran Trial 86/100 (SUCCESS) ---
+--- Ran Trial 87/100 (SUCCESS) ---
+--- Ran Trial 88/100 (SUCCESS) ---
+--- Ran Trial 89/100 (SUCCESS) ---
+--- Ran Trial 90/100 (SUCCESS) ---
+--- Ran Trial 91/100 (SUCCESS) ---
+--- Ran Trial 92/100 (SUCCESS) ---
+--- Ran Trial 93/100 (SUCCESS) ---
+--- Ran Trial 94/100 (SUCCESS) ---
+--- Ran Trial 95/100 (SUCCESS) ---
+--- Ran Trial 96/100 (SUCCESS) ---
+--- Ran Trial 97/100 (SUCCESS) ---
+--- Ran Trial 98/100 (SUCCESS) ---
+--- Ran Trial 99/100 (SUCCESS) ---
+--- Ran Trial 100/100 (SUCCESS) ---
+  [Inference Settings] Temperature=0.2 | Top-P=0.95 | Max New Tokens=512 | Sample=True | Max Steps=15
+  Loading [FP16]  /home/ror-technologies/Quantization/models/Qwen2.5-14B-Instruct_FP8_Static_per_tensor …
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+Compressing model:   0%|          | 0/631 [00:00<?, ?it/s]Compressing model:  61%|██████    | 384/631 [00:00<00:00, 3827.61it/s]Compressing model: 100%|██████████| 631/631 [00:00<00:00, 3835.67it/s]
+Loading weights:   0%|          | 0/1251 [00:00<?, ?it/s]Loading weights:   0%|          | 1/1251 [00:01<21:19,  1.02s/it]Loading weights:   3%|▎         | 34/1251 [00:01<00:30, 40.49it/s]Loading weights:   5%|▍         | 60/1251 [00:01<00:16, 71.58it/s]Loading weights:   7%|▋         | 85/1251 [00:01<00:11, 99.25it/s]Loading weights:   9%|▊         | 109/1251 [00:01<00:09, 114.34it/s]Loading weights:  11%|█         | 135/1251 [00:01<00:08, 136.78it/s]Loading weights:  13%|█▎        | 161/1251 [00:01<00:06, 156.30it/s]Loading weights:  15%|█▍        | 187/1251 [00:01<00:06, 172.15it/s]Loading weights:  17%|█▋        | 213/1251 [00:01<00:05, 187.85it/s]Loading weights:  19%|█▉        | 235/1251 [00:02<00:05, 190.15it/s]Loading weights:  21%|██        | 263/1251 [00:02<00:04, 204.69it/s]Loading weights:  23%|██▎       | 285/1251 [00:02<00:05, 163.10it/s]Loading weights:  24%|██▍       | 304/1251 [00:02<00:05, 164.89it/s]Loading weights:  26%|██▌       | 323/1251 [00:02<00:05, 168.56it/s]Loading weights:  28%|██▊       | 349/1251 [00:02<00:04, 184.68it/s]Loading weights:  29%|██▉       | 369/1251 [00:03<00:06, 136.49it/s]Loading weights:  31%|███       | 385/1251 [00:03<00:06, 128.44it/s]Loading weights:  32%|███▏      | 400/1251 [00:03<00:06, 124.94it/s]Loading weights:  34%|███▍      | 424/1251 [00:03<00:05, 149.87it/s]Loading weights:  36%|███▌      | 450/1251 [00:03<00:04, 175.39it/s]Loading weights:  39%|███▊      | 484/1251 [00:03<00:03, 216.98it/s]Loading weights:  42%|████▏     | 525/1251 [00:03<00:02, 256.50it/s]Loading weights:  45%|████▍     | 561/1251 [00:03<00:02, 283.75it/s]Loading weights:  47%|████▋     | 591/1251 [00:04<00:03, 195.85it/s]Loading weights:  49%|████▉     | 616/1251 [00:04<00:04, 141.75it/s]Loading weights:  51%|█████     | 640/1251 [00:04<00:03, 158.53it/s]Loading weights:  53%|█████▎    | 661/1251 [00:04<00:03, 168.57it/s]Loading weights:  55%|█████▍    | 687/1251 [00:04<00:03, 184.76it/s]Loading weights:  57%|█████▋    | 709/1251 [00:04<00:02, 181.68it/s]Loading weights:  59%|█████▊    | 732/1251 [00:04<00:02, 191.59it/s]Loading weights:  61%|██████    | 759/1251 [00:05<00:02, 203.58it/s]Loading weights:  63%|██████▎   | 785/1251 [00:05<00:02, 201.42it/s]Loading weights:  65%|██████▌   | 814/1251 [00:05<00:01, 223.93it/s]Loading weights:  67%|██████▋   | 842/1251 [00:05<00:01, 224.91it/s]Loading weights:  69%|██████▉   | 869/1251 [00:05<00:01, 236.71it/s]Loading weights:  72%|███████▏  | 900/1251 [00:05<00:01, 255.79it/s]Loading weights:  74%|███████▍  | 927/1251 [00:05<00:01, 253.28it/s]Loading weights:  76%|███████▋  | 955/1251 [00:05<00:01, 258.47it/s]Loading weights:  78%|███████▊  | 982/1251 [00:05<00:01, 246.36it/s]Loading weights:  81%|████████  | 1011/1251 [00:06<00:00, 252.70it/s]Loading weights:  83%|████████▎ | 1041/1251 [00:06<00:00, 265.30it/s]Loading weights:  86%|████████▌ | 1071/1251 [00:06<00:00, 259.80it/s]Loading weights:  88%|████████▊ | 1098/1251 [00:06<00:00, 248.38it/s]Loading weights:  90%|█████████ | 1129/1251 [00:06<00:00, 251.12it/s]Loading weights:  93%|█████████▎| 1162/1251 [00:06<00:00, 266.67it/s]Loading weights:  95%|█████████▌| 1190/1251 [00:06<00:00, 265.08it/s]Loading weights:  98%|█████████▊| 1227/1251 [00:06<00:00, 276.45it/s]Loading weights: 100%|██████████| 1251/1251 [00:06<00:00, 180.38it/s]
+  ✓  Model ready.
+Decompressing model:   0%|          | 0/631 [00:00<?, ?it/s]Decompressing model: 100%|██████████| 631/631 [00:00<00:00, 7045.87it/s]
+--- Ran Trial 1/100 (SUCCESS) ---
+--- Ran Trial 2/100 (SUCCESS) ---
+--- Ran Trial 3/100 (SUCCESS) ---
+--- Ran Trial 4/100 (SUCCESS) ---
+--- Ran Trial 5/100 (SUCCESS) ---
+--- Ran Trial 6/100 (SUCCESS) ---
+--- Ran Trial 7/100 (SUCCESS) ---
+--- Ran Trial 8/100 (SUCCESS) ---
+--- Ran Trial 9/100 (SUCCESS) ---
+--- Ran Trial 10/100 (SUCCESS) ---
+--- Ran Trial 11/100 (SUCCESS) ---
+--- Ran Trial 12/100 (SUCCESS) ---
+--- Ran Trial 13/100 (SUCCESS) ---
+--- Ran Trial 14/100 (SUCCESS) ---
+--- Ran Trial 15/100 (SUCCESS) ---
+--- Ran Trial 16/100 (SUCCESS) ---
+--- Ran Trial 17/100 (SUCCESS) ---
+--- Ran Trial 18/100 (SUCCESS) ---
+--- Ran Trial 19/100 (SUCCESS) ---
+--- Ran Trial 20/100 (SUCCESS) ---
+--- Ran Trial 21/100 (SUCCESS) ---
+--- Ran Trial 22/100 (SUCCESS) ---
+--- Ran Trial 23/100 (SUCCESS) ---
+--- Ran Trial 24/100 (SUCCESS) ---
+--- Ran Trial 25/100 (SUCCESS) ---
+--- Ran Trial 26/100 (SUCCESS) ---
+--- Ran Trial 27/100 (SUCCESS) ---
+--- Ran Trial 28/100 (SUCCESS) ---
+--- Ran Trial 29/100 (SUCCESS) ---
+--- Ran Trial 30/100 (SUCCESS) ---
+--- Ran Trial 31/100 (SUCCESS) ---
+--- Ran Trial 32/100 (SUCCESS) ---
+--- Ran Trial 33/100 (SUCCESS) ---
+--- Ran Trial 34/100 (SUCCESS) ---
+--- Ran Trial 35/100 (SUCCESS) ---
+--- Ran Trial 36/100 (SUCCESS) ---
+--- Ran Trial 37/100 (SUCCESS) ---
+--- Ran Trial 38/100 (SUCCESS) ---
+--- Ran Trial 39/100 (SUCCESS) ---
+--- Ran Trial 40/100 (SUCCESS) ---
+--- Ran Trial 41/100 (SUCCESS) ---
+--- Ran Trial 42/100 (SUCCESS) ---
+--- Ran Trial 43/100 (SUCCESS) ---
+--- Ran Trial 44/100 (SUCCESS) ---
+--- Ran Trial 45/100 (SUCCESS) ---
+--- Ran Trial 46/100 (SUCCESS) ---
+--- Ran Trial 47/100 (SUCCESS) ---
+--- Ran Trial 48/100 (SUCCESS) ---
+--- Ran Trial 49/100 (SUCCESS) ---
+--- Ran Trial 50/100 (SUCCESS) ---
+--- Ran Trial 51/100 (SUCCESS) ---
+--- Ran Trial 52/100 (SUCCESS) ---
+--- Ran Trial 53/100 (SUCCESS) ---
+--- Ran Trial 54/100 (SUCCESS) ---
+--- Ran Trial 55/100 (SUCCESS) ---
+--- Ran Trial 56/100 (SUCCESS) ---
+--- Ran Trial 57/100 (SUCCESS) ---
+--- Ran Trial 58/100 (SUCCESS) ---
+--- Ran Trial 59/100 (SUCCESS) ---
+--- Ran Trial 60/100 (SUCCESS) ---
+--- Ran Trial 61/100 (SUCCESS) ---
+--- Ran Trial 62/100 (SUCCESS) ---
+--- Ran Trial 63/100 (SUCCESS) ---
+--- Ran Trial 64/100 (SUCCESS) ---
+--- Ran Trial 65/100 (SUCCESS) ---
+--- Ran Trial 66/100 (SUCCESS) ---
+--- Ran Trial 67/100 (SUCCESS) ---
+--- Ran Trial 68/100 (SUCCESS) ---
+--- Ran Trial 69/100 (SUCCESS) ---
+--- Ran Trial 70/100 (SUCCESS) ---
+--- Ran Trial 71/100 (SUCCESS) ---
+--- Ran Trial 72/100 (SUCCESS) ---
+--- Ran Trial 73/100 (SUCCESS) ---
+--- Ran Trial 74/100 (SUCCESS) ---
+--- Ran Trial 75/100 (SUCCESS) ---
+--- Ran Trial 76/100 (SUCCESS) ---
+--- Ran Trial 77/100 (SUCCESS) ---
+--- Ran Trial 78/100 (SUCCESS) ---
+--- Ran Trial 79/100 (SUCCESS) ---
+--- Ran Trial 80/100 (SUCCESS) ---
+--- Ran Trial 81/100 (SUCCESS) ---
+--- Ran Trial 82/100 (SUCCESS) ---
+--- Ran Trial 83/100 (SUCCESS) ---
+--- Ran Trial 84/100 (SUCCESS) ---
+--- Ran Trial 85/100 (SUCCESS) ---
+--- Ran Trial 86/100 (SUCCESS) ---
+--- Ran Trial 87/100 (SUCCESS) ---
+--- Ran Trial 88/100 (SUCCESS) ---
+--- Ran Trial 89/100 (SUCCESS) ---
+--- Ran Trial 90/100 (SUCCESS) ---
+--- Ran Trial 91/100 (SUCCESS) ---
+--- Ran Trial 92/100 (SUCCESS) ---
+--- Ran Trial 93/100 (SUCCESS) ---
+--- Ran Trial 94/100 (SUCCESS) ---
+--- Ran Trial 95/100 (SUCCESS) ---
+--- Ran Trial 96/100 (SUCCESS) ---
+--- Ran Trial 97/100 (SUCCESS) ---
+--- Ran Trial 98/100 (SUCCESS) ---
+--- Ran Trial 99/100 (SUCCESS) ---
+--- Ran Trial 100/100 (SUCCESS) ---
+  [Inference Settings] Temperature=0.2 | Top-P=0.95 | Max New Tokens=512 | Sample=True | Max Steps=15
+  Loading [AWQ]  /home/ror-technologies/Quantization/models/Qwen2.5-14B-Instruct_INT4_AWQ …
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+f1b7120
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `AwqMarlinLinear`               
+INFO  Kernel: selected -> `AwqMarlinLinear`.                                   
+Loading weights:   0%|          | 0/1251 [00:00<?, ?it/s]Loading weights:   0%|          | 1/1251 [00:00<12:51,  1.62it/s]Loading weights:   0%|          | 2/1251 [00:00<06:55,  3.00it/s]Loading weights:  12%|█▏        | 150/1251 [00:00<00:03, 300.77it/s]Loading weights:  17%|█▋        | 218/1251 [00:01<00:03, 336.90it/s]Loading weights:  22%|██▏       | 276/1251 [00:01<00:02, 367.70it/s]Loading weights:  26%|██▋       | 330/1251 [00:01<00:02, 379.97it/s]Loading weights:  30%|███       | 380/1251 [00:01<00:02, 392.36it/s]Loading weights:  34%|███▍      | 427/1251 [00:01<00:02, 397.39it/s]Loading weights:  38%|███▊      | 475/1251 [00:01<00:01, 415.49it/s]Loading weights:  42%|████▏     | 523/1251 [00:01<00:01, 427.70it/s]Loading weights:  46%|████▌     | 576/1251 [00:01<00:01, 440.37it/s]Loading weights:  50%|████▉     | 624/1251 [00:01<00:01, 449.93it/s]Loading weights:  54%|█████▎    | 671/1251 [00:02<00:01, 409.29it/s]Loading weights:  57%|█████▋    | 714/1251 [00:02<00:01, 391.53it/s]Loading weights:  61%|██████    | 757/1251 [00:02<00:01, 390.21it/s]Loading weights:  64%|██████▍   | 806/1251 [00:02<00:01, 415.73it/s]Loading weights:  68%|██████▊   | 849/1251 [00:02<00:01, 391.69it/s]Loading weights:  71%|███████▏  | 894/1251 [00:02<00:00, 395.60it/s]Loading weights:  75%|███████▌  | 943/1251 [00:02<00:00, 420.09it/s]Loading weights:  79%|███████▉  | 992/1251 [00:02<00:00, 438.50it/s]Loading weights:  83%|████████▎ | 1037/1251 [00:02<00:00, 440.94it/s]Loading weights:  86%|████████▋ | 1082/1251 [00:03<00:00, 440.99it/s]Loading weights:  90%|█████████ | 1128/1251 [00:03<00:00, 431.83it/s]Loading weights:  94%|█████████▍| 1177/1251 [00:03<00:00, 448.42it/s]Loading weights:  98%|█████████▊| 1226/1251 [00:03<00:00, 450.79it/s]Loading weights: 100%|██████████| 1251/1251 [00:03<00:00, 367.50it/s]
+INFO  gc.collect() reclaimed 354 objects in 0.162s                             
+  ✓  Model ready.
+--- Ran Trial 1/100 (SUCCESS) ---
+--- Ran Trial 2/100 (SUCCESS) ---
+--- Ran Trial 3/100 (SUCCESS) ---
+--- Ran Trial 4/100 (SUCCESS) ---
+--- Ran Trial 5/100 (SUCCESS) ---
+--- Ran Trial 6/100 (SUCCESS) ---
+--- Ran Trial 7/100 (SUCCESS) ---
+--- Ran Trial 8/100 (SUCCESS) ---
+--- Ran Trial 9/100 (SUCCESS) ---
+--- Ran Trial 10/100 (SUCCESS) ---
+--- Ran Trial 11/100 (SUCCESS) ---
+--- Ran Trial 12/100 (SUCCESS) ---
+--- Ran Trial 13/100 (SUCCESS) ---
+--- Ran Trial 14/100 (SUCCESS) ---
+--- Ran Trial 15/100 (SUCCESS) ---
+--- Ran Trial 16/100 (SUCCESS) ---
+--- Ran Trial 17/100 (SUCCESS) ---
+--- Ran Trial 18/100 (SUCCESS) ---
+--- Ran Trial 19/100 (SUCCESS) ---
+--- Ran Trial 20/100 (SUCCESS) ---
+--- Ran Trial 21/100 (SUCCESS) ---
+--- Ran Trial 22/100 (SUCCESS) ---
+--- Ran Trial 23/100 (SUCCESS) ---
+--- Ran Trial 24/100 (SUCCESS) ---
+--- Ran Trial 25/100 (SUCCESS) ---
+--- Ran Trial 26/100 (SUCCESS) ---
+--- Ran Trial 27/100 (SUCCESS) ---
+--- Ran Trial 28/100 (SUCCESS) ---
+--- Ran Trial 29/100 (SUCCESS) ---
+--- Ran Trial 30/100 (SUCCESS) ---
+--- Ran Trial 31/100 (SUCCESS) ---
+--- Ran Trial 32/100 (SUCCESS) ---
+--- Ran Trial 33/100 (SUCCESS) ---
+--- Ran Trial 34/100 (SUCCESS) ---
+--- Ran Trial 35/100 (SUCCESS) ---
+--- Ran Trial 36/100 (SUCCESS) ---
+--- Ran Trial 37/100 (SUCCESS) ---
+--- Ran Trial 38/100 (SUCCESS) ---
+--- Ran Trial 39/100 (SUCCESS) ---
+--- Ran Trial 40/100 (SUCCESS) ---
+--- Ran Trial 41/100 (SUCCESS) ---
+--- Ran Trial 42/100 (SUCCESS) ---
+--- Ran Trial 43/100 (SUCCESS) ---
+--- Ran Trial 44/100 (SUCCESS) ---
+--- Ran Trial 45/100 (SUCCESS) ---
+--- Ran Trial 46/100 (SUCCESS) ---
+--- Ran Trial 47/100 (SUCCESS) ---
+--- Ran Trial 48/100 (SUCCESS) ---
+--- Ran Trial 49/100 (SUCCESS) ---
+--- Ran Trial 50/100 (SUCCESS) ---
+--- Ran Trial 51/100 (SUCCESS) ---
+--- Ran Trial 52/100 (SUCCESS) ---
+--- Ran Trial 53/100 (SUCCESS) ---
+--- Ran Trial 54/100 (SUCCESS) ---
+--- Ran Trial 55/100 (SUCCESS) ---
+--- Ran Trial 56/100 (SUCCESS) ---
+--- Ran Trial 57/100 (SUCCESS) ---
+--- Ran Trial 58/100 (SUCCESS) ---
+--- Ran Trial 59/100 (SUCCESS) ---
+--- Ran Trial 60/100 (SUCCESS) ---
+--- Ran Trial 61/100 (SUCCESS) ---
+--- Ran Trial 62/100 (SUCCESS) ---
+--- Ran Trial 63/100 (SUCCESS) ---
+--- Ran Trial 64/100 (SUCCESS) ---
+--- Ran Trial 65/100 (SUCCESS) ---
+--- Ran Trial 66/100 (SUCCESS) ---
+--- Ran Trial 67/100 (SUCCESS) ---
+--- Ran Trial 68/100 (SUCCESS) ---
+--- Ran Trial 69/100 (SUCCESS) ---
+--- Ran Trial 70/100 (SUCCESS) ---
+--- Ran Trial 71/100 (SUCCESS) ---
+--- Ran Trial 72/100 (SUCCESS) ---
+--- Ran Trial 73/100 (SUCCESS) ---
+--- Ran Trial 74/100 (SUCCESS) ---
+--- Ran Trial 75/100 (SUCCESS) ---
+--- Ran Trial 76/100 (SUCCESS) ---
+--- Ran Trial 77/100 (SUCCESS) ---
+--- Ran Trial 78/100 (SUCCESS) ---
+--- Ran Trial 79/100 (SUCCESS) ---
+--- Ran Trial 80/100 (SUCCESS) ---
+--- Ran Trial 81/100 (SUCCESS) ---
+--- Ran Trial 82/100 (SUCCESS) ---
+--- Ran Trial 83/100 (SUCCESS) ---
+--- Ran Trial 84/100 (SUCCESS) ---
+--- Ran Trial 85/100 (SUCCESS) ---
+--- Ran Trial 86/100 (SUCCESS) ---
+--- Ran Trial 87/100 (SUCCESS) ---
+--- Ran Trial 88/100 (SUCCESS) ---
+--- Ran Trial 89/100 (SUCCESS) ---
+--- Ran Trial 90/100 (SUCCESS) ---
+--- Ran Trial 91/100 (SUCCESS) ---
+--- Ran Trial 92/100 (SUCCESS) ---
+--- Ran Trial 93/100 (SUCCESS) ---
+--- Ran Trial 94/100 (SUCCESS) ---
+--- Ran Trial 95/100 (SUCCESS) ---
+--- Ran Trial 96/100 (SUCCESS) ---
+--- Ran Trial 97/100 (SUCCESS) ---
+--- Ran Trial 98/100 (SUCCESS) ---
+--- Ran Trial 99/100 (SUCCESS) ---
+--- Ran Trial 100/100 (SUCCESS) ---
+  [Inference Settings] Temperature=0.2 | Top-P=0.95 | Max New Tokens=512 | Sample=True | Max Steps=15
+  Loading [FP16]  /home/ror-technologies/Quantization/models/Qwen2.5-14B-Instruct_FP16_Baseline …
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+Loading weights:   0%|          | 0/579 [00:00<?, ?it/s]Loading weights:   0%|          | 1/579 [00:00<06:27,  1.49it/s]Loading weights:   3%|▎         | 18/579 [00:00<00:18, 30.83it/s]Loading weights:   7%|▋         | 40/579 [00:00<00:07, 67.66it/s]Loading weights:   9%|▉         | 55/579 [00:01<00:06, 81.65it/s]Loading weights:  12%|█▏        | 69/579 [00:01<00:05, 90.91it/s]Loading weights:  15%|█▍        | 84/579 [00:01<00:05, 96.18it/s]Loading weights:  17%|█▋        | 97/579 [00:01<00:04, 102.57it/s]Loading weights:  19%|█▉        | 112/579 [00:01<00:04, 102.91it/s]Loading weights:  21%|██▏       | 124/579 [00:01<00:04, 101.78it/s]Loading weights:  24%|██▎       | 137/579 [00:01<00:04, 103.82it/s]Loading weights:  27%|██▋       | 154/579 [00:01<00:03, 107.18it/s]Loading weights:  30%|██▉       | 172/579 [00:02<00:03, 118.63it/s]Loading weights:  32%|███▏      | 185/579 [00:02<00:03, 113.96it/s]Loading weights:  34%|███▍      | 197/579 [00:02<00:03, 110.98it/s]Loading weights:  37%|███▋      | 213/579 [00:02<00:03, 120.97it/s]Loading weights:  39%|███▉      | 226/579 [00:02<00:03, 113.43it/s]Loading weights:  42%|████▏     | 244/579 [00:02<00:02, 120.28it/s]Loading weights:  44%|████▍     | 257/579 [00:02<00:02, 119.43it/s]Loading weights:  47%|████▋     | 270/579 [00:02<00:02, 119.71it/s]Loading weights:  49%|████▉     | 283/579 [00:02<00:02, 120.39it/s]Loading weights:  51%|█████     | 296/579 [00:03<00:02, 120.15it/s]Loading weights:  54%|█████▎    | 310/579 [00:03<00:02, 118.57it/s]Loading weights:  56%|█████▌    | 322/579 [00:03<00:02, 116.72it/s]Loading weights:  58%|█████▊    | 334/579 [00:03<00:02, 115.06it/s]Loading weights:  60%|██████    | 348/579 [00:03<00:01, 121.12it/s]Loading weights:  62%|██████▏   | 361/579 [00:03<00:01, 123.53it/s]Loading weights:  65%|██████▍   | 374/579 [00:03<00:01, 124.57it/s]Loading weights:  67%|██████▋   | 388/579 [00:03<00:01, 116.43it/s]Loading weights:  69%|██████▉   | 401/579 [00:03<00:01, 119.34it/s]Loading weights:  72%|███████▏  | 414/579 [00:04<00:01, 116.48it/s]Loading weights:  74%|███████▎  | 426/579 [00:04<00:01, 116.11it/s]Loading weights:  76%|███████▌  | 438/579 [00:04<00:01, 116.33it/s]Loading weights:  78%|███████▊  | 450/579 [00:04<00:01, 116.10it/s]Loading weights:  80%|███████▉  | 462/579 [00:04<00:00, 117.06it/s]Loading weights:  82%|████████▏ | 474/579 [00:04<00:00, 117.37it/s]Loading weights:  85%|████████▍ | 490/579 [00:04<00:00, 117.18it/s]Loading weights:  87%|████████▋ | 502/579 [00:04<00:00, 116.30it/s]Loading weights:  89%|████████▉ | 516/579 [00:04<00:00, 121.30it/s]Loading weights:  92%|█████████▏| 532/579 [00:05<00:00, 125.22it/s]Loading weights:  94%|█████████▍| 545/579 [00:05<00:00, 121.88it/s]Loading weights:  96%|█████████▋| 558/579 [00:05<00:00, 118.36it/s]Loading weights:  98%|█████████▊| 570/579 [00:05<00:00, 118.56it/s]Loading weights: 100%|██████████| 579/579 [00:05<00:00, 107.06it/s]
+  ✓  Model ready.
+--- Ran Trial 1/100 (SUCCESS) ---
+--- Ran Trial 2/100 (SUCCESS) ---
+--- Ran Trial 3/100 (SUCCESS) ---
+--- Ran Trial 4/100 (SUCCESS) ---
+--- Ran Trial 5/100 (SUCCESS) ---
+--- Ran Trial 6/100 (SUCCESS) ---
+--- Ran Trial 7/100 (SUCCESS) ---
+--- Ran Trial 8/100 (SUCCESS) ---
+--- Ran Trial 9/100 (SUCCESS) ---
+--- Ran Trial 10/100 (SUCCESS) ---
+--- Ran Trial 11/100 (SUCCESS) ---
+--- Ran Trial 12/100 (SUCCESS) ---
+--- Ran Trial 13/100 (SUCCESS) ---
+--- Ran Trial 14/100 (SUCCESS) ---
+--- Ran Trial 15/100 (SUCCESS) ---
+--- Ran Trial 16/100 (SUCCESS) ---
+--- Ran Trial 17/100 (SUCCESS) ---
+--- Ran Trial 18/100 (SUCCESS) ---
+--- Ran Trial 19/100 (SUCCESS) ---
+--- Ran Trial 20/100 (SUCCESS) ---
+--- Ran Trial 21/100 (SUCCESS) ---
+--- Ran Trial 22/100 (SUCCESS) ---
+--- Ran Trial 23/100 (SUCCESS) ---
+--- Ran Trial 24/100 (SUCCESS) ---
+--- Ran Trial 25/100 (SUCCESS) ---
+--- Ran Trial 26/100 (SUCCESS) ---
+--- Ran Trial 27/100 (SUCCESS) ---
+--- Ran Trial 28/100 (SUCCESS) ---
+--- Ran Trial 29/100 (SUCCESS) ---
+--- Ran Trial 30/100 (SUCCESS) ---
+--- Ran Trial 31/100 (SUCCESS) ---
+--- Ran Trial 32/100 (SUCCESS) ---
+--- Ran Trial 33/100 (SUCCESS) ---
+--- Ran Trial 34/100 (SUCCESS) ---
+--- Ran Trial 35/100 (SUCCESS) ---
+--- Ran Trial 36/100 (SUCCESS) ---
+--- Ran Trial 37/100 (SUCCESS) ---
+--- Ran Trial 38/100 (SUCCESS) ---
+--- Ran Trial 39/100 (SUCCESS) ---
+--- Ran Trial 40/100 (SUCCESS) ---
+--- Ran Trial 41/100 (SUCCESS) ---
+--- Ran Trial 42/100 (SUCCESS) ---
+--- Ran Trial 43/100 (SUCCESS) ---
+--- Ran Trial 44/100 (SUCCESS) ---
+--- Ran Trial 45/100 (SUCCESS) ---
+--- Ran Trial 46/100 (SUCCESS) ---
+--- Ran Trial 47/100 (SUCCESS) ---
+--- Ran Trial 48/100 (SUCCESS) ---
+--- Ran Trial 49/100 (SUCCESS) ---
+--- Ran Trial 50/100 (SUCCESS) ---
+--- Ran Trial 51/100 (SUCCESS) ---
+--- Ran Trial 52/100 (SUCCESS) ---
+--- Ran Trial 53/100 (SUCCESS) ---
+--- Ran Trial 54/100 (SUCCESS) ---
+--- Ran Trial 55/100 (SUCCESS) ---
+--- Ran Trial 56/100 (SUCCESS) ---
+--- Ran Trial 57/100 (SUCCESS) ---
+--- Ran Trial 58/100 (SUCCESS) ---
+--- Ran Trial 59/100 (SUCCESS) ---
+--- Ran Trial 60/100 (SUCCESS) ---
+--- Ran Trial 61/100 (SUCCESS) ---
+--- Ran Trial 62/100 (SUCCESS) ---
+--- Ran Trial 63/100 (SUCCESS) ---
+--- Ran Trial 64/100 (SUCCESS) ---
+--- Ran Trial 65/100 (SUCCESS) ---
+--- Ran Trial 66/100 (SUCCESS) ---
+--- Ran Trial 67/100 (SUCCESS) ---
+--- Ran Trial 68/100 (SUCCESS) ---
+--- Ran Trial 69/100 (SUCCESS) ---
+--- Ran Trial 70/100 (SUCCESS) ---
+--- Ran Trial 71/100 (SUCCESS) ---
+--- Ran Trial 72/100 (SUCCESS) ---
+--- Ran Trial 73/100 (SUCCESS) ---
+--- Ran Trial 74/100 (SUCCESS) ---
+--- Ran Trial 75/100 (SUCCESS) ---
+--- Ran Trial 76/100 (SUCCESS) ---
+--- Ran Trial 77/100 (SUCCESS) ---
+--- Ran Trial 78/100 (SUCCESS) ---
+--- Ran Trial 79/100 (SUCCESS) ---
+--- Ran Trial 80/100 (SUCCESS) ---
+--- Ran Trial 81/100 (SUCCESS) ---
+--- Ran Trial 82/100 (SUCCESS) ---
+--- Ran Trial 83/100 (SUCCESS) ---
+--- Ran Trial 84/100 (SUCCESS) ---
+--- Ran Trial 85/100 (SUCCESS) ---
+--- Ran Trial 86/100 (SUCCESS) ---
+--- Ran Trial 87/100 (SUCCESS) ---
+--- Ran Trial 88/100 (SUCCESS) ---
+--- Ran Trial 89/100 (SUCCESS) ---
+--- Ran Trial 90/100 (SUCCESS) ---
+--- Ran Trial 91/100 (SUCCESS) ---
+--- Ran Trial 92/100 (SUCCESS) ---
+--- Ran Trial 93/100 (SUCCESS) ---
+--- Ran Trial 94/100 (SUCCESS) ---
+--- Ran Trial 95/100 (SUCCESS) ---
+--- Ran Trial 96/100 (SUCCESS) ---
+--- Ran Trial 97/100 (SUCCESS) ---
+--- Ran Trial 98/100 (SUCCESS) ---
+--- Ran Trial 99/100 (SUCCESS) ---
+--- Ran Trial 100/100 (SUCCESS) ---
+  [Inference Settings] Temperature=0.2 | Top-P=0.95 | Max New Tokens=512 | Sample=True | Max Steps=15
+  Loading [FP16]  /home/ror-technologies/Quantization/models/Qwen2.5-14B-Instruct_FP8_Static_per_tensor …
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+Compressing model:   0%|          | 0/631 [00:00<?, ?it/s]Compressing model:  61%|██████▏   | 387/631 [00:00<00:00, 3868.42it/s]Compressing model: 100%|██████████| 631/631 [00:00<00:00, 3891.52it/s]
+Loading weights:   0%|          | 0/1251 [00:00<?, ?it/s]Loading weights:   0%|          | 1/1251 [00:00<11:58,  1.74it/s]Loading weights:  30%|██▉       | 371/1251 [00:00<00:01, 733.41it/s]Loading weights:  47%|████▋     | 583/1251 [00:00<00:00, 871.27it/s]Loading weights:  60%|█████▉    | 750/1251 [00:00<00:00, 983.61it/s]Loading weights:  72%|███████▏  | 904/1251 [00:01<00:00, 1054.78it/s]Loading weights:  84%|████████▍ | 1048/1251 [00:01<00:00, 1100.53it/s]Loading weights:  95%|█████████▍| 1185/1251 [00:01<00:00, 1145.89it/s]Loading weights: 100%|██████████| 1251/1251 [00:01<00:00, 903.48it/s] 
+  ✓  Model ready.
+Decompressing model:   0%|          | 0/631 [00:00<?, ?it/s]Decompressing model: 100%|██████████| 631/631 [00:00<00:00, 7030.99it/s]
+--- Ran Trial 1/100 (SUCCESS) ---
+--- Ran Trial 2/100 (SUCCESS) ---
+--- Ran Trial 3/100 (SUCCESS) ---
+--- Ran Trial 4/100 (SUCCESS) ---
+--- Ran Trial 5/100 (SUCCESS) ---
+--- Ran Trial 6/100 (SUCCESS) ---
+--- Ran Trial 7/100 (SUCCESS) ---
+--- Ran Trial 8/100 (SUCCESS) ---
+--- Ran Trial 9/100 (SUCCESS) ---
+--- Ran Trial 10/100 (SUCCESS) ---
+--- Ran Trial 11/100 (SUCCESS) ---
+--- Ran Trial 12/100 (SUCCESS) ---
+--- Ran Trial 13/100 (SUCCESS) ---
+--- Ran Trial 14/100 (SUCCESS) ---
+--- Ran Trial 15/100 (SUCCESS) ---
+--- Ran Trial 16/100 (SUCCESS) ---
+--- Ran Trial 17/100 (SUCCESS) ---
+--- Ran Trial 18/100 (SUCCESS) ---
+--- Ran Trial 19/100 (SUCCESS) ---
+--- Ran Trial 20/100 (SUCCESS) ---
+--- Ran Trial 21/100 (SUCCESS) ---
+--- Ran Trial 22/100 (SUCCESS) ---
+--- Ran Trial 23/100 (SUCCESS) ---
+--- Ran Trial 24/100 (SUCCESS) ---
+--- Ran Trial 25/100 (SUCCESS) ---
+--- Ran Trial 26/100 (SUCCESS) ---
+--- Ran Trial 27/100 (SUCCESS) ---
+--- Ran Trial 28/100 (SUCCESS) ---
+--- Ran Trial 29/100 (SUCCESS) ---
+--- Ran Trial 30/100 (SUCCESS) ---
+--- Ran Trial 31/100 (SUCCESS) ---
+--- Ran Trial 32/100 (SUCCESS) ---
+--- Ran Trial 33/100 (SUCCESS) ---
+--- Ran Trial 34/100 (SUCCESS) ---
+--- Ran Trial 35/100 (SUCCESS) ---
+--- Ran Trial 36/100 (SUCCESS) ---
+--- Ran Trial 37/100 (SUCCESS) ---
+--- Ran Trial 38/100 (SUCCESS) ---
+--- Ran Trial 39/100 (SUCCESS) ---
+--- Ran Trial 40/100 (SUCCESS) ---
+--- Ran Trial 41/100 (SUCCESS) ---
+--- Ran Trial 42/100 (SUCCESS) ---
+--- Ran Trial 43/100 (SUCCESS) ---
+--- Ran Trial 44/100 (SUCCESS) ---
+--- Ran Trial 45/100 (SUCCESS) ---
+--- Ran Trial 46/100 (SUCCESS) ---
+--- Ran Trial 47/100 (SUCCESS) ---
+--- Ran Trial 48/100 (SUCCESS) ---
+--- Ran Trial 49/100 (SUCCESS) ---
+--- Ran Trial 50/100 (SUCCESS) ---
+--- Ran Trial 51/100 (SUCCESS) ---
+--- Ran Trial 52/100 (SUCCESS) ---
+--- Ran Trial 53/100 (SUCCESS) ---
+--- Ran Trial 54/100 (SUCCESS) ---
+--- Ran Trial 55/100 (SUCCESS) ---
+--- Ran Trial 56/100 (SUCCESS) ---
+--- Ran Trial 57/100 (SUCCESS) ---
+--- Ran Trial 58/100 (SUCCESS) ---
+--- Ran Trial 59/100 (SUCCESS) ---
+--- Ran Trial 60/100 (SUCCESS) ---
+--- Ran Trial 61/100 (SUCCESS) ---
+--- Ran Trial 62/100 (SUCCESS) ---
+--- Ran Trial 63/100 (SUCCESS) ---
+--- Ran Trial 64/100 (SUCCESS) ---
+--- Ran Trial 65/100 (SUCCESS) ---
+--- Ran Trial 66/100 (SUCCESS) ---
+--- Ran Trial 67/100 (SUCCESS) ---
+--- Ran Trial 68/100 (SUCCESS) ---
+--- Ran Trial 69/100 (SUCCESS) ---
+--- Ran Trial 70/100 (SUCCESS) ---
+--- Ran Trial 71/100 (SUCCESS) ---
+--- Ran Trial 72/100 (SUCCESS) ---
+--- Ran Trial 73/100 (SUCCESS) ---
+--- Ran Trial 74/100 (SUCCESS) ---
+--- Ran Trial 75/100 (SUCCESS) ---
+--- Ran Trial 76/100 (SUCCESS) ---
+--- Ran Trial 77/100 (SUCCESS) ---
+--- Ran Trial 78/100 (SUCCESS) ---
+--- Ran Trial 79/100 (SUCCESS) ---
+--- Ran Trial 80/100 (SUCCESS) ---
+--- Ran Trial 81/100 (SUCCESS) ---
+--- Ran Trial 82/100 (SUCCESS) ---
+--- Ran Trial 83/100 (SUCCESS) ---
+--- Ran Trial 84/100 (SUCCESS) ---
+--- Ran Trial 85/100 (SUCCESS) ---
+--- Ran Trial 86/100 (SUCCESS) ---
+--- Ran Trial 87/100 (SUCCESS) ---
+--- Ran Trial 88/100 (SUCCESS) ---
+--- Ran Trial 89/100 (SUCCESS) ---
+--- Ran Trial 90/100 (SUCCESS) ---
+--- Ran Trial 91/100 (SUCCESS) ---
+--- Ran Trial 92/100 (SUCCESS) ---
+--- Ran Trial 93/100 (SUCCESS) ---
+--- Ran Trial 94/100 (SUCCESS) ---
+--- Ran Trial 95/100 (SUCCESS) ---
+--- Ran Trial 96/100 (SUCCESS) ---
+--- Ran Trial 97/100 (SUCCESS) ---
+--- Ran Trial 98/100 (SUCCESS) ---
+--- Ran Trial 99/100 (SUCCESS) ---
+--- Ran Trial 100/100 (SUCCESS) ---
+  [Inference Settings] Temperature=0.2 | Top-P=0.95 | Max New Tokens=512 | Sample=True | Max Steps=15
+  Loading [AWQ]  /home/ror-technologies/Quantization/models/Qwen2.5-14B-Instruct_INT4_AWQ …
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+
+WARN  Python GIL is enabled: Multi-gpu quant acceleration for MoE models is sub-optimal and multi-core accelerated cpu packing is also disabled. We recommend Python >= 3.13.3t with Pytorch > 2.8 for mult-gpu quantization and multi-cpu packing with env `PYTHON_GIL=0`.
+INFO  ENV: Auto setting PYTORCH_ALLOC_CONF='expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.7' for memory saving.
+INFO  ENV: Auto setting CUDA_DEVICE_ORDER=PCI_BUS_ID for correctness.          
+INFO  
+
+┌─────────────┐    ┌────────────────────────┐    ┌────────────┐    ┌─────────┐
+│ GPT-QModel  │ -> │ ▓▓▓▓▓▓▓▓▓▓▓▓ 16bit     │ -> │ ▒▒▒▒ 8bit  │ -> │ ░░ 4bit │
+└─────────────┘    └────────────────────────┘    └────────────┘    └─────────┘
+GPT-QModel   : 7.1.0+f1b7120
+Transformers : 5.13.1
+Torch        : 2.10.0+cu128
+Triton       : 3.6.0
+INFO  Kernel: Auto-selection: adding candidate `AwqMarlinLinear`               
+INFO  Kernel: selected -> `AwqMarlinLinear`.                                   
+Loading weights:   0%|          | 0/1251 [00:00<?, ?it/s]Loading weights:  15%|█▍        | 185/1251 [00:00<00:00, 1846.94it/s]Loading weights:  32%|███▏      | 399/1251 [00:00<00:00, 2001.87it/s]Loading weights:  49%|████▉     | 616/1251 [00:00<00:00, 2070.09it/s]Loading weights:  66%|██████▌   | 823/1251 [00:00<00:00, 1884.60it/s]Loading weights:  81%|████████  | 1014/1251 [00:00<00:00, 1813.53it/s]Loading weights:  96%|█████████▌| 1197/1251 [00:00<00:00, 1771.66it/s]Loading weights: 100%|██████████| 1251/1251 [00:00<00:00, 1856.09it/s]
+INFO  gc.collect() reclaimed 354 objects in 0.183s                             
+  ✓  Model ready.
+--- Ran Trial 1/100 (SUCCESS) ---
+--- Ran Trial 2/100 (SUCCESS) ---
+--- Ran Trial 3/100 (SUCCESS) ---
+--- Ran Trial 4/100 (SUCCESS) ---
+--- Ran Trial 5/100 (SUCCESS) ---
+--- Ran Trial 6/100 (SUCCESS) ---
+--- Ran Trial 7/100 (SUCCESS) ---
+--- Ran Trial 8/100 (SUCCESS) ---
+--- Ran Trial 9/100 (SUCCESS) ---
+--- Ran Trial 10/100 (SUCCESS) ---
+--- Ran Trial 11/100 (SUCCESS) ---
+--- Ran Trial 12/100 (SUCCESS) ---
+--- Ran Trial 13/100 (SUCCESS) ---
+--- Ran Trial 14/100 (SUCCESS) ---
+--- Ran Trial 15/100 (SUCCESS) ---
+--- Ran Trial 16/100 (SUCCESS) ---
+--- Ran Trial 17/100 (SUCCESS) ---
+--- Ran Trial 18/100 (SUCCESS) ---
+--- Ran Trial 19/100 (SUCCESS) ---
+--- Ran Trial 20/100 (SUCCESS) ---
+--- Ran Trial 21/100 (SUCCESS) ---
+--- Ran Trial 22/100 (SUCCESS) ---
+--- Ran Trial 23/100 (SUCCESS) ---
+--- Ran Trial 24/100 (SUCCESS) ---
+--- Ran Trial 25/100 (SUCCESS) ---
+--- Ran Trial 26/100 (SUCCESS) ---
+--- Ran Trial 27/100 (SUCCESS) ---
+--- Ran Trial 28/100 (SUCCESS) ---
+--- Ran Trial 29/100 (SUCCESS) ---
+--- Ran Trial 30/100 (SUCCESS) ---
+--- Ran Trial 31/100 (SUCCESS) ---
+--- Ran Trial 32/100 (SUCCESS) ---
+--- Ran Trial 33/100 (SUCCESS) ---
+--- Ran Trial 34/100 (SUCCESS) ---
+--- Ran Trial 35/100 (SUCCESS) ---
+--- Ran Trial 36/100 (SUCCESS) ---
+--- Ran Trial 37/100 (SUCCESS) ---
+--- Ran Trial 38/100 (SUCCESS) ---
+--- Ran Trial 39/100 (SUCCESS) ---
+--- Ran Trial 40/100 (SUCCESS) ---
+--- Ran Trial 41/100 (SUCCESS) ---
+--- Ran Trial 42/100 (SUCCESS) ---
+--- Ran Trial 43/100 (SUCCESS) ---
+--- Ran Trial 44/100 (SUCCESS) ---
+--- Ran Trial 45/100 (SUCCESS) ---
+--- Ran Trial 46/100 (SUCCESS) ---
+--- Ran Trial 47/100 (SUCCESS) ---
+--- Ran Trial 48/100 (SUCCESS) ---
+--- Ran Trial 49/100 (SUCCESS) ---
+--- Ran Trial 50/100 (SUCCESS) ---
+--- Ran Trial 51/100 (SUCCESS) ---
+--- Ran Trial 52/100 (SUCCESS) ---
+--- Ran Trial 53/100 (SUCCESS) ---
+--- Ran Trial 54/100 (SUCCESS) ---
+--- Ran Trial 55/100 (SUCCESS) ---
+--- Ran Trial 56/100 (SUCCESS) ---
+--- Ran Trial 57/100 (SUCCESS) ---
+--- Ran Trial 58/100 (SUCCESS) ---
+--- Ran Trial 59/100 (SUCCESS) ---
+--- Ran Trial 60/100 (SUCCESS) ---
+--- Ran Trial 61/100 (SUCCESS) ---
+--- Ran Trial 62/100 (SUCCESS) ---
+--- Ran Trial 63/100 (SUCCESS) ---
+--- Ran Trial 64/100 (SUCCESS) ---
+--- Ran Trial 65/100 (SUCCESS) ---
+--- Ran Trial 66/100 (SUCCESS) ---
+--- Ran Trial 67/100 (SUCCESS) ---
+--- Ran Trial 68/100 (SUCCESS) ---
+--- Ran Trial 69/100 (SUCCESS) ---
+--- Ran Trial 70/100 (SUCCESS) ---
+--- Ran Trial 71/100 (SUCCESS) ---
+--- Ran Trial 72/100 (SUCCESS) ---
+--- Ran Trial 73/100 (SUCCESS) ---
+--- Ran Trial 74/100 (SUCCESS) ---
+--- Ran Trial 75/100 (SUCCESS) ---
+--- Ran Trial 76/100 (SUCCESS) ---
+--- Ran Trial 77/100 (SUCCESS) ---
+--- Ran Trial 78/100 (SUCCESS) ---
+--- Ran Trial 79/100 (SUCCESS) ---
+--- Ran Trial 80/100 (SUCCESS) ---
+--- Ran Trial 81/100 (SUCCESS) ---
+--- Ran Trial 82/100 (SUCCESS) ---
+--- Ran Trial 83/100 (SUCCESS) ---
+--- Ran Trial 84/100 (SUCCESS) ---
+--- Ran Trial 85/100 (SUCCESS) ---
+--- Ran Trial 86/100 (SUCCESS) ---
+--- Ran Trial 87/100 (SUCCESS) ---
+--- Ran Trial 88/100 (SUCCESS) ---
+--- Ran Trial 89/100 (SUCCESS) ---
+--- Ran Trial 90/100 (SUCCESS) ---
+--- Ran Trial 91/100 (SUCCESS) ---
+--- Ran Trial 92/100 (SUCCESS) ---
+--- Ran Trial 93/100 (SUCCESS) ---
+--- Ran Trial 94/100 (SUCCESS) ---
+--- Ran Trial 95/100 (SUCCESS) ---
+--- Ran Trial 96/100 (SUCCESS) ---
+--- Ran Trial 97/100 (SUCCESS) ---
+--- Ran Trial 98/100 (SUCCESS) ---
+--- Ran Trial 99/100 (SUCCESS) ---
+--- Ran Trial 100/100 (SUCCESS) ---
+=======================================================
+       QUANTIZATION AGENT BENCHMARK SUITE
+=======================================================
+Timestamp:        20260928_100453
+Output Directory: ./results/benchmark_20260928_100453
+Log File:         ./results/benchmark_20260928_100453/output.log
+SET TEMPERATURE:  0.2
+-------------------------------------------------------
+Inference Hyperparameters:
+  • Temperature:    0.2
+  • Top-p:          0.95
+  • Max New Tokens: 512
+  • Sampling Mode:  Sampling (do_sample=True)
+  • Max Steps:      15
+-------------------------------------------------------
+Benchmark Configuration:
+  • Active Agents:  AGENT_1_SUPPORT, AGENT_3_FINANCE
+  • Qwen Models:    3 enabled
+  • Llama Models:   0 enabled
+  • Total Models:   3
+  • Trials / Model: 100
+  • Engine:         HuggingFace
+  • Save Traces:    False
+=======================================================
+
+
+=======================================================
+=== TESTING AGENT: AGENT_1_SUPPORT ===
+=======================================================
+
+--- Benchmarking Model: Qwen2.5-14B-Instruct_FP16_Baseline on AGENT_1_SUPPORT ---
+--- Benchmarking Model: Qwen2.5-14B-Instruct_FP8_Static_per_tensor on AGENT_1_SUPPORT ---
+--- Benchmarking Model: Qwen2.5-14B-Instruct_INT4_AWQ on AGENT_1_SUPPORT ---
+
+--- AGENT_1_SUPPORT Benchmark Complete! Results saved to ./results/benchmark_20260928_100453/AGENT_1_SUPPORT ---
+
+=======================================================
+=== TESTING AGENT: AGENT_3_FINANCE ===
+=======================================================
+
+--- Benchmarking Model: Qwen2.5-14B-Instruct_FP16_Baseline on AGENT_3_FINANCE ---
+--- Benchmarking Model: Qwen2.5-14B-Instruct_FP8_Static_per_tensor on AGENT_3_FINANCE ---
+--- Benchmarking Model: Qwen2.5-14B-Instruct_INT4_AWQ on AGENT_3_FINANCE ---
+
+--- AGENT_3_FINANCE Benchmark Complete! Results saved to ./results/benchmark_20260928_100453/AGENT_3_FINANCE ---
+
+Benchmark run finished! All output saved to ./results/benchmark_20260928_100453
